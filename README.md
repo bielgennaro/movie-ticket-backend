@@ -22,19 +22,13 @@ SESSION
 | room | int |
 | movie_id | FK |
 <br />
-USER_TYPE
-
-| id | PK |
-| --- | --- |
-| name | “admin” | “user” |
-<br />
 USER
 
 | id | PK |
 | --- | --- |
 | email | string |
 | password | string |
-| user_type_id | FK |
+| is_admin | boolean |
 <br />
 TICKET
 
