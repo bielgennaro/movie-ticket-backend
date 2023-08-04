@@ -25,10 +25,11 @@ namespace MovieTicketApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Ticket>>> GetTicket()
         {
-          if (_context.Ticket == null)
-          {
-              return NotFound();
-          }
+            if (_context.Ticket == null)
+            {
+                return NotFound();
+            }
+
             return await _context.Ticket.ToListAsync();
         }
 
@@ -36,10 +37,11 @@ namespace MovieTicketApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Ticket>> GetTicket(int id)
         {
-          if (_context.Ticket == null)
-          {
-              return NotFound();
-          }
+            if (_context.Ticket == null)
+            {
+                return NotFound();
+            }
+
             var ticket = await _context.Ticket.FindAsync(id);
 
             if (ticket == null)
@@ -72,10 +74,8 @@ namespace MovieTicketApi.Controllers
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+
+                throw;
             }
 
             return NoContent();
@@ -86,10 +86,11 @@ namespace MovieTicketApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Ticket>> PostTicket(Ticket ticket)
         {
-          if (_context.Ticket == null)
-          {
-              return Problem("Entity set 'MovieTicketApiContext.Ticket'  is null.");
-          }
+            if (_context.Ticket == null)
+            {
+                return Problem("Entity set 'MovieTicketApiContext.Ticket'  is null.");
+            }
+
             _context.Ticket.Add(ticket);
             await _context.SaveChangesAsync();
 
@@ -104,6 +105,7 @@ namespace MovieTicketApi.Controllers
             {
                 return NotFound();
             }
+
             var ticket = await _context.Ticket.FindAsync(id);
             if (ticket == null)
             {

@@ -6,11 +6,11 @@ public class User
     public string Email { get; set; }
     private string Password { get; set; }
     public bool IsAdmin { get; set; }
-    
+
     public User()
     {
     }
-    
+
     public User(int userId, string email, string password, bool isAdmin)
     {
         UserId = userId;
@@ -18,5 +18,4 @@ public class User
         Password = password;
         IsAdmin = isAdmin;
     }
-    
 }

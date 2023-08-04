@@ -19,10 +19,7 @@ void ConfigureServices(IServiceCollection services)
 {
     services.AddControllers();
     app.UseRouting();
-    app.UseEndpoints(endpoints =>
-    {
-        endpoints.MapControllers();
-    });
+    app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 }
 
 app.Run();

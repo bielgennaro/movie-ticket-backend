@@ -25,10 +25,11 @@ namespace MovieTicketApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Session>>> GetSession()
         {
-          if (_context.Session == null)
-          {
-              return NotFound();
-          }
+            if (_context.Session == null)
+            {
+                return NotFound();
+            }
+
             return await _context.Session.ToListAsync();
         }
 
@@ -36,12 +37,13 @@ namespace MovieTicketApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Session>> GetSession(int id)
         {
-          if (_context.Session == null)
-          {
-              return NotFound();
-          }
+            if (_context.Session == null)
+            {
+                return NotFound();
+            }
+
             var session = await _context.Session.FindAsync(id);
-            
+
             if (session == null)
             {
                 return NotFound();
@@ -72,10 +74,8 @@ namespace MovieTicketApi.Controllers
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+
+                throw;
             }
 
             return NoContent();
@@ -86,10 +86,11 @@ namespace MovieTicketApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Session>> PostSession(Session session)
         {
-          if (_context.Session == null)
-          {
-              return Problem("Entity set 'MovieTicketApiContext.Session'  is null.");
-          }
+            if (_context.Session == null)
+            {
+                return Problem("Entity set 'MovieTicketApiContext.Session'  is null.");
+            }
+
             _context.Session.Add(session);
             await _context.SaveChangesAsync();
 
@@ -104,6 +105,7 @@ namespace MovieTicketApi.Controllers
             {
                 return NotFound();
             }
+
             var session = await _context.Session.FindAsync(id);
             if (session == null)
             {
