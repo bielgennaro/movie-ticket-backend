@@ -14,9 +14,9 @@ namespace MovieTicketApi.Data
         {
         }
 
-        public DbSet<MovieTicketApi.Models.User> User { get; set; }
-        public DbSet<MovieTicketApi.Models.Session> Session { get; set; }
-        public DbSet<MovieTicketApi.Models.Ticket> Ticket { get; set; }
-        public DbSet<MovieTicketApi.Models.Movie> Movie { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<Session> Session { get; set; }
+        public DbSet<Ticket> Ticket { get; set; }
+        public DbSet<Movie> Movie { get; set; }
     }
 }

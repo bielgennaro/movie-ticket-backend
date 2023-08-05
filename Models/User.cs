@@ -18,5 +18,4 @@ public class User
         Password = password;
         IsAdmin = isAdmin;
     }
-    
 }

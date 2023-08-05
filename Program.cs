@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MovieTicketApi.Controllers;
@@ -6,20 +7,26 @@ using MovieTicketApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers()
+    .AddNewtonsoftJson();
+
+new ServiceCollection()
+    .AddLogging()
+    .AddMvc()
+    .AddNewtonsoftJson()
+    .Services.BuildServiceProvider();
+
+builder.Services.AddControllers();
+
 builder.Services.AddDbContext<MovieTicketApiContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("MovieTicketApiContext")));
 
 var app = builder.Build();
 
-var context = app.Services.GetRequiredService<MovieTicketApiContext>();
+app.UseHttpsRedirection();
 
-context.Database.EnsureCreated();
+app.UseAuthorization();
 
-void ConfigureServices(IServiceCollection services)
-{
-    services.AddControllers();
-    app.UseRouting();
-    app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-}
+app.MapControllers();
 
 app.Run();
