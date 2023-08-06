@@ -21,7 +21,7 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<MovieTicketApiContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("MovieTicketApiContext")));
 
-var app = builder.Build();
+var app = builder.Build(); ;
 
 app.UseHttpsRedirection();
 

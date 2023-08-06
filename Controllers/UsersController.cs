@@ -10,7 +10,7 @@ using MovieTicketApi.Models;
 
 namespace MovieTicketApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("/")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -21,8 +21,8 @@ namespace MovieTicketApi.Controllers
             _context = context;
         }
 
-        // GET: api/Users
-        [HttpGet]
+        // GET: /users
+        [HttpGet ("users")]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
             if (_context.User == null)
@@ -33,8 +33,8 @@ namespace MovieTicketApi.Controllers
             return await _context.User.ToListAsync();
         }
 
-        // GET: api/Users/5
-        [HttpGet("{id}")]
+        // GET: users/5
+        [HttpGet("users/{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
             if (_context.User == null)
@@ -52,9 +52,8 @@ namespace MovieTicketApi.Controllers
             return user;
         }
 
-        // PUT: api/Users/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        // PUT: users/edit/5
+        [HttpPut("/users/edit/{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
             if (id != user.UserId)
@@ -81,9 +80,8 @@ namespace MovieTicketApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        // POST: /users/create
+        [HttpPost ("/users/create")]
         public async Task<ActionResult<User>> PostUser(User user)
         {
             if (_context.User == null)
@@ -97,8 +95,8 @@ namespace MovieTicketApi.Controllers
             return CreatedAtAction("GetUser", new { id = user.UserId }, user);
         }
 
-        // DELETE: api/Users/5
-        [HttpDelete("{id}")]
+        // DELETE: users/delete/5
+        [HttpDelete("/users/delete/{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
             if (_context.User == null)

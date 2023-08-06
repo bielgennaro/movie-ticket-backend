@@ -10,7 +10,7 @@ using MovieTicketApi.Models;
 
 namespace MovieTicketApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("/")]
     [ApiController]
     public class SessionsController : ControllerBase
     {
@@ -21,8 +21,8 @@ namespace MovieTicketApi.Controllers
             _context = context;
         }
 
-        // GET: api/Sessions
-        [HttpGet]
+        // GET: /sessions
+        [HttpGet ("sessions")]
         public async Task<ActionResult<IEnumerable<Session>>> GetSession()
         {
             if (_context.Session == null)
@@ -52,9 +52,8 @@ namespace MovieTicketApi.Controllers
             return session;
         }
 
-        // PUT: api/Sessions/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        // PUT: /sessions/edit/5
+        [HttpPut("/sessions/edit/{id}")]
         public async Task<IActionResult> PutSession(int id, Session session)
         {
             if (id != session.SessionId)
@@ -81,9 +80,8 @@ namespace MovieTicketApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Sessions
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        // POST: /sessions/create
+        [HttpPost ("/sessions/create")]
         public async Task<ActionResult<Session>> PostSession(Session session)
         {
             if (_context.Session == null)
@@ -97,8 +95,8 @@ namespace MovieTicketApi.Controllers
             return CreatedAtAction("GetSession", new { id = session.SessionId }, session);
         }
 
-        // DELETE: api/Sessions/5
-        [HttpDelete("{id}")]
+        // DELETE: /sessions/delete/5
+        [HttpDelete("/sessions/delete/{id}")]
         public async Task<IActionResult> DeleteSession(int id)
         {
             if (_context.Session == null)

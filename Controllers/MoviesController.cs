@@ -10,7 +10,7 @@ using MovieTicketApi.Models;
 
 namespace MovieTicketApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("/")]
     [ApiController]
     public class MoviesController : ControllerBase
     {
@@ -21,8 +21,8 @@ namespace MovieTicketApi.Controllers
             _context = context;
         }
 
-        // GET: api/Movies
-        [HttpGet]
+        // GET: /movies
+        [HttpGet ("movies")]
         public async Task<ActionResult<IEnumerable<Movie>>> GetMovie()
         {
             if (_context.Movie == null)
@@ -33,8 +33,8 @@ namespace MovieTicketApi.Controllers
             return await _context.Movie.ToListAsync();
         }
 
-        // GET: api/Movies/5
-        [HttpGet("{id}")]
+        // GET: movies/5
+        [HttpGet("movies/{id}")]
         public async Task<ActionResult<Movie>> GetMovie(int id)
         {
             if (_context.Movie == null)
@@ -52,9 +52,8 @@ namespace MovieTicketApi.Controllers
             return movie;
         }
 
-        // PUT: api/Movies/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        // PUT: movies/edit/5
+        [HttpPut("moviees/edit/{id}")]
         public async Task<IActionResult> PutMovie(int id, Movie movie)
         {
             if (id != movie.MovieId)
@@ -81,9 +80,8 @@ namespace MovieTicketApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Movies
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        // POST: /movies/create
+        [HttpPost ("movies/create")]
         public async Task<ActionResult<Movie>> PostMovie(Movie movie)
         {
             if (_context.Movie == null)
@@ -97,8 +95,8 @@ namespace MovieTicketApi.Controllers
             return CreatedAtAction("GetMovie", new { id = movie.MovieId }, movie);
         }
 
-        // DELETE: api/Movies/5
-        [HttpDelete("{id}")]
+        // DELETE: movies/delete/5
+        [HttpDelete("movies/delete/{id}")]
         public async Task<IActionResult> DeleteMovie(int id)
         {
             if (_context.Movie == null)
