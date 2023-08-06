@@ -10,7 +10,7 @@ using MovieTicketApi.Models;
 
 namespace MovieTicketApi.Controllers
 {
-    [Route("/")]
+    [Route("/users")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -22,7 +22,8 @@ namespace MovieTicketApi.Controllers
         }
 
         // GET: /users
-        [HttpGet ("users")]
+        [HttpGet ("/")]
+        [ProducesResponseType(statusCode: StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
             if (_context.User == null)
@@ -33,8 +34,9 @@ namespace MovieTicketApi.Controllers
             return await _context.User.ToListAsync();
         }
 
-        // GET: users/5
-        [HttpGet("users/{id}")]
+        // GET: list/5
+        [HttpGet("list/{id}")]
+        [ProducesResponseType(statusCode: StatusCodes.Status200OK)]
         public async Task<ActionResult<User>> GetUser(int id)
         {
             if (_context.User == null)
@@ -52,8 +54,9 @@ namespace MovieTicketApi.Controllers
             return user;
         }
 
-        // PUT: users/edit/5
-        [HttpPut("/users/edit/{id}")]
+        // PUT: edit/5
+        [HttpPut("/edit/{id}")]
+        [ProducesResponseType(statusCode: StatusCodes.Status100Continue)]
         public async Task<IActionResult> PutUser(int id, User user)
         {
             if (id != user.UserId)
@@ -80,8 +83,9 @@ namespace MovieTicketApi.Controllers
             return NoContent();
         }
 
-        // POST: /users/create
-        [HttpPost ("/users/create")]
+        // POST: /create
+        [HttpPost ("/create")]
+        [ProducesResponseType(statusCode: StatusCodes.Status201Created)]
         public async Task<ActionResult<User>> PostUser(User user)
         {
             if (_context.User == null)
@@ -95,8 +99,9 @@ namespace MovieTicketApi.Controllers
             return CreatedAtAction("GetUser", new { id = user.UserId }, user);
         }
 
-        // DELETE: users/delete/5
-        [HttpDelete("/users/delete/{id}")]
+        // DELETE: delete/5
+        [HttpDelete("delete/{id}")]
+        [ProducesResponseType(statusCode: StatusCodes.Status202Accepted)]
         public async Task<IActionResult> DeleteUser(int id)
         {
             if (_context.User == null)

@@ -10,7 +10,7 @@ using MovieTicketApi.Models;
 
 namespace MovieTicketApi.Controllers
 {
-    [Route("/")]
+    [Route("/sessions")]
     [ApiController]
     public class SessionsController : ControllerBase
     {
@@ -22,7 +22,8 @@ namespace MovieTicketApi.Controllers
         }
 
         // GET: /sessions
-        [HttpGet ("sessions")]
+        [HttpGet ("/")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<Session>>> GetSession()
         {
             if (_context.Session == null)
@@ -33,8 +34,9 @@ namespace MovieTicketApi.Controllers
             return await _context.Session.ToListAsync();
         }
 
-        // GET: api/Sessions/5
-        [HttpGet("{id}")]
+        // GET: list/5
+        [HttpGet("list/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Session>> GetSession(int id)
         {
             if (_context.Session == null)
@@ -53,7 +55,8 @@ namespace MovieTicketApi.Controllers
         }
 
         // PUT: /sessions/edit/5
-        [HttpPut("/sessions/edit/{id}")]
+        [HttpPut("edit/{id}")]
+        [ProducesResponseType(StatusCodes.Status100Continue)]
         public async Task<IActionResult> PutSession(int id, Session session)
         {
             if (id != session.SessionId)
@@ -80,8 +83,9 @@ namespace MovieTicketApi.Controllers
             return NoContent();
         }
 
-        // POST: /sessions/create
-        [HttpPost ("/sessions/create")]
+        // POST: /create
+        [HttpPost ("create")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<ActionResult<Session>> PostSession(Session session)
         {
             if (_context.Session == null)
@@ -95,8 +99,9 @@ namespace MovieTicketApi.Controllers
             return CreatedAtAction("GetSession", new { id = session.SessionId }, session);
         }
 
-        // DELETE: /sessions/delete/5
-        [HttpDelete("/sessions/delete/{id}")]
+        // DELETE: delete/5
+        [HttpDelete("delete/{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> DeleteSession(int id)
         {
             if (_context.Session == null)

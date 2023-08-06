@@ -10,7 +10,7 @@ using MovieTicketApi.Models;
 
 namespace MovieTicketApi.Controllers
 {
-    [Route("/")]
+    [Route("/movies")]
     [ApiController]
     public class MoviesController : ControllerBase
     {
@@ -22,7 +22,8 @@ namespace MovieTicketApi.Controllers
         }
 
         // GET: /movies
-        [HttpGet ("movies")]
+        [HttpGet ("/")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<Movie>>> GetMovie()
         {
             if (_context.Movie == null)
@@ -34,7 +35,8 @@ namespace MovieTicketApi.Controllers
         }
 
         // GET: movies/5
-        [HttpGet("movies/{id}")]
+        [HttpGet("list/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Movie>> GetMovie(int id)
         {
             if (_context.Movie == null)
@@ -53,7 +55,8 @@ namespace MovieTicketApi.Controllers
         }
 
         // PUT: movies/edit/5
-        [HttpPut("moviees/edit/{id}")]
+        [HttpPut("edit/{id}")]
+        [ProducesResponseType(StatusCodes.Status100Continue)]
         public async Task<IActionResult> PutMovie(int id, Movie movie)
         {
             if (id != movie.MovieId)
@@ -81,7 +84,8 @@ namespace MovieTicketApi.Controllers
         }
 
         // POST: /movies/create
-        [HttpPost ("movies/create")]
+        [HttpPost ("/create")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<ActionResult<Movie>> PostMovie(Movie movie)
         {
             if (_context.Movie == null)
@@ -96,7 +100,8 @@ namespace MovieTicketApi.Controllers
         }
 
         // DELETE: movies/delete/5
-        [HttpDelete("movies/delete/{id}")]
+        [HttpDelete("delete/{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> DeleteMovie(int id)
         {
             if (_context.Movie == null)

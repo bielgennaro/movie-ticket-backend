@@ -11,7 +11,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2c4262d2-1453-4d05-bef6-5a24e9578d18" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MovieTicketApi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MovieTicketApi/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/MoviesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/MoviesController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/SessionsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/SessionsController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/TicketsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/TicketsController.cs" afterDir="false" />
@@ -129,7 +128,8 @@
       <workItem from="1691140616523" duration="2555000" />
       <workItem from="1691143272893" duration="256000" />
       <workItem from="1691181903145" duration="3467000" />
-      <workItem from="1691287364793" duration="1928000" />
+      <workItem from="1691287364793" duration="3172000" />
+      <workItem from="1691292591356" duration="897000" />
     </task>
     <task id="LOCAL-00001" summary="clean:ajustes na identação">
       <option name="closed" value="true" />

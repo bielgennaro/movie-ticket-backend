@@ -10,7 +10,7 @@ using MovieTicketApi.Models;
 
 namespace MovieTicketApi.Controllers
 {
-    [Route ("/")]
+    [Route ("/tickets")]
     [ApiController]
     public class TicketsController : ControllerBase
     {
@@ -21,8 +21,9 @@ namespace MovieTicketApi.Controllers
             _context = context;
         }
 
-        // GET: /tickets
-        [HttpGet ("tickets")]
+        // GET: tickets/
+        [HttpGet ("/")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<Ticket>>> GetTicket()
         {
             if (_context.Ticket == null)
@@ -33,8 +34,9 @@ namespace MovieTicketApi.Controllers
             return await _context.Ticket.ToListAsync();
         }
 
-        // GET: Tickets/5
-        [HttpGet("tickets/{id}")]
+        // GET: list/5
+        [HttpGet("list/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Ticket>> GetTicket(int id)
         {
             if (_context.Ticket == null)
@@ -52,8 +54,9 @@ namespace MovieTicketApi.Controllers
             return ticket;
         }
 
-        // PUT: tickets/edit/5
-        [HttpPut("tickets/edit/{id}")]
+        // PUT: edit/5
+        [HttpPut("edit/{id}")]
+        [ProducesResponseType(StatusCodes.Status100Continue)]
         public async Task<IActionResult> PutTicket(int id, Ticket ticket)
         {
             if (id != ticket.TicketId)
@@ -80,8 +83,9 @@ namespace MovieTicketApi.Controllers
             return NoContent();
         }
 
-        // POST: /tickets/create
-        [HttpPost ("tickets/create")]
+        // POST: create
+        [HttpPost ("/create")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<ActionResult<Ticket>> PostTicket(Ticket ticket)
         {
             if (_context.Ticket == null)
@@ -95,8 +99,8 @@ namespace MovieTicketApi.Controllers
             return CreatedAtAction("GetTicket", new { id = ticket.TicketId }, ticket);
         }
 
-        // DELETE: tickets/5
-        [HttpDelete("tickets/{id}")]
+        // DELETE: delete/5
+        [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteTicket(int id)
         {
             if (_context.Ticket == null)
