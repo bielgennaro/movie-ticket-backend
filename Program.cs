@@ -23,8 +23,6 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
-app.UseHttpsRedirection();
-
 app.UseRouting();
 
 /*
@@ -48,8 +46,6 @@ app.UseCors();
 app.UseAuthorization();
 
 app.MapControllers();
-
-app.UseHttpsRedirection();
 
 app.Run();
 

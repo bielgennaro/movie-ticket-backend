@@ -1,12 +1,17 @@
-﻿namespace MovieTicketApi.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MovieTicketApi.Models;
 
 public class Movie
 {
     public int MovieId { get; set; }
     public string Name { get; set; }
+    
+    [StringLength(1200, ErrorMessage = "A sinopse deve conter no máximo 1200 caracteres")]
     public string Synopsis { get; set; }
     public string Director { get; set; }
     public string BannerUrl { get; set; }
+    public ICollection<MovieSession> MovieSessions { get; set; } = new List<MovieSession>();
 
     public Movie()
     {

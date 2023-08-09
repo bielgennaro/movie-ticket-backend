@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieTicketApi.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MovieTicketApi.Migrations
 {
     [DbContext(typeof(MovieTicketApiContext))]
-    partial class MovieTicketApiContextModelSnapshot : ModelSnapshot
+    [Migration("20230809054354_PasswordColumn")]
+    partial class PasswordColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,29 +24,6 @@ namespace MovieTicketApi.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("MovieTicketApi.Models.AdminUser", b =>
-                {
-                    b.Property<int>("AdminUserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AdminUserId"));
-
-                    b.Property<int>("EmailUserId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("UserId1")
-                        .HasColumnType("integer");
-
-                    b.HasKey("AdminUserId");
-
-                    b.HasIndex("EmailUserId");
-
-                    b.HasIndex("UserId1");
-
-                    b.ToTable("AdminUser");
-                });
 
             modelBuilder.Entity("MovieTicketApi.Models.Movie", b =>
                 {
@@ -67,8 +47,8 @@ namespace MovieTicketApi.Migrations
 
                     b.Property<string>("Synopsis")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
+                        .HasMaxLength(2020)
+                        .HasColumnType("character varying(2020)");
 
                     b.HasKey("MovieId");
 
@@ -146,31 +126,11 @@ namespace MovieTicketApi.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
+                        .HasColumnType("text");
 
                     b.HasKey("UserId");
 
                     b.ToTable("User");
-                });
-
-            modelBuilder.Entity("MovieTicketApi.Models.AdminUser", b =>
-                {
-                    b.HasOne("MovieTicketApi.Models.User", "Email")
-                        .WithMany()
-                        .HasForeignKey("EmailUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MovieTicketApi.Models.User", "UserId")
-                        .WithMany()
-                        .HasForeignKey("UserId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Email");
-
-                    b.Navigation("UserId");
                 });
 
             modelBuilder.Entity("MovieTicketApi.Models.Session", b =>

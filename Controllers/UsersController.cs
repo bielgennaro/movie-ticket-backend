@@ -23,8 +23,7 @@ namespace MovieTicketApi.Controllers
         }
 
         // GET: /users
-        [HttpGet ("list")]
-        [EnableCors("CorsPolicy")]
+        [HttpGet("list")]
         [ProducesResponseType(statusCode: StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
@@ -35,9 +34,9 @@ namespace MovieTicketApi.Controllers
 
             return await _context.User.ToListAsync();
         }
-
+        
         // GET: list/5
-        [HttpGet("list/{id}")]
+        [HttpGet("list/{id:int}")]
         [ProducesResponseType(statusCode: StatusCodes.Status200OK)]
         public async Task<ActionResult<User>> GetUser(int id)
         {
@@ -57,7 +56,7 @@ namespace MovieTicketApi.Controllers
         }
 
         // PUT: edit/5
-        [HttpPut("edit/{id}")]
+        [HttpPut("edit/{id:int}")]
         [ProducesResponseType(statusCode: StatusCodes.Status100Continue)]
         public async Task<IActionResult> PutUser(int id, User user)
         {
@@ -91,19 +90,18 @@ namespace MovieTicketApi.Controllers
         {
             if (_context.User == null)
             {
-                return Problem("Entity set 'MovieTicketApiContext.User'  is null.");
+                return Problem("Entity set 'MovieTicketApiContext.Movie' is null.");
             }
 
             _context.User.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
+            return CreatedAtAction("GetMovie", new { id = user.UserId }, user);
         }
 
         // DELETE: delete/5
-        [HttpDelete("delete/{id}")]
-        [EnableCors("CorsPolicy")]
-        [ProducesResponseType(statusCode: StatusCodes.Status202Accepted)]
+        [HttpDelete("delete/{id:int}")]
+        [ProducesResponseType(statusCode: StatusCodes.Status204NoContent)]
         public async Task<IActionResult> DeleteUser(int id)
         {
             if (_context.User == null)
@@ -122,7 +120,6 @@ namespace MovieTicketApi.Controllers
 
             return NoContent();
         }
-
         private bool UserExists(int id)
         {
             return (_context.User?.Any(e => e.UserId == id)).GetValueOrDefault();
