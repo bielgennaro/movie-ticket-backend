@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +23,7 @@ namespace MovieTicketApi.Controllers
         }
 
         // GET: /movies
-        [HttpGet ("/")]
+        [HttpGet("list")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<Movie>>> GetMovie()
         {
@@ -84,13 +85,13 @@ namespace MovieTicketApi.Controllers
         }
 
         // POST: /movies/create
-        [HttpPost ("/create")]
+        [HttpPost("create")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<ActionResult<Movie>> PostMovie(Movie movie)
         {
             if (_context.Movie == null)
             {
-                return Problem("Entity set 'MovieTicketApiContext.Movie'  is null.");
+                return Problem("Entity set 'MovieTicketApiContext.Movie' is null.");
             }
 
             _context.Movie.Add(movie);

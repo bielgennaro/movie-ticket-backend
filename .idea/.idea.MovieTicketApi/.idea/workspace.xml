@@ -11,10 +11,14 @@
   <component name="ChangeListManager">
     <list default="true" id="2c4262d2-1453-4d05-bef6-5a24e9578d18" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MovieTicketApi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MovieTicketApi/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/65ce51e5-6b08-4ec2-b697-5921ab12fdee.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/65ce51e5-6b08-4ec2-b697-5921ab12fdee.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/MoviesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/MoviesController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/SessionsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/SessionsController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/TicketsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/TicketsController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/UsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/UsersController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/User.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MovieTicketApi.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/MovieTicketApi.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,6 +28,20 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;bielgennaro&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="47de77af-9db3-4b6e-b96b-baf89eaf27ae" />
+        <option name="url" value="https://github.com/guiliuri13/movie-ticket-backend" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="mock://C:/movie-ticket-backend/Models/Movie.cs" root0="SKIP_HIGHLIGHTING" />
@@ -35,6 +53,9 @@
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="Toolset" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2TVPIi4MgdeFj6yJgnDbKSjF1hM" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -49,18 +70,22 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ],
     &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\biel\\AppData\\Local\\JetBrains\\Shared\\vAny\\DecompilerCache&quot;,
-      &quot;C:\\Users\\biel\\AppData\\Local\\JetBrains\\Shared\\vAny\\SourcesCache&quot;,
+      &quot;C:\\Users\\biel\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\biel\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache&quot;,
       &quot;C:\\Users\\biel\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
@@ -129,7 +154,14 @@
       <workItem from="1691143272893" duration="256000" />
       <workItem from="1691181903145" duration="3467000" />
       <workItem from="1691287364793" duration="3172000" />
-      <workItem from="1691292591356" duration="897000" />
+      <workItem from="1691292591356" duration="1129000" />
+      <workItem from="1691448515017" duration="2004000" />
+      <workItem from="1691450585862" duration="24000" />
+      <workItem from="1691450656945" duration="2875000" />
+      <workItem from="1691536294094" duration="834000" />
+      <workItem from="1691537480746" duration="1469000" />
+      <workItem from="1691539455819" duration="315000" />
+      <workItem from="1691539794614" duration="1349000" />
     </task>
     <task id="LOCAL-00001" summary="clean:ajustes na identação">
       <option name="closed" value="true" />
@@ -146,9 +178,22 @@
     <option name="version" value="3" />
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="executable:docker" />
+    <option featureType="dependencySupport" implementationName="dotnet:Microsoft.Identity.Client" />
+    <option featureType="dependencySupport" implementationName="executable:kubectl" />
+    <option featureType="dependencySupport" implementationName="dotnet:Microsoft.EntityFrameworkCore.Abstractions" />
+    <option featureType="dependencySupport" implementationName="dotnet:Microsoft.EntityFrameworkCore.Relational" />
+    <option featureType="dependencySupport" implementationName="dotnet:Microsoft.Extensions.Logging" />
+    <option featureType="dependencySupport" implementationName="dotnet:Microsoft.EntityFrameworkCore" />
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="clean:ajustes na identação" />
     <option name="LAST_COMMIT_MESSAGE" value="clean:ajustes na identação" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

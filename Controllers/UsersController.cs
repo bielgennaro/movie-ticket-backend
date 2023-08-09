@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +23,8 @@ namespace MovieTicketApi.Controllers
         }
 
         // GET: /users
-        [HttpGet ("/")]
+        [HttpGet ("list")]
+        [EnableCors("CorsPolicy")]
         [ProducesResponseType(statusCode: StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
@@ -55,7 +57,7 @@ namespace MovieTicketApi.Controllers
         }
 
         // PUT: edit/5
-        [HttpPut("/edit/{id}")]
+        [HttpPut("edit/{id}")]
         [ProducesResponseType(statusCode: StatusCodes.Status100Continue)]
         public async Task<IActionResult> PutUser(int id, User user)
         {
@@ -84,8 +86,7 @@ namespace MovieTicketApi.Controllers
         }
 
         // POST: /create
-        [HttpPost ("/create")]
-        [ProducesResponseType(statusCode: StatusCodes.Status201Created)]
+        [HttpPost("create")]
         public async Task<ActionResult<User>> PostUser(User user)
         {
             if (_context.User == null)
@@ -101,6 +102,7 @@ namespace MovieTicketApi.Controllers
 
         // DELETE: delete/5
         [HttpDelete("delete/{id}")]
+        [EnableCors("CorsPolicy")]
         [ProducesResponseType(statusCode: StatusCodes.Status202Accepted)]
         public async Task<IActionResult> DeleteUser(int id)
         {

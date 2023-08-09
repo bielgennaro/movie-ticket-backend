@@ -22,7 +22,7 @@ namespace MovieTicketApi.Controllers
         }
 
         // GET: /sessions
-        [HttpGet ("/")]
+        [HttpGet("list")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<Session>>> GetSession()
         {
@@ -84,7 +84,7 @@ namespace MovieTicketApi.Controllers
         }
 
         // POST: /create
-        [HttpPost ("create")]
+        [HttpPost("create")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<ActionResult<Session>> PostSession(Session session)
         {

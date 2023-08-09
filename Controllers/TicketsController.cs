@@ -10,7 +10,7 @@ using MovieTicketApi.Models;
 
 namespace MovieTicketApi.Controllers
 {
-    [Route ("/tickets")]
+    [Route("/tickets")]
     [ApiController]
     public class TicketsController : ControllerBase
     {
@@ -22,7 +22,7 @@ namespace MovieTicketApi.Controllers
         }
 
         // GET: tickets/
-        [HttpGet ("/")]
+        [HttpGet ("list")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<Ticket>>> GetTicket()
         {
@@ -84,7 +84,7 @@ namespace MovieTicketApi.Controllers
         }
 
         // POST: create
-        [HttpPost ("/create")]
+        [HttpPost("create")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<ActionResult<Ticket>> PostTicket(Ticket ticket)
         {
