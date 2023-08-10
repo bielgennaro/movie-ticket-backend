@@ -115,6 +115,30 @@ namespace MovieTicketApi.Controllers
 
             return NoContent();
         }
+        
+        // GET: api/MoviesSessions/home
+        [HttpGet("home")]
+        public async Task<IActionResult> HomeMovieSession(int id)
+        {
+            if (_context.MovieSessions == null)
+            {
+                return NoContent();
+            }
+            
+            var currentTimeWithTimeZone = DateTime.UtcNow;
+            var movieSession = await _context.MovieSessions
+                .Where(s => s.Session.DateTime >= currentTimeWithTimeZone)
+                .GroupBy(s => s.MovieId)
+                .Select(s => s.First())
+                .ToListAsync();
+
+            if (movieSession == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(movieSession);
+        }
 
         private bool MovieSessionExists(int id)
         {

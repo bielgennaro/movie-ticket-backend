@@ -96,7 +96,7 @@ namespace MovieTicketApi.Controllers
             _context.User.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetMovie", new { id = user.UserId }, user);
+            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
         }
 
         // DELETE: delete/5
