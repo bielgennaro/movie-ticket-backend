@@ -17,7 +17,8 @@ new ServiceCollection()
     .AddLogging()
     .AddMvc()
     .AddNewtonsoftJson()
-    .Services.BuildServiceProvider();
+    .Services.BuildServiceProvider()
+    .ConfigureAwait(true);
 
 builder.Services.AddControllers();
 
@@ -27,7 +28,7 @@ app.UseRouting();
 
 /*
  *Teste CORS*
- * 
+ *
 builder.Services.AddCors(
     options =>
     {

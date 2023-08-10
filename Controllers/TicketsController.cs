@@ -23,7 +23,7 @@ namespace MovieTicketApi.Controllers
         }
 
         // GET: tickets/
-        [HttpGet ("list")]
+        [HttpGet("list")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<Ticket>>> GetTicket()
         {

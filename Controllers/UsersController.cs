@@ -34,7 +34,7 @@ namespace MovieTicketApi.Controllers
 
             return await _context.User.ToListAsync();
         }
-        
+
         // GET: list/5
         [HttpGet("list/{id:int}")]
         [ProducesResponseType(statusCode: StatusCodes.Status200OK)]
@@ -120,6 +120,7 @@ namespace MovieTicketApi.Controllers
 
             return NoContent();
         }
+
         private bool UserExists(int id)
         {
             return (_context.User?.Any(e => e.UserId == id)).GetValueOrDefault();
