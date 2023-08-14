@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MovieTicketApi.Data;
+using MovieTicketApi.Migrations;
 using MovieTicketApi.Models;
 
 namespace MovieTicketApi.Controllers
@@ -27,12 +28,7 @@ namespace MovieTicketApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<Movie>>> GetMovie()
         {
-            if (_context.Movie == null)
-            {
-                return NotFound();
-            }
-
-            return await _context.Movie.ToListAsync();
+            return await _context.Movie.Include(m => m.Sessions).ToListAsync();
         }
 
         // GET: movies/5
@@ -89,15 +85,10 @@ namespace MovieTicketApi.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<ActionResult<Movie>> PostMovie(Movie movie)
         {
-            if (_context.Movie == null)
-            {
-                return Problem("Entity set 'MovieTicketApiContext.Movie' is null.");
-            }
-
             _context.Movie.Add(movie);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetMovie", new { id = movie.MovieId }, movie);
+            return CreatedAtAction("GetMovies", new { id = movie.MovieId }, movie);
         }
 
         // DELETE: movies/delete/5

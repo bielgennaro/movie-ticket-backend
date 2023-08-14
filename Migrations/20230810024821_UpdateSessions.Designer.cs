@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MovieTicketApi.Migrations
 {
     [DbContext(typeof(MovieTicketApiContext))]
-    [Migration("20230810003156_UpdateRelations")]
-    partial class UpdateRelations
+    [Migration("20230810024821_UpdateSessions")]
+    partial class UpdateSessions
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,6 +55,29 @@ namespace MovieTicketApi.Migrations
                     b.ToTable("Movie");
                 });
 
+            modelBuilder.Entity("MovieTicketApi.Models.MovieSession", b =>
+                {
+                    b.Property<int>("MovieSessionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("MovieSessionId"));
+
+                    b.Property<int>("MovieId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SessionId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("MovieSessionId");
+
+                    b.HasIndex("MovieId");
+
+                    b.HasIndex("SessionId");
+
+                    b.ToTable("MovieSessions");
+                });
+
             modelBuilder.Entity("MovieTicketApi.Models.Session", b =>
                 {
                     b.Property<int>("SessionId")
@@ -65,10 +88,6 @@ namespace MovieTicketApi.Migrations
 
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("MovieHour")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<int>("MovieId")
                         .HasColumnType("integer");
@@ -126,6 +145,25 @@ namespace MovieTicketApi.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("User");
+                });
+
+            modelBuilder.Entity("MovieTicketApi.Models.MovieSession", b =>
+                {
+                    b.HasOne("MovieTicketApi.Models.Movie", "Movie")
+                        .WithMany()
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MovieTicketApi.Models.Session", "Session")
+                        .WithMany()
+                        .HasForeignKey("SessionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
+
+                    b.Navigation("Session");
                 });
 
             modelBuilder.Entity("MovieTicketApi.Models.Session", b =>

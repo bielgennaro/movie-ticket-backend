@@ -26,12 +26,7 @@ namespace MovieTicketApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<Session>>> GetSession()
         {
-            if (_context.Session == null)
-            {
-                return NotFound();
-            }
-
-            return await _context.Session.ToListAsync();
+            return await _context.Session.Include(s => s.Movie).ToListAsync();
         }
 
         // GET: list/5
@@ -88,15 +83,10 @@ namespace MovieTicketApi.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<ActionResult<Session>> PostSession(Session session)
         {
-            if (_context.Session == null)
-            {
-                return Problem("Entity set 'MovieTicketApiContext.Session'  is null.");
-            }
-
             _context.Session.Add(session);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSession", new { id = session.SessionId }, session);
+            return CreatedAtAction("GetSessions", new { id = session.SessionId }, session);
         }
 
         // DELETE: delete/5

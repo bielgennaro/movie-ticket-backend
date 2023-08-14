@@ -1,53 +1,21 @@
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using MovieTicketApi.Controllers;
-using MovieTicketApi.Data;
-using MovieTicketApi.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+using MovieTicketApi;
 
-var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddDbContext<MovieTicketApiContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("MovieTicketApiContext")));
-
-builder.Services.AddControllers()
-    .AddNewtonsoftJson();
-
-new ServiceCollection()
-    .AddLogging()
-    .AddMvc()
-    .AddNewtonsoftJson()
-    .Services.BuildServiceProvider()
-    .ConfigureAwait(true);
-
-builder.Services.AddControllers();
-
-var app = builder.Build();
-
-app.UseRouting();
-
-/*
- *Teste CORS*
- *
-builder.Services.AddCors(
-    options =>
+namespace MovieTicketApi
+{
+    public class Program
     {
-        options.AddPolicy("CorsPolyci",
-            policy =>
-            {
-                policy.WithOrigins("http://localhost:7266")
-                    .AllowAnyHeader()
-                    .AllowAnyMethod();
-            });
-    });
+        public static void Main(string[] args)
+        {
+            CreateHostBuilder(args).Build().Run();
+        }
 
-app.UseCors();
-*/
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
-
-app.Logger.LogInformation("Starting application");
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
+    }
+}

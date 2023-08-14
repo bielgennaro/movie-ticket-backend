@@ -11,18 +11,23 @@
   <component name="ChangeListManager">
     <list default="true" id="2c4262d2-1453-4d05-bef6-5a24e9578d18" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MovieTicketApi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MovieTicketApi/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/65ce51e5-6b08-4ec2-b697-5921ab12fdee.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/65ce51e5-6b08-4ec2-b697-5921ab12fdee.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/MoviesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/MoviesController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/MoviesSessionsController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/TicketsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/TicketsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/UsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/UsersController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/SessionsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/SessionsController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/MovieTicketApiContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/MovieTicketApiContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20230810003156_UpdateRelations.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20230810003156_UpdateRelations.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Migrations/MovieTicketApiContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Migrations/MovieTicketApiContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Enums/TicketStatus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Enums/TicketStatus.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Models/Movie.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Movie.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/MovieSession.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Models/Session.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Session.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Models/Ticket.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Ticket.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/User.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MovieTicketApi.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/MovieTicketApi.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Properties/launchSettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,10 +53,16 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/25eff0c6e61fa78668cfab4bedf57b35564a0231cb9fa3e750ecc38ffe78/ActionResultOfT.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/movie-ticket-backend/Data/MovieTicketApiContext.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/movie-ticket-backend/Data/MovieTicketApiContext.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/movie-ticket-backend/Data/MovieTicketApiContext.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/movie-ticket-backend/Data/MovieTicketApiContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/movie-ticket-backend/Models/Session.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/movie-ticket-backend/Models/Session.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/movie-ticket-backend/Models/Session.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/movie-ticket-backend/Models/Session.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/movie-ticket-backend/Models/Session.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/movie-ticket-backend/Models/Session.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/movie-ticket-backend/Models/Session.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/movie-ticket-backend/Models/Session.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/movie-ticket-backend/Models/Session.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/movie-ticket-backend/Models/Session.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -61,7 +72,7 @@
     <option name="selectedTabId" value="SWEA" />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 8
+  &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="2TVPIi4MgdeFj6yJgnDbKSjF1hM" />
   <component name="ProjectLevelVcsManager">
@@ -171,6 +182,15 @@
       <workItem from="1691539794614" duration="1349000" />
       <workItem from="1691598583163" duration="5170000" />
       <workItem from="1691621214445" duration="5307000" />
+      <workItem from="1691633873209" duration="2484000" />
+      <workItem from="1691705901700" duration="146000" />
+      <workItem from="1691706540598" duration="3577000" />
+      <workItem from="1691710895969" duration="2014000" />
+      <workItem from="1691873738501" duration="762000" />
+      <workItem from="1691964253329" duration="680000" />
+      <workItem from="1692051780047" duration="398000" />
+      <workItem from="1692052250826" duration="113000" />
+      <workItem from="1692052393869" duration="1611000" />
     </task>
     <task id="LOCAL-00001" summary="clean:ajustes na identação">
       <option name="closed" value="true" />
