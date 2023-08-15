@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MovieTicketApi.Data;
-using MovieTicketApi.Migrations;
+using MovieTicketApi;
 using MovieTicketApi.Models;
 
 namespace MovieTicketApi.Controllers
@@ -56,7 +56,7 @@ namespace MovieTicketApi.Controllers
         [ProducesResponseType(StatusCodes.Status100Continue)]
         public async Task<IActionResult> PutMovie(int id, Movie movie)
         {
-            if (id != movie.MovieId)
+            if (id != movie.Id)
             {
                 return BadRequest();
             }
@@ -88,7 +88,7 @@ namespace MovieTicketApi.Controllers
             _context.Movie.Add(movie);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetMovies", new { id = movie.MovieId }, movie);
+            return CreatedAtAction("GetMovies", new { id = movie.Id }, movie);
         }
 
         // DELETE: movies/delete/5
@@ -115,7 +115,7 @@ namespace MovieTicketApi.Controllers
 
         private bool MovieExists(int id)
         {
-            return (_context.Movie?.Any(e => e.MovieId == id)).GetValueOrDefault();
+            return (_context.Movie?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

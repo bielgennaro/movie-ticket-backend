@@ -24,17 +24,21 @@ namespace MovieTicketApi.Migrations
 
             modelBuilder.Entity("MovieTicketApi.Models.Movie", b =>
                 {
-                    b.Property<int>("MovieId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("MovieId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("BannerUrl")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Director")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Genre")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -47,32 +51,9 @@ namespace MovieTicketApi.Migrations
                         .HasMaxLength(1200)
                         .HasColumnType("character varying(1200)");
 
-                    b.HasKey("MovieId");
+                    b.HasKey("Id");
 
                     b.ToTable("Movie");
-                });
-
-            modelBuilder.Entity("MovieTicketApi.Models.MovieSession", b =>
-                {
-                    b.Property<int>("MovieSessionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("MovieSessionId"));
-
-                    b.Property<int>("MovieId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("SessionId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("MovieSessionId");
-
-                    b.HasIndex("MovieId");
-
-                    b.HasIndex("SessionId");
-
-                    b.ToTable("MovieSessions");
                 });
 
             modelBuilder.Entity("MovieTicketApi.Models.Session", b =>
@@ -89,12 +70,17 @@ namespace MovieTicketApi.Migrations
                     b.Property<int>("MovieId")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("MovieId1")
+                        .HasColumnType("integer");
+
                     b.Property<int>("Room")
                         .HasColumnType("integer");
 
                     b.HasKey("SessionId");
 
                     b.HasIndex("MovieId");
+
+                    b.HasIndex("MovieId1");
 
                     b.ToTable("Session");
                 });
@@ -111,10 +97,18 @@ namespace MovieTicketApi.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("IdUserId")
+                        .HasColumnType("integer");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("double precision");
+
                     b.Property<int>("Status")
                         .HasColumnType("integer");
 
                     b.HasKey("TicketId");
+
+                    b.HasIndex("IdUserId");
 
                     b.ToTable("Ticket");
                 });
@@ -144,39 +138,40 @@ namespace MovieTicketApi.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("MovieTicketApi.Models.MovieSession", b =>
-                {
-                    b.HasOne("MovieTicketApi.Models.Movie", "Movie")
-                        .WithMany()
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MovieTicketApi.Models.Session", "Session")
-                        .WithMany()
-                        .HasForeignKey("SessionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Movie");
-
-                    b.Navigation("Session");
-                });
-
             modelBuilder.Entity("MovieTicketApi.Models.Session", b =>
                 {
-                    b.HasOne("MovieTicketApi.Models.Movie", "Movie")
-                        .WithMany("Sessions")
+                    b.HasOne("MovieTicketApi.Models.Movie", "SessionMovies")
+                        .WithMany()
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Movie");
+                    b.HasOne("MovieTicketApi.Models.Movie", null)
+                        .WithMany("Sessions")
+                        .HasForeignKey("MovieId1");
+
+                    b.Navigation("SessionMovies");
+                });
+
+            modelBuilder.Entity("MovieTicketApi.Models.Ticket", b =>
+                {
+                    b.HasOne("MovieTicketApi.Models.User", "Id")
+                        .WithMany("Tickets")
+                        .HasForeignKey("IdUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Id");
                 });
 
             modelBuilder.Entity("MovieTicketApi.Models.Movie", b =>
                 {
                     b.Navigation("Sessions");
+                });
+
+            modelBuilder.Entity("MovieTicketApi.Models.User", b =>
+                {
+                    b.Navigation("Tickets");
                 });
 #pragma warning restore 612, 618
         }

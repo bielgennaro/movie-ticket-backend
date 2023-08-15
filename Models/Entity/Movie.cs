@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MovieTicketApi.Models;
 
 public class Movie
 {
-    [Key] public int MovieId { get; set; }
+    public int Id { get; set; }
     public string Name { get; set; }
-    
     public string Genre { get; set; }
     
     [StringLength(1200, ErrorMessage = "A sinopse deve conter no máximo 1200 caracteres")]
@@ -19,24 +19,13 @@ public class Movie
     {
     }
 
-    public Movie(int movieId, string name, string synopsis, string director, string bannerUrl, ICollection<Session> sessions)
+    public Movie(string genre,int movieId, string name, string synopsis, string director, string bannerUrl, ICollection<Session> sessions)
     {
-        MovieId = movieId;
+        Genre = genre;
+        Id = movieId;
         Name = name;
         Synopsis = synopsis;
         Director = director;
         BannerUrl = bannerUrl;
-        Sessions = sessions;
     }
-    
-    public void AddSession(Session session)
-    {
-        Sessions.Add(session);
-    }
-    
-    public void RemoveSession(Session session)
-    {
-        Sessions.Remove(session);
-    }
-    
 }

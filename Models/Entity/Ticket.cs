@@ -6,8 +6,8 @@ namespace MovieTicketApi.Models;
 public class Ticket
 {
     public int TicketId { get; set; }
-    [ForeignKey("UserId")] public User UserId { get; set; }
-    [ForeignKey("SessionId")] private Session Session { get; set; }
+    public User Id { get; set; }
+    private Session SessionId { get; set; }
     public string ChairCoord { get; set; }
     public double Price { get; set; }
     public TicketStatus Status { get; set; }
@@ -20,8 +20,8 @@ public class Ticket
     {
         TicketId = ticketId;
         Price = price;
-        UserId = userId;
-        Session = sessionId;
+        Id = userId;
+        SessionId = sessionId;
         ChairCoord = chairCoord;
         Status = status;
     }

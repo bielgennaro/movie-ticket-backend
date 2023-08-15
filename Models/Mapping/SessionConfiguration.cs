@@ -11,7 +11,7 @@ namespace MovieTicketApi.Models.Mapping
 
             builder.Property(s => s.MovieId);
             
-            builder.HasOne(s => s.Movie)
+            builder.HasOne(s => s.SessionMovies)
                 .WithMany()
                 .HasForeignKey(s => s.MovieId);
         }

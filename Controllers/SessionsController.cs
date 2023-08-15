@@ -26,7 +26,7 @@ namespace MovieTicketApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<Session>>> GetSession()
         {
-            return await _context.Session.Include(s => s.Movie).ToListAsync();
+            return await _context.Session.Include(s => s.SessionMovies).ToListAsync();
         }
 
         // GET: list/5

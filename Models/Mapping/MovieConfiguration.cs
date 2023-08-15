@@ -6,9 +6,7 @@ public class MovieConfiguration : IEntityTypeConfiguration<Movie>
 {
     public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Movie> builder)
     {
-        builder.HasKey(m => m.MovieId);
-
-        builder.Property(m => m.Sessions);
+        builder.HasKey(m => m.Id);
         
         builder.Property(m => m.Name);
         
@@ -17,9 +15,10 @@ public class MovieConfiguration : IEntityTypeConfiguration<Movie>
         builder.Property(m => m.Director);
         
         builder.Property(m => m.BannerUrl);
-        
+
         builder.HasMany(m => m.Sessions)
-            .WithOne(s => s.Movie)
+            .WithOne(s => s.SessionMovies)
             .HasForeignKey(s => s.MovieId);
+
     }
 }
