@@ -1,17 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿#region
+
 using MovieTicketApi.Models.Enums;
+
+#endregion
 
 namespace MovieTicketApi.Models;
 
 public class Ticket
 {
-    public int TicketId { get; set; }
-    public User Id { get; set; }
-    private Session SessionId { get; set; }
-    public string ChairCoord { get; set; }
-    public double Price { get; set; }
-    public TicketStatus Status { get; set; }
-
     public Ticket()
     {
     }
@@ -25,4 +21,11 @@ public class Ticket
         ChairCoord = chairCoord;
         Status = status;
     }
+
+    public int TicketId { get; set; }
+    public User Id { get; set; }
+    private Session SessionId { get; set; }
+    public string ChairCoord { get; set; }
+    public double Price { get; set; }
+    public TicketStatus Status { get; set; }
 }

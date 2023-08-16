@@ -20,6 +20,7 @@
     },
     "https": {
       "commandName": "Project",
+      "launchUrl": "swagger",
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "applicationUrl": "https://localhost:7266;http://localhost:5116",
@@ -29,6 +30,7 @@
     },
     "IIS Express": {
       "commandName": "IISExpress",
+      "launchUrl": "swagger",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

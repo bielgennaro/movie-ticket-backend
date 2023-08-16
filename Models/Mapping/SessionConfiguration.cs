@@ -1,5 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿#region
+
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+#endregion
 
 namespace MovieTicketApi.Models.Mapping
 {
@@ -9,11 +13,15 @@ namespace MovieTicketApi.Models.Mapping
         {
             builder.HasKey(s => s.SessionId);
 
+            builder.Property(s => s.DateTime);
+
+            builder.Property(s => s.Room);
+
             builder.Property(s => s.MovieId);
-            
+
             builder.HasOne(s => s.SessionMovies)
-                .WithMany()
-                .HasForeignKey(s => s.MovieId);
+                .WithMany(m => m.SessionsList)
+                .HasForeignKey(s => s.SessionId);
         }
     }
 }

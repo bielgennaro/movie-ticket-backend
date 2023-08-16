@@ -1,14 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+#region
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MovieTicketApi.Data;
-using MovieTicketApi;
 using MovieTicketApi.Models;
+using MovieTicketApi.Models.Requests;
+
+#endregion
 
 namespace MovieTicketApi.Controllers
 {
@@ -28,7 +26,7 @@ namespace MovieTicketApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<Movie>>> GetMovie()
         {
-            return await _context.Movie.Include(m => m.Sessions).ToListAsync();
+            return await _context.Movie.Include(m => m.SessionsList).ToListAsync();
         }
 
         // GET: movies/5
@@ -80,18 +78,18 @@ namespace MovieTicketApi.Controllers
             return NoContent();
         }
 
-        // POST: /movies/create
         [HttpPost("create")]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<ActionResult<Movie>> PostMovie(Movie movie)
+        public async Task<ActionResult<Movie>> PostMovie(CreateMovieRequest movieRequest)
         {
-            _context.Movie.Add(movie);
+            var movie = new Movie(movieRequest.Name, movieRequest.Genre, movieRequest.Director);
+
+            await _context.Movie.AddAsync(movie);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetMovies", new { id = movie.Id }, movie);
+            return Ok(new { movieId = movie.Id });
         }
-
-        // DELETE: movies/delete/5
+        
         [HttpDelete("delete/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> DeleteMovie(int id)

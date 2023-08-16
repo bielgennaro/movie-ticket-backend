@@ -1,11 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+#region
+
 using Microsoft.EntityFrameworkCore;
 using MovieTicketApi.Models;
-using MovieTicketApi.Models.Enums;
 using MovieTicketApi.Models.Mapping;
+
+#endregion
 
 namespace MovieTicketApi.Data
 {

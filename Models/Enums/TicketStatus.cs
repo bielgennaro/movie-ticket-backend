@@ -1,4 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+﻿#region
+
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+
+#endregion
 
 namespace MovieTicketApi.Models.Enums;
 

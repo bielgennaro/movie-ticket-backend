@@ -1,11 +1,26 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
+﻿#region
+
+using System.ComponentModel.DataAnnotations;
+
+#endregion
 
 namespace MovieTicketApi.Models;
 
 public class User
 {
-    public int UserId { get; set; }
+    public User()
+    {
+    }
+
+    public User(int id, string email, string password, bool isAdmin)
+    {
+        Id = id;
+        Email = email;
+        Password = password;
+        IsAdmin = isAdmin;
+    }
+
+    public int Id { get; set; }
 
     [EmailAddress(ErrorMessage = "Insira um email válido!")]
     public string Email { get; set; }
@@ -14,18 +29,6 @@ public class User
     public string Password { get; set; }
 
     public bool IsAdmin { get; set; }
-    
+
     public ICollection<Ticket> Tickets { get; set; }
-
-    public User()
-    {
-    }
-
-    public User(int userId, string email, string password, bool isAdmin)
-    {
-        UserId = userId;
-        Email = email;
-        Password = password;
-        IsAdmin = isAdmin;
-    }
 }

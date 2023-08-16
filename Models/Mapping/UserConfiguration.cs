@@ -1,12 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿#region
+
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+#endregion
 
 namespace MovieTicketApi.Models.Mapping;
 
 public class UserConfiguration : IEntityTypeConfiguration<User>
 {
-    public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<User> builder)
+    public void Configure(EntityTypeBuilder<User> builder)
     {
-        builder.HasKey(u => u.UserId);
+        builder.HasKey(u => u.Id);
 
         builder.Property(u => u.Email);
 
