@@ -18,5 +18,9 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.Password);
 
         builder.Property(u => u.IsAdmin);
+
+        builder.HasMany(u => u.TicketsList)
+                   .WithOne(t => t.User)
+                   .HasForeignKey(t => t.UserId);
     }
 }

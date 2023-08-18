@@ -1,22 +1,23 @@
-﻿namespace MovieTicketApi.Models;
-
-public class Session
+﻿namespace MovieTicketApi.Models
 {
-    public Session()
+    public class Session
     {
-    }
+        public Session()
+        {
+        }
 
-    public Session(int sessionId, DateTime dateTime, int room, int movieId)
-    {
-        SessionId = sessionId;
-        DateTime = dateTime;
-        Room = room;
-        MovieId = movieId;
-    }
+        public Session(DateTime dateTime, string room)
+        {
+            DateTime = dateTime;
+            Room = room;
+        }
 
-    public int SessionId { get; set; }
-    public DateTime DateTime { get; set; }
-    public int Room { get; set; }
-    public int MovieId { get; set; }
-    public Movie SessionMovies { get; set; }
+        public int Id { get; set; }
+        public DateTime DateTime { get; set; }
+        public string Room { get; set; }
+
+        public int MovieId { get; set; }  // Chave estrangeira
+        public Movie Movie { get; set; }  // Propriedade de navegação para o filme
+    }
 }
+

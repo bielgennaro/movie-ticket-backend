@@ -13,14 +13,27 @@ public class MovieConfiguration : IEntityTypeConfiguration<Movie>
     {
         builder.HasKey(m => m.Id);
 
-        builder.Property(m => m.Name);
+        builder.Property(m => m.Name)
+            .IsRequired()
+            .HasMaxLength(100);
 
-        builder.Property(m => m.Director);
+        builder.Property(m => m.Genre)
+            .IsRequired()
+            .HasMaxLength(50);
 
-        builder.Property(m => m.Genre);
+        builder.Property(m => m.Synopsis)
+            .HasMaxLength(255);
 
-        builder.HasMany(m => m.SessionsList)
-            .WithOne(s => s.SessionMovies)
-            .HasForeignKey(s => s.MovieId);
+        builder.Property(m => m.Director)
+            .IsRequired()
+            .HasMaxLength(100);
+
+        builder.Property(m => m.BannerUrl)
+            .HasMaxLength(200);
+
+        builder.HasMany(m => m.SessionsList)  // Relação com a entidade Session
+            .WithOne(s => s.Movie)
+            .HasForeignKey(s => s.MovieId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

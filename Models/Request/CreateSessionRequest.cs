@@ -2,6 +2,6 @@
 
 public class CreateSessionRequest
 {
-    public int Room { get; set; }
+    public string Room { get; set; }
     public DateTime DateTime { get; set; }
 }

@@ -11,17 +11,19 @@ namespace MovieTicketApi.Models.Mapping
     {
         public void Configure(EntityTypeBuilder<Session> builder)
         {
-            builder.HasKey(s => s.SessionId);
+            builder.HasKey(s => s.Id);
 
-            builder.Property(s => s.DateTime);
+            builder.Property(s => s.DateTime)
+                .IsRequired();
 
-            builder.Property(s => s.Room);
+            builder.Property(s => s.Room)
+                .IsRequired()
+                .HasMaxLength(50);
 
-            builder.Property(s => s.MovieId);
-
-            builder.HasOne(s => s.SessionMovies)
+            builder.HasOne(s => s.Movie)  // Relação com a entidade Movie
                 .WithMany(m => m.SessionsList)
-                .HasForeignKey(s => s.SessionId);
+                .HasForeignKey(s => s.MovieId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

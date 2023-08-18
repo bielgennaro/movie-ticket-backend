@@ -3,9 +3,9 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.48">
     <root id="1">
       <DateStyle>dmy</DateStyle>
-      <IntrospectionStateNumber>735</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1031</IntrospectionStateNumber>
       <ServerVersion>15.3</ServerVersion>
-      <StartupTime>1691135767</StartupTime>
+      <StartupTime>1691864132</StartupTime>
       <TimeZones>true ACDT
 true ACSST
 false ACST
@@ -796,24 +796,21 @@ false Zulu
       <Grants>11||10|C|G
 11||-9223372036854775808|U|G
 11||10|U|G
-2200||6171|C|G
-2200||-9223372036854775808|U|G
-2200||6171|U|G
 13183||10|C|G
 13183||-9223372036854775808|U|G
 13183||10|U|G</Grants>
-      <IntrospectionStateNumber>735</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1031</IntrospectionStateNumber>
       <ObjectId>5</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
-    <role id="3" parent="1" name="pg_database_owner">
+    <role id="3" parent="1" name="pg_checkpoint">
+      <ObjectId>4544</ObjectId>
+    </role>
+    <role id="4" parent="1" name="pg_database_owner">
       <ObjectId>6171</ObjectId>
     </role>
-    <role id="4" parent="1" name="pg_read_all_data">
-      <ObjectId>6181</ObjectId>
-    </role>
-    <role id="5" parent="1" name="pg_write_all_data">
-      <ObjectId>6182</ObjectId>
+    <role id="5" parent="1" name="pg_execute_server_program">
+      <ObjectId>4571</ObjectId>
     </role>
     <role id="6" parent="1" name="pg_monitor">
       <ObjectId>3373</ObjectId>
@@ -821,29 +818,29 @@ false Zulu
 3375
 3377</RoleGrants>
     </role>
-    <role id="7" parent="1" name="pg_read_all_settings">
+    <role id="7" parent="1" name="pg_read_all_data">
+      <ObjectId>6181</ObjectId>
+    </role>
+    <role id="8" parent="1" name="pg_read_all_settings">
       <ObjectId>3374</ObjectId>
     </role>
-    <role id="8" parent="1" name="pg_read_all_stats">
+    <role id="9" parent="1" name="pg_read_all_stats">
       <ObjectId>3375</ObjectId>
-    </role>
-    <role id="9" parent="1" name="pg_stat_scan_tables">
-      <ObjectId>3377</ObjectId>
     </role>
     <role id="10" parent="1" name="pg_read_server_files">
       <ObjectId>4569</ObjectId>
     </role>
-    <role id="11" parent="1" name="pg_write_server_files">
-      <ObjectId>4570</ObjectId>
-    </role>
-    <role id="12" parent="1" name="pg_execute_server_program">
-      <ObjectId>4571</ObjectId>
-    </role>
-    <role id="13" parent="1" name="pg_signal_backend">
+    <role id="11" parent="1" name="pg_signal_backend">
       <ObjectId>4200</ObjectId>
     </role>
-    <role id="14" parent="1" name="pg_checkpoint">
-      <ObjectId>4544</ObjectId>
+    <role id="12" parent="1" name="pg_stat_scan_tables">
+      <ObjectId>3377</ObjectId>
+    </role>
+    <role id="13" parent="1" name="pg_write_all_data">
+      <ObjectId>6182</ObjectId>
+    </role>
+    <role id="14" parent="1" name="pg_write_server_files">
+      <ObjectId>4570</ObjectId>
     </role>
     <role id="15" parent="1" name="postgres">
       <BypassRls>1</BypassRls>
@@ -4227,339 +4224,342 @@ false Zulu
       <OwnerName>postgres</OwnerName>
     </schema>
     <schema id="262" parent="2" name="public">
-      <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>735</IntrospectionStateNumber>
-      <ObjectId>2200</ObjectId>
-      <StateNumber>518</StateNumber>
-      <OwnerName>pg_database_owner</OwnerName>
+      <IntrospectionStateNumber>1031</IntrospectionStateNumber>
+      <ObjectId>24873</ObjectId>
+      <StateNumber>915</StateNumber>
+      <OwnerName>postgres</OwnerName>
     </schema>
-    <sequence id="263" parent="262" name="Movie_MovieId_seq">
+    <sequence id="263" parent="262" name="Movie_Id_seq">
       <DasType>integer|0s</DasType>
-      <ObjectId>16399</ObjectId>
+      <ObjectId>25298</ObjectId>
       <SequenceIdentity>1(1)</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>727</StateNumber>
+      <StateNumber>1030</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <sequence id="264" parent="262" name="Session_SessionId_seq">
+    <sequence id="264" parent="262" name="Session_Id_seq">
       <DasType>integer|0s</DasType>
-      <ObjectId>16415</ObjectId>
+      <ObjectId>25314</ObjectId>
       <SequenceIdentity>1(1)</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>727</StateNumber>
+      <StateNumber>1030</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
     <sequence id="265" parent="262" name="Ticket_TicketId_seq">
       <DasType>integer|0s</DasType>
-      <ObjectId>16426</ObjectId>
+      <ObjectId>25327</ObjectId>
       <SequenceIdentity>1(1)</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>727</StateNumber>
+      <StateNumber>1030</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <sequence id="266" parent="262" name="User_UserId_seq">
+    <sequence id="266" parent="262" name="User_Id_seq">
       <DasType>integer|0s</DasType>
-      <ObjectId>16407</ObjectId>
-      <SequenceIdentity>1(2)</SequenceIdentity>
+      <ObjectId>25306</ObjectId>
+      <SequenceIdentity>1(1)</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>727</StateNumber>
+      <StateNumber>1030</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
     <table id="267" parent="262" name="Movie">
-      <ObjectId>16400</ObjectId>
-      <StateNumber>727</StateNumber>
+      <ObjectId>25299</ObjectId>
+      <StateNumber>1030</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
     <table id="268" parent="262" name="Session">
-      <ObjectId>16416</ObjectId>
-      <StateNumber>727</StateNumber>
+      <ObjectId>25315</ObjectId>
+      <StateNumber>1030</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
     <table id="269" parent="262" name="Ticket">
-      <ObjectId>16427</ObjectId>
-      <StateNumber>727</StateNumber>
+      <ObjectId>25328</ObjectId>
+      <StateNumber>1030</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
     <table id="270" parent="262" name="User">
-      <ObjectId>16408</ObjectId>
-      <StateNumber>727</StateNumber>
+      <ObjectId>25307</ObjectId>
+      <StateNumber>1030</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
     <table id="271" parent="262" name="__EFMigrationsHistory">
-      <ObjectId>16394</ObjectId>
-      <StateNumber>726</StateNumber>
+      <ObjectId>25293</ObjectId>
+      <StateNumber>1029</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <column id="272" parent="267" name="MovieId">
+    <column id="272" parent="267" name="Id">
       <DasType>integer|0s</DasType>
       <IdentityKind>by-default</IdentityKind>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>727</StateNumber>
-      <SequenceId>16399</SequenceId>
+      <StateNumber>1030</StateNumber>
+      <SequenceId>25298</SequenceId>
       <TypeId>23</TypeId>
     </column>
     <column id="273" parent="267" name="Name">
       <DasType>text|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>727</StateNumber>
+      <StateNumber>1030</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="274" parent="267" name="Synopsis">
+    <column id="274" parent="267" name="Genre">
       <DasType>text|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StateNumber>727</StateNumber>
+      <StateNumber>1030</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="275" parent="267" name="Director">
-      <DasType>text|0s</DasType>
+    <column id="275" parent="267" name="Synopsis">
+      <DasType>varchar(255)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
-      <StateNumber>727</StateNumber>
-      <TypeId>25</TypeId>
+      <StateNumber>1030</StateNumber>
+      <TypeId>1043</TypeId>
     </column>
-    <column id="276" parent="267" name="BannerUrl">
+    <column id="276" parent="267" name="Director">
       <DasType>text|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
-      <StateNumber>727</StateNumber>
+      <StateNumber>1030</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <index id="277" parent="267" name="PK_Movie">
-      <ColNames>MovieId</ColNames>
-      <ObjectId>16405</ObjectId>
+    <column id="277" parent="267" name="BannerUrl">
+      <DasType>text|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>6</Position>
+      <StateNumber>1030</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="278" parent="267" name="SessionId">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>7</Position>
+      <StateNumber>1030</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="279" parent="267" name="PK_Movie">
+      <ColNames>Id</ColNames>
+      <ObjectId>25304</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>727</StateNumber>
+      <StateNumber>1030</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="278" parent="267" name="PK_Movie">
-      <ObjectId>16406</ObjectId>
+    <key id="280" parent="267" name="PK_Movie">
+      <ObjectId>25305</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>727</StateNumber>
-      <UnderlyingIndexId>16405</UnderlyingIndexId>
+      <StateNumber>1030</StateNumber>
+      <UnderlyingIndexId>25304</UnderlyingIndexId>
     </key>
-    <column id="279" parent="268" name="SessionId">
+    <column id="281" parent="268" name="Id">
       <DasType>integer|0s</DasType>
       <IdentityKind>by-default</IdentityKind>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>727</StateNumber>
-      <SequenceId>16415</SequenceId>
+      <StateNumber>1030</StateNumber>
+      <SequenceId>25314</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="280" parent="268" name="DateTime">
+    <column id="282" parent="268" name="DateTime">
       <DasType>timestamp with time zone|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>727</StateNumber>
+      <StateNumber>1030</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="281" parent="268" name="Room">
-      <DasType>integer|0s</DasType>
+    <column id="283" parent="268" name="Room">
+      <DasType>text|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StateNumber>727</StateNumber>
-      <TypeId>23</TypeId>
+      <StateNumber>1030</StateNumber>
+      <TypeId>25</TypeId>
     </column>
-    <column id="282" parent="268" name="MovieId">
+    <column id="284" parent="268" name="MovieId">
       <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
-      <StateNumber>727</StateNumber>
+      <StateNumber>1030</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <foreign-key id="283" parent="268" name="FK_Session_Movie_MovieId">
+    <foreign-key id="285" parent="268" name="FK_Session_Movie_MovieId">
       <ColNames>MovieId</ColNames>
-      <ObjectId>16421</ObjectId>
+      <ObjectId>25322</ObjectId>
       <OnDelete>cascade</OnDelete>
-      <RefColNames>MovieId</RefColNames>
+      <RefColNames>Id</RefColNames>
       <RefColPositions>1</RefColPositions>
-      <StateNumber>727</StateNumber>
-      <RefTableId>16400</RefTableId>
+      <StateNumber>1030</StateNumber>
+      <RefTableId>25299</RefTableId>
       <RefTableName>Movie</RefTableName>
       <RefTableKind>table</RefTableKind>
     </foreign-key>
-    <index id="284" parent="268" name="PK_Session">
-      <ColNames>SessionId</ColNames>
-      <ObjectId>16419</ObjectId>
+    <index id="286" parent="268" name="PK_Session">
+      <ColNames>Id</ColNames>
+      <ObjectId>25320</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>727</StateNumber>
+      <StateNumber>1030</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="285" parent="268" name="IX_Session_MovieId">
+    <index id="287" parent="268" name="IX_Session_MovieId">
       <ColNames>MovieId</ColNames>
-      <ObjectId>16444</ObjectId>
-      <StateNumber>727</StateNumber>
+      <ObjectId>25340</ObjectId>
+      <StateNumber>1030</StateNumber>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="286" parent="268" name="PK_Session">
-      <ObjectId>16420</ObjectId>
+    <key id="288" parent="268" name="PK_Session">
+      <ObjectId>25321</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>727</StateNumber>
-      <UnderlyingIndexId>16419</UnderlyingIndexId>
+      <StateNumber>1030</StateNumber>
+      <UnderlyingIndexId>25320</UnderlyingIndexId>
     </key>
-    <column id="287" parent="269" name="TicketId">
+    <column id="289" parent="269" name="TicketId">
       <DasType>integer|0s</DasType>
       <IdentityKind>by-default</IdentityKind>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>727</StateNumber>
-      <SequenceId>16426</SequenceId>
+      <StateNumber>1030</StateNumber>
+      <SequenceId>25327</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="288" parent="269" name="UserId">
+    <column id="290" parent="269" name="UserId">
       <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>727</StateNumber>
+      <StateNumber>1030</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="289" parent="269" name="SessionId">
-      <DasType>integer|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-      <StateNumber>727</StateNumber>
-      <TypeId>23</TypeId>
-    </column>
-    <column id="290" parent="269" name="ChairCoord">
+    <column id="291" parent="269" name="ChairCoord">
       <DasType>text|0s</DasType>
       <NotNull>1</NotNull>
-      <Position>4</Position>
-      <StateNumber>727</StateNumber>
+      <Position>3</Position>
+      <StateNumber>1030</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="291" parent="269" name="Status">
+    <column id="292" parent="269" name="Price">
+      <DasType>double precision|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StateNumber>1030</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <column id="293" parent="269" name="Status">
       <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
-      <StateNumber>727</StateNumber>
+      <StateNumber>1030</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <foreign-key id="292" parent="269" name="FK_Ticket_User_UserId">
+    <foreign-key id="294" parent="269" name="FK_Ticket_User_UserId">
       <ColNames>UserId</ColNames>
-      <ObjectId>16439</ObjectId>
+      <ObjectId>25335</ObjectId>
       <OnDelete>cascade</OnDelete>
-      <RefColNames>UserId</RefColNames>
+      <RefColNames>Id</RefColNames>
       <RefColPositions>1</RefColPositions>
-      <StateNumber>727</StateNumber>
-      <RefTableId>16408</RefTableId>
+      <StateNumber>1030</StateNumber>
+      <RefTableId>25307</RefTableId>
       <RefTableName>User</RefTableName>
       <RefTableKind>table</RefTableKind>
     </foreign-key>
-    <foreign-key id="293" parent="269" name="FK_Ticket_Session_SessionId">
-      <ColNames>SessionId</ColNames>
-      <ObjectId>16434</ObjectId>
-      <OnDelete>cascade</OnDelete>
-      <RefColNames>SessionId</RefColNames>
-      <RefColPositions>1</RefColPositions>
-      <StateNumber>727</StateNumber>
-      <RefTableId>16416</RefTableId>
-      <RefTableName>Session</RefTableName>
-      <RefTableKind>table</RefTableKind>
-    </foreign-key>
-    <index id="294" parent="269" name="PK_Ticket">
+    <index id="295" parent="269" name="PK_Ticket">
       <ColNames>TicketId</ColNames>
-      <ObjectId>16432</ObjectId>
+      <ObjectId>25333</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>727</StateNumber>
+      <StateNumber>1030</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="295" parent="269" name="IX_Ticket_UserId">
+    <index id="296" parent="269" name="IX_Ticket_UserId">
       <ColNames>UserId</ColNames>
-      <ObjectId>16446</ObjectId>
-      <StateNumber>727</StateNumber>
-      <AccessMethodId>403</AccessMethodId>
-    </index>
-    <index id="296" parent="269" name="IX_Ticket_SessionId">
-      <ColNames>SessionId</ColNames>
-      <ObjectId>16445</ObjectId>
-      <StateNumber>727</StateNumber>
+      <ObjectId>25341</ObjectId>
+      <StateNumber>1030</StateNumber>
       <AccessMethodId>403</AccessMethodId>
     </index>
     <key id="297" parent="269" name="PK_Ticket">
-      <ObjectId>16433</ObjectId>
+      <ObjectId>25334</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>727</StateNumber>
-      <UnderlyingIndexId>16432</UnderlyingIndexId>
+      <StateNumber>1030</StateNumber>
+      <UnderlyingIndexId>25333</UnderlyingIndexId>
     </key>
-    <column id="298" parent="270" name="UserId">
+    <column id="298" parent="270" name="Id">
       <DasType>integer|0s</DasType>
       <IdentityKind>by-default</IdentityKind>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>727</StateNumber>
-      <SequenceId>16407</SequenceId>
+      <StateNumber>1030</StateNumber>
+      <SequenceId>25306</SequenceId>
       <TypeId>23</TypeId>
     </column>
     <column id="299" parent="270" name="Email">
       <DasType>text|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>727</StateNumber>
+      <StateNumber>1030</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="300" parent="270" name="IsAdmin">
-      <DasType>boolean|0s</DasType>
+    <column id="300" parent="270" name="Password">
+      <DasType>varchar(12)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StateNumber>727</StateNumber>
+      <StateNumber>1030</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="301" parent="270" name="IsAdmin">
+      <DasType>boolean|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StateNumber>1030</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <index id="301" parent="270" name="PK_User">
-      <ColNames>UserId</ColNames>
-      <ObjectId>16413</ObjectId>
+    <index id="302" parent="270" name="PK_User">
+      <ColNames>Id</ColNames>
+      <ObjectId>25312</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>727</StateNumber>
+      <StateNumber>1030</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="302" parent="270" name="PK_User">
-      <ObjectId>16414</ObjectId>
+    <key id="303" parent="270" name="PK_User">
+      <ObjectId>25313</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>727</StateNumber>
-      <UnderlyingIndexId>16413</UnderlyingIndexId>
+      <StateNumber>1030</StateNumber>
+      <UnderlyingIndexId>25312</UnderlyingIndexId>
     </key>
-    <column id="303" parent="271" name="MigrationId">
+    <column id="304" parent="271" name="MigrationId">
       <DasType>varchar(150)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>726</StateNumber>
+      <StateNumber>1029</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="304" parent="271" name="ProductVersion">
+    <column id="305" parent="271" name="ProductVersion">
       <DasType>varchar(32)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>726</StateNumber>
+      <StateNumber>1029</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="305" parent="271" name="PK___EFMigrationsHistory">
+    <index id="306" parent="271" name="PK___EFMigrationsHistory">
       <ColNames>MigrationId</ColNames>
-      <ObjectId>16397</ObjectId>
+      <ObjectId>25296</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>726</StateNumber>
+      <StateNumber>1029</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
       <CollationNames>default</CollationNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="306" parent="271" name="PK___EFMigrationsHistory">
-      <ObjectId>16398</ObjectId>
+    <key id="307" parent="271" name="PK___EFMigrationsHistory">
+      <ObjectId>25297</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>726</StateNumber>
-      <UnderlyingIndexId>16397</UnderlyingIndexId>
+      <StateNumber>1029</StateNumber>
+      <UnderlyingIndexId>25296</UnderlyingIndexId>
     </key>
   </database-model>
 </dataSource>

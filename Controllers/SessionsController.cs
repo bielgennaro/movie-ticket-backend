@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MovieTicketApi.Data;
 using MovieTicketApi.Models;
+using MovieTicketApi.Models.Requests;
 
 #endregion
 
@@ -25,7 +26,7 @@ namespace MovieTicketApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<Session>>> GetSession()
         {
-            return await _context.Session.Include(s => s.SessionMovies).ToListAsync();
+            return await _context.Session.Include(s => s.Movie).ToListAsync();
         }
 
         // GET: list/5
@@ -51,17 +52,26 @@ namespace MovieTicketApi.Controllers
         // PUT: /sessions/edit/5
         [HttpPut("edit/{id}")]
         [ProducesResponseType(StatusCodes.Status100Continue)]
-        public async Task<IActionResult> PutSession(int id, Session session)
+        public async Task<IActionResult> PutSession(int id, CreateSessionRequest sessionRequest)
         {
-            if (id != session.SessionId)
+            var existingSession = await _context.Session.FindAsync(id);
+
+            if (existingSession == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(session).State = EntityState.Modified;
+            var updateSession = new Session(
+                sessionRequest.DateTime,
+                sessionRequest.Room
+            );
+
+            existingSession.Room = sessionRequest.Room;
+            existingSession.DateTime = sessionRequest.DateTime;
 
             try
             {
+                _context.Update(existingSession);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -74,18 +84,20 @@ namespace MovieTicketApi.Controllers
                 throw;
             }
 
-            return NoContent();
+            return Ok();
         }
 
         // POST: /create
         [HttpPost("create")]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<ActionResult<Session>> PostSession(Session session)
+        public async Task<ActionResult<Session>> PostSession(CreateSessionRequest sessionRequest)
         {
-            _context.Session.Add(session);
+            var session = new Session(sessionRequest.DateTime, sessionRequest.Room);
+
+            await _context.Session.AddAsync(session);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSessions", new { id = session.SessionId }, session);
+            return Ok(new { sessionId = session.Id });
         }
 
         // DELETE: delete/5
@@ -105,14 +117,13 @@ namespace MovieTicketApi.Controllers
             }
 
             _context.Session.Remove(session);
-            await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
         private bool SessionExists(int id)
         {
-            return (_context.Session?.Any(e => e.SessionId == id)).GetValueOrDefault();
+            return (_context.Session?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

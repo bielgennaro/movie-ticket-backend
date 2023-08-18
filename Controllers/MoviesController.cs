@@ -52,17 +52,29 @@ namespace MovieTicketApi.Controllers
         // PUT: movies/edit/5
         [HttpPut("edit/{id}")]
         [ProducesResponseType(StatusCodes.Status100Continue)]
-        public async Task<IActionResult> PutMovie(int id, Movie movie)
+        public async Task<IActionResult> PutMovie(int id, CreateMovieRequest movieRequest)
         {
-            if (id != movie.Id)
+            var existingMovie = await _context.Movie.FindAsync(id);
+
+            if (existingMovie == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(movie).State = EntityState.Modified;
+            var updateMovie = new Movie(
+                movieRequest.Name,
+                movieRequest.Synopsis,
+                movieRequest.BannerUrl,
+                movieRequest.Genre,
+                movieRequest.Director
+            );
 
+            existingMovie.Name = movieRequest.Name;
+            existingMovie.Genre = movieRequest.Genre;
+            existingMovie.Director = movieRequest.Director;
             try
             {
+                _context.Update(existingMovie);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -75,21 +87,21 @@ namespace MovieTicketApi.Controllers
                 throw;
             }
 
-            return NoContent();
+            return Ok();
         }
 
         [HttpPost("create")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<ActionResult<Movie>> PostMovie(CreateMovieRequest movieRequest)
         {
-            var movie = new Movie(movieRequest.Name, movieRequest.Genre, movieRequest.Director);
+            var movie = new Movie(movieRequest.Name, movieRequest.Genre, movieRequest.Director, movieRequest.Synopsis, movieRequest.BannerUrl);
 
             await _context.Movie.AddAsync(movie);
             await _context.SaveChangesAsync();
 
             return Ok(new { movieId = movie.Id });
         }
-        
+
         [HttpDelete("delete/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> DeleteMovie(int id)
