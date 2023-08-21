@@ -82,6 +82,7 @@ namespace MovieTicketApi.Controllers
             return NoContent();
         }
 
+   
         // POST: create
         [HttpPost("create")]
         [ProducesResponseType(StatusCodes.Status201Created)]
