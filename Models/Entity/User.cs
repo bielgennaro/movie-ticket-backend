@@ -22,14 +22,8 @@ public class User
     }
 
     public int Id { get; set; }
-
-    [EmailAddress(ErrorMessage = "Insira um email válido!")]
     public string Email { get; set; }
-
-    [StringLength(12, ErrorMessage = "Sua senha deve conter entre 6 e 12 caracteres", MinimumLength = 6)]
     public string Password { get; set; }
-
     public bool IsAdmin { get; set; }
-
     public ICollection<Ticket> TicketsList { get; set; }
 }

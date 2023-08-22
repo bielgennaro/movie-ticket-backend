@@ -15,9 +15,10 @@ public class TicketConfiguration : IEntityTypeConfiguration<Ticket>
 
         builder.Property(t => t.Status);
 
-        builder.Property(t => t.ChairCoord);
+        builder.Property(t => t.ChairCoord)
+            .IsRequired();
 
-        builder.Property(t => t.Price);
-
+        builder.Property(t => t.Price)
+            .IsRequired();
     }
 }

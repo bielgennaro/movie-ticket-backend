@@ -13,14 +13,17 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
     {
         builder.HasKey(u => u.Id);
 
-        builder.Property(u => u.Email);
+        builder.Property(u => u.Email)
+            .IsRequired();
 
-        builder.Property(u => u.Password);
+        builder.Property(u => u.Password)
+            .IsRequired();
 
-        builder.Property(u => u.IsAdmin);
+        builder.Property(u => u.IsAdmin)
+            .IsRequired();
 
         builder.HasMany(u => u.TicketsList)
-                   .WithOne(t => t.User)
-                   .HasForeignKey(t => t.UserId);
+            .WithOne(t => t.User)
+            .HasForeignKey(t => t.UserId);
     }
 }

@@ -10,7 +10,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c4262d2-1453-4d05-bef6-5a24e9578d18" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Migrations/20230821210709_TestingSessionPost.Designer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Migrations/20230821210709_TestingSessionPost.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Models/Dto/MovieDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Models/Dto/SessionDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Models/Dto/TicketDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Models/Dto/UserDto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MovieTicketApi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MovieTicketApi/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/65ce51e5-6b08-4ec2-b697-5921ab12fdee.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/65ce51e5-6b08-4ec2-b697-5921ab12fdee.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7f5bbc47-1ed0-422c-9b47-135ce8b6e1af.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7f5bbc47-1ed0-422c-9b47-135ce8b6e1af.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ca32b56f-1508-4bf7-af6e-ab07a544e685.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ca32b56f-1508-4bf7-af6e-ab07a544e685.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/MoviesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/MoviesController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/SessionsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/SessionsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/TicketsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/TicketsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/UsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/UsersController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/MovieTicketApiContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/MovieTicketApiContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/MovieTicketApiContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Migrations/MovieTicketApiContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Entity/Movie.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Entity/Movie.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Entity/Session.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Entity/Session.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Entity/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Entity/User.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Mapping/MovieConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Mapping/MovieConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Mapping/SessionConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Mapping/SessionConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Mapping/TicketConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Mapping/TicketConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Mapping/UserConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Mapping/UserConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MovieTicketApi.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/MovieTicketApi.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Startup.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,32 +90,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.uml",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ],
-    "rider.external.source.directories": [
-      "C:\\Users\\biel\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache",
-      "C:\\Users\\biel\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache",
-      "C:\\Users\\biel\\AppData\\Local\\Symbols\\src"
+    &quot;rider.external.source.directories&quot;: [
+      &quot;/home/bielgennaro/.config/JetBrains/Rider2023.2/resharper-host/DecompilerCache&quot;,
+      &quot;/home/bielgennaro/.config/JetBrains/Rider2023.2/resharper-host/SourcesCache&quot;,
+      &quot;/home/bielgennaro/.local/share/Symbols/src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.MovieTicketApi: http">
     <configuration name="MovieTicketApi: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/MovieTicketApi.csproj" />
@@ -174,6 +202,14 @@
       <workItem from="1692058119852" duration="2479000" />
       <workItem from="1692135019353" duration="2005000" />
       <workItem from="1692138079186" duration="12652000" />
+      <workItem from="1692635611478" duration="305000" />
+      <workItem from="1692635924163" duration="119000" />
+      <workItem from="1692636065031" duration="645000" />
+      <workItem from="1692645199929" duration="2070000" />
+      <workItem from="1692647719908" duration="568000" />
+      <workItem from="1692650238176" duration="3658000" />
+      <workItem from="1692661970716" duration="188000" />
+      <workItem from="1692662183825" duration="1483000" />
     </task>
     <task id="LOCAL-00001" summary="clean:ajustes na identação">
       <option name="closed" value="true" />

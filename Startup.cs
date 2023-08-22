@@ -33,7 +33,8 @@ public class Startup
         services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1",
-                new OpenApiInfo { Title = "Movie Ticket", Description = "Cineminha dos parsero", Version = "v1" });
+                new OpenApiInfo
+                    { Title = "Movie Ticket", Description = "Projeto integrado do 3/4°semestre", Version = "v1" });
         });
 
         services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin()
@@ -53,8 +54,8 @@ public class Startup
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                "default",
+                "{controller=Home}/{action=Index}/{id?}");
         });
     }
 }

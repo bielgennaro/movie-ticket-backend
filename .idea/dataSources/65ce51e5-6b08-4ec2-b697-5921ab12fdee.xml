@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="postgres@localhost">
-  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.48">
+  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.49">
     <root id="1">
       <DateStyle>dmy</DateStyle>
       <IntrospectionStateNumber>1031</IntrospectionStateNumber>
@@ -4391,9 +4391,9 @@ false Zulu
       <ColNames>MovieId</ColNames>
       <ObjectId>25322</ObjectId>
       <OnDelete>cascade</OnDelete>
-      <RefColNames>Id</RefColNames>
-      <RefColPositions>1</RefColPositions>
       <StateNumber>1030</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefKeyColNames>Id</RefKeyColNames>
       <RefTableId>25299</RefTableId>
       <RefTableName>Movie</RefTableName>
       <RefTableKind>table</RefTableKind>
@@ -4459,9 +4459,9 @@ false Zulu
       <ColNames>UserId</ColNames>
       <ObjectId>25335</ObjectId>
       <OnDelete>cascade</OnDelete>
-      <RefColNames>Id</RefColNames>
-      <RefColPositions>1</RefColPositions>
       <StateNumber>1030</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefKeyColNames>Id</RefKeyColNames>
       <RefTableId>25307</RefTableId>
       <RefTableName>User</RefTableName>
       <RefTableKind>table</RefTableKind>

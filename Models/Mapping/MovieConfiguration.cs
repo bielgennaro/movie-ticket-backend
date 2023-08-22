@@ -31,7 +31,7 @@ public class MovieConfiguration : IEntityTypeConfiguration<Movie>
         builder.Property(m => m.BannerUrl)
             .HasMaxLength(200);
 
-        builder.HasMany(m => m.SessionsList)  // Relação com a entidade Session
+        builder.HasMany(m => m.SessionsList) // Relação com a entidade Session
             .WithOne(s => s.Movie)
             .HasForeignKey(s => s.MovieId)
             .OnDelete(DeleteBehavior.Restrict);
