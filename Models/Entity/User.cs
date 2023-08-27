@@ -1,6 +1,5 @@
 ﻿#region
 
-using System.ComponentModel.DataAnnotations;
 
 #endregion
 
@@ -10,7 +9,6 @@ public class User
 {
     public User()
     {
-        TicketsList = new List<Ticket>();
     }
 
     public User(int id, string email, string password, bool isAdmin)
@@ -25,5 +23,4 @@ public class User
     public string Email { get; set; }
     public string Password { get; set; }
     public bool IsAdmin { get; set; }
-    public ICollection<Ticket> TicketsList { get; set; }
 }

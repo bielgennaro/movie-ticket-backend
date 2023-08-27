@@ -34,7 +34,7 @@ public class Startup
         {
             c.SwaggerDoc("v1",
                 new OpenApiInfo
-                    { Title = "Movie Ticket", Description = "Projeto integrado do 3/4°semestre", Version = "v1" });
+                { Title = "Movie Ticket", Description = "Projeto integrado do 3/4°semestre", Version = "v1" });
         });
 
         services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin()

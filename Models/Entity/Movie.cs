@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace MovieTicketApi.Models;
+﻿namespace MovieTicketApi.Models;
 
 public class Movie
 {
@@ -8,20 +6,16 @@ public class Movie
     {
     }
 
-    public Movie(string name, string genre, string director, string synopsis, string bannerUrl)
+    public Movie(string gender, string synopsis, string director)
     {
-        Name = name;
-        Genre = genre;
-        Director = director;
+        Gender = gender;
         Synopsis = synopsis;
-        BannerUrl = bannerUrl;
+        Director = director;
     }
 
     public int Id { get; set; }
-    public string Name { get; set; }
-    public string Genre { get; set; }
+    public string Gender { get; set; }
     public string Synopsis { get; set; }
     public string Director { get; set; }
     public string BannerUrl { get; set; }
-    public ICollection<Session> SessionsList { get; set; }
 }

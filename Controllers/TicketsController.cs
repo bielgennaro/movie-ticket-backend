@@ -49,7 +49,7 @@ public class TicketsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status100Continue)]
     public async Task<IActionResult> PutTicket(int id, Ticket ticket)
     {
-        if (id != ticket.TicketId) return BadRequest();
+        if (id != ticket.Id) return BadRequest();
 
         _context.Entry(ticket).State = EntityState.Modified;
 
@@ -78,7 +78,7 @@ public class TicketsController : ControllerBase
         _context.Ticket.Add(ticket);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction("GetTicket", new { id = ticket.TicketId }, ticket);
+        return CreatedAtAction("GetTicket", new { id = ticket.Id }, ticket);
     }
 
     // DELETE: delete/5
@@ -98,6 +98,6 @@ public class TicketsController : ControllerBase
 
     private bool TicketExists(int id)
     {
-        return (_context.Ticket?.Any(e => e.TicketId == id)).GetValueOrDefault();
+        return (_context.Ticket?.Any(e => e.Id == id)).GetValueOrDefault();
     }
 }

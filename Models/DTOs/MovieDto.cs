@@ -5,9 +5,6 @@ namespace MovieTicketApi.Models.Dto;
 public class MovieDto
 {
     public int Id { get; set; }
-    
-    [Required(ErrorMessage = "O nome do filme é obrigatório.")]
-    public string Name { get; set; }
 
     [Required(ErrorMessage = "O gênero do filme é obrigatório.")]
     public string Genre { get; set; }

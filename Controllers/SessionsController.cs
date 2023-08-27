@@ -26,7 +26,7 @@ public class SessionsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<Session>>> GetSession()
     {
-        return await _context.Session.Include(s => s.Movie).ToListAsync();
+        return await _context.Session.Include(s => s.MovieId).ToListAsync();
     }
 
     // GET: list/5

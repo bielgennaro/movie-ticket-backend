@@ -13,8 +13,8 @@ public class Session
     }
 
     public int Id { get; set; }
-    public DateTime DateTime { get; set; }
     public string Room { get; set; }
-    public int MovieId { get; set; } 
+    public DateTime DateTime { get; set; } = DateTime.Now;
+    public int MovieId { get; set; }
     public Movie Movie { get; set; }
 }

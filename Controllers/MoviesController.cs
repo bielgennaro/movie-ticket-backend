@@ -26,7 +26,7 @@ public class MoviesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<Movie>>> GetMovie()
     {
-        return await _context.Movie.Include(m => m.SessionsList).ToListAsync();
+        return await _context.Movie.ToListAsync();
     }
 
     // GET: movies/5
@@ -53,15 +53,10 @@ public class MoviesController : ControllerBase
         if (existingMovie == null) return NotFound();
 
         var updateMovie = new Movie(
-            movieRequest.Name,
-            movieRequest.Synopsis,
-            movieRequest.BannerUrl,
-            movieRequest.Genre,
-            movieRequest.Director
+            movieRequest.Gender, movieRequest.Director, movieRequest.Synopsis
         );
 
-        existingMovie.Name = movieRequest.Name;
-        existingMovie.Genre = movieRequest.Genre;
+        existingMovie.Gender = movieRequest.Gender;
         existingMovie.Director = movieRequest.Director;
         try
         {
@@ -82,8 +77,7 @@ public class MoviesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<ActionResult<Movie>> PostMovie(CreateMovieRequest movieRequest)
     {
-        var movie = new Movie(movieRequest.Name, movieRequest.Genre, movieRequest.Director, movieRequest.Synopsis,
-            movieRequest.BannerUrl);
+        var movie = new Movie(movieRequest.Gender, movieRequest.Director, movieRequest.Synopsis);
 
         await _context.Movie.AddAsync(movie);
         await _context.SaveChangesAsync();

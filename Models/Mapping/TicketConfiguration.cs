@@ -1,24 +1,27 @@
-﻿#region
-
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-#endregion
-
-namespace MovieTicketApi.Models.Mapping;
-
-public class TicketConfiguration : IEntityTypeConfiguration<Ticket>
+namespace MovieTicketApi.Models
 {
-    public void Configure(EntityTypeBuilder<Ticket> builder)
+    public class TicketConfiguration : IEntityTypeConfiguration<Ticket>
     {
-        builder.HasKey(t => t.TicketId);
+        public void Configure(EntityTypeBuilder<Ticket> builder)
+        {
+            builder.ToTable("Tickets");
 
-        builder.Property(t => t.Status);
+            builder.HasKey(t => t.Id);
 
-        builder.Property(t => t.ChairCoord)
-            .IsRequired();
+            builder.Property(t => t.Id).HasColumnName("id");
 
-        builder.Property(t => t.Price)
-            .IsRequired();
+            builder.HasOne(t => t.Session)
+                   .WithMany()
+                   .HasForeignKey(t => t.SessionId)                  
+                   .HasConstraintName("session_id");
+
+            builder.HasOne(t => t.User)
+                   .WithMany()
+                   .HasForeignKey(t => t.UserId)
+                   .HasConstraintName("user_id");
+        }
     }
 }

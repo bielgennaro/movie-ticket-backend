@@ -1,29 +1,26 @@
-﻿#region
-
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-#endregion
-
-namespace MovieTicketApi.Models.Mapping;
-
-public class UserConfiguration : IEntityTypeConfiguration<User>
+namespace MovieTicketApi.Models
 {
-    public void Configure(EntityTypeBuilder<User> builder)
+    public class UserConfiguration : IEntityTypeConfiguration<User>
     {
-        builder.HasKey(u => u.Id);
+        public void Configure(EntityTypeBuilder<User> builder)
+        {
+            builder.ToTable("Users");
 
-        builder.Property(u => u.Email)
-            .IsRequired();
+            builder.HasKey(u => u.Id);
 
-        builder.Property(u => u.Password)
-            .IsRequired();
+            builder.Property(u => u.Email)
+                   .HasColumnName("email")
+                   .HasMaxLength(100);
 
-        builder.Property(u => u.IsAdmin)
-            .IsRequired();
+            builder.Property(u => u.Password)
+                   .HasColumnName("password")
+                   .HasMaxLength(100);
 
-        builder.HasMany(u => u.TicketsList)
-            .WithOne(t => t.User)
-            .HasForeignKey(t => t.UserId);
+            builder.Property(u => u.IsAdmin)
+                   .HasColumnName("is_admin");                   
+        }
     }
 }

@@ -15,17 +15,16 @@ public class MovieTicketApiContext : DbContext
     {
     }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfiguration(new MovieConfiguration());
+        modelBuilder.ApplyConfiguration(new SessionConfiguration());
+        modelBuilder.ApplyConfiguration(new TicketConfiguration());
+        modelBuilder.ApplyConfiguration(new UserConfiguration());
+    }
+
     public DbSet<User> User { get; set; }
     public DbSet<Session> Session { get; set; }
     public DbSet<Ticket> Ticket { get; set; }
     public DbSet<Movie> Movie { get; set; }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        base.OnModelCreating(modelBuilder);
-        modelBuilder.ApplyConfiguration(new UserConfiguration());
-        modelBuilder.ApplyConfiguration(new MovieConfiguration());
-        modelBuilder.ApplyConfiguration(new SessionConfiguration());
-        modelBuilder.ApplyConfiguration(new TicketConfiguration());
-    }
 }

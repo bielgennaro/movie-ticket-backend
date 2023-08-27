@@ -1,6 +1,5 @@
 ﻿#region
 
-using MovieTicketApi.Models.Enums;
 
 #endregion
 
@@ -12,18 +11,16 @@ public class Ticket
     {
     }
 
-    public Ticket(double price, string chairCoord, TicketStatus status)
+    public Ticket(int id)
     {
-        Price = price;
-        ChairCoord = chairCoord;
-        Status = status;
+        Id = id;
     }
 
-    public int TicketId { get; set; }
+    public int Id { get; set; }
+    public virtual int  SessionId { get; set; }
+    public Session Session { get; set; }
+    public virtual int UserId { get; set; }
     public User User { get; set; }
-    public int UserId { get; set; }
-    private Session SessionId { get; set; }
-    public string ChairCoord { get; set; }
-    public double Price { get; set; }
-    public TicketStatus Status { get; set; }
+
+
 }
