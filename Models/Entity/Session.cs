@@ -6,10 +6,11 @@ public class Session
     {
     }
 
-    public Session(DateTime dateTime, string room)
+    public Session(DateTime dateTime, string room, Movie movie)
     {
         DateTime = dateTime;
         Room = room;
+        Movie = movie;
     }
 
     public int Id { get; set; }

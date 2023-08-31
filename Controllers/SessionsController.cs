@@ -10,6 +10,13 @@ using MovieTicketApi.Models.Requests;
 
 namespace MovieTicketApi.Controllers;
 
+
+
+/*OKAY
+ OKAY
+ OKAY
+OKAY 
+ */
 [Route("/sessions")]
 [ApiController]
 public class SessionsController : ControllerBase
@@ -26,7 +33,8 @@ public class SessionsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<Session>>> GetSession()
     {
-        return await _context.Session.Include(s => s.MovieId).ToListAsync();
+        var sessions = await _context.Session.ToListAsync();
+        return Ok(sessions);
     }
 
     // GET: list/5
@@ -54,7 +62,8 @@ public class SessionsController : ControllerBase
 
         var updateSession = new Session(
             sessionRequest.DateTime,
-            sessionRequest.Room
+            sessionRequest.Room,
+            sessionRequest.Movie
         );
 
         existingSession.Room = sessionRequest.Room;
@@ -76,11 +85,12 @@ public class SessionsController : ControllerBase
     }
 
     // POST: /create
+    // Campo "movie" saindo null!!!
     [HttpPost("create")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<ActionResult<Session>> PostSession(CreateSessionRequest sessionRequest)
     {
-        var session = new Session(sessionRequest.DateTime, sessionRequest.Room);
+        var session = new Session(sessionRequest.DateTime, sessionRequest.Room, sessionRequest.Movie);
 
         await _context.Session.AddAsync(session);
         await _context.SaveChangesAsync();
@@ -93,14 +103,17 @@ public class SessionsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> DeleteSession(int id)
     {
-        if (_context.Session == null) return NotFound();
-
         var session = await _context.Session.FindAsync(id);
-        if (session == null) return NotFound();
+
+        if (session == null)
+        {
+            return NotFound();
+        }
 
         _context.Session.Remove(session);
+        await _context.SaveChangesAsync();
 
-        return NoContent();
+        return Ok();
     }
 
     private bool SessionExists(int id)

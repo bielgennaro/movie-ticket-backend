@@ -15,8 +15,4 @@ public enum TicketStatus
 
 public class TicketStatusConverter : EnumToStringConverter<TicketStatus>
 {
-    public TicketStatusConverter(ConverterMappingHints mappingHints = null)
-        : base(mappingHints)
-    {
-    }
 }

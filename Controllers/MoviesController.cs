@@ -10,6 +10,13 @@ using MovieTicketApi.Models.Requests;
 
 namespace MovieTicketApi.Controllers;
 
+
+
+/*OKAY
+ OKAY
+ OKAY
+OKAY 
+ */
 [Route("/movies")]
 [ApiController]
 public class MoviesController : ControllerBase
@@ -26,7 +33,8 @@ public class MoviesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<Movie>>> GetMovie()
     {
-        return await _context.Movie.ToListAsync();
+        var movies = await _context.Movie.ToListAsync(); // Substitua 'Movies' pelo nome do DbSet em seu DbContext
+        return Ok(movies);
     }
 
     // GET: movies/5
@@ -34,13 +42,14 @@ public class MoviesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<Movie>> GetMovie(int id)
     {
-        if (_context.Movie == null) return NotFound();
-
         var movie = await _context.Movie.FindAsync(id);
 
-        if (movie == null) return NotFound();
+        if (movie == null)
+        {
+            return NotFound();
+        }
 
-        return movie;
+        return Ok(movie);
     }
 
     // PUT: movies/edit/5
@@ -53,11 +62,11 @@ public class MoviesController : ControllerBase
         if (existingMovie == null) return NotFound();
 
         var updateMovie = new Movie(
-            movieRequest.Gender, movieRequest.Director, movieRequest.Synopsis
+            movieRequest.Gender, movieRequest.Director, movieRequest.Synopsis, movieRequest.BannerUrl
         );
 
-        existingMovie.Gender = movieRequest.Gender;
-        existingMovie.Director = movieRequest.Director;
+        existingMovie.Gender = updateMovie.Gender;
+        existingMovie.Director = updateMovie.Director;
         try
         {
             _context.Update(existingMovie);
@@ -77,7 +86,7 @@ public class MoviesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<ActionResult<Movie>> PostMovie(CreateMovieRequest movieRequest)
     {
-        var movie = new Movie(movieRequest.Gender, movieRequest.Director, movieRequest.Synopsis);
+        var movie = new Movie(movieRequest.Gender, movieRequest.Synopsis, movieRequest.Director, movieRequest.BannerUrl);
 
         await _context.Movie.AddAsync(movie);
         await _context.SaveChangesAsync();

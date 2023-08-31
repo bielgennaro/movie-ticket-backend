@@ -20,7 +20,7 @@ namespace MovieTicketApi.Models
                    .HasMaxLength(100);
 
             builder.Property(u => u.IsAdmin)
-                   .HasColumnName("is_admin");                   
+                   .HasColumnName("is_admin");
         }
     }
 }

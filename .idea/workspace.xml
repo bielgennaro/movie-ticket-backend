@@ -5,36 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc96a72e-2a25-4003-9988-992a76aab0f6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/.editorconfig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/65ce51e5-6b08-4ec2-b697-5921ab12fdee.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/65ce51e5-6b08-4ec2-b697-5921ab12fdee.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7f5bbc47-1ed0-422c-9b47-135ce8b6e1af.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7f5bbc47-1ed0-422c-9b47-135ce8b6e1af.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ca32b56f-1508-4bf7-af6e-ab07a544e685.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ca32b56f-1508-4bf7-af6e-ab07a544e685.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/MoviesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/MoviesController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/SessionsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/SessionsController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/TicketsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/TicketsController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/MovieTicketApiContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/MovieTicketApiContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230818010443_RequestSuccess.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230818010443_RequestSuccess.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230821210709_TestingSessionPost.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230821210709_TestingSessionPost.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Migrations/MovieTicketApiContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Migrations/MovieTicketApiContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Dto/MovieDto.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Dto/SessionDto.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Dto/TicketDto.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Dto/UserDto.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Models/Entity/Movie.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Entity/Movie.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Models/Entity/Session.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Entity/Session.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Models/Entity/Ticket.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Entity/Ticket.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Entity/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Entity/User.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Enums/TicketStatus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Enums/TicketStatus.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Models/Mapping/MovieConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Mapping/MovieConfiguration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Mapping/SessionConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Mapping/SessionConfiguration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Mapping/TicketConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Mapping/TicketConfiguration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Mapping/UserConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Mapping/UserConfiguration.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Models/Request/CreateMovieRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Request/CreateMovieRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieTicketApi.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/MovieTicketApi.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieTicketApi.sln" beforeDir="false" afterPath="$PROJECT_DIR$/MovieTicketApi.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Request/CreateSessionRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Request/CreateSessionRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Request/CreateTicketRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Request/CreateTicketRequest.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +46,8 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/movie-ticket-backend&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/movie-ticket-backend&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.uml&quot;
   },
   &quot;keyToStringList&quot;: {
     &quot;DatabaseDriversLRU&quot;: [
@@ -69,4 +58,8 @@
   }
 }</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
 </project>

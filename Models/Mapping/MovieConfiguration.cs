@@ -11,8 +11,6 @@ namespace MovieTicketApi.Models.Mapping
 
             builder.HasKey(m => m.Id);
 
-            builder.Property(m => m.Id).HasColumnName("id");
-
             builder.Property(m => m.Gender).HasColumnName("gender").HasMaxLength(255);
 
             builder.Property(m => m.Synopsis).HasColumnName("synopsis");

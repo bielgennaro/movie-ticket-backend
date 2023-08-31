@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MovieTicketApi.Data;
 using MovieTicketApi.Models;
+using MovieTicketApi.Models.Dto;
+using MovieTicketApi.Models.Requests;
 
 #endregion
 
@@ -14,10 +16,12 @@ namespace MovieTicketApi.Controllers;
 public class UsersController : ControllerBase
 {
     private readonly MovieTicketApiContext _context;
+    private readonly HashingService _hashingService;
 
-    public UsersController(MovieTicketApiContext context)
+    public UsersController(MovieTicketApiContext context, HashingService hashingService)
     {
         _context = context;
+        _hashingService = hashingService;
     }
 
     // GET: /users
@@ -33,15 +37,25 @@ public class UsersController : ControllerBase
     // GET: list/5
     [HttpGet("list/{id:int}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<User>> GetUser(int id)
+    public async Task<ActionResult<UserDto>> GetUser(int id)
     {
-        if (_context.User == null) return NotFound();
+        {
+            var user = await _context.User.FindAsync(id);
 
-        var user = await _context.User.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
 
-        if (user == null) return NotFound();
+            var userDto = new UserDto
+            {
+                Email = user.Email,
+                IsAdmin = user.IsAdmin,
+                PasswordHash = user.PasswordHash
+            };
 
-        return user;
+            return Ok(userDto);
+        }
     }
 
     // PUT: edit/5
@@ -49,9 +63,29 @@ public class UsersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status100Continue)]
     public async Task<IActionResult> PutUser(int id, User user)
     {
-        if (id != user.Id) return BadRequest();
+        if (id != user.Id)
+        {
+            return BadRequest();
+        }
 
-        _context.Entry(user).State = EntityState.Modified;
+        var existingUser = await _context.User.FindAsync(id);
+        if (existingUser == null)
+        {
+            return NotFound();
+        }
+
+        byte[] salt = _hashingService.GenerateSalt();
+
+        byte[] combinedBytes = _hashingService.CombinePasswordAndSalt(user.Password, salt);
+
+        byte[] hash = _hashingService.ComputeHash(combinedBytes);
+
+        string passwordHash = BitConverter.ToString(hash).Replace("-", "");
+
+        existingUser.PasswordHash = passwordHash;
+        existingUser.PasswordSalt = BitConverter.ToString(salt).Replace("-", "");
+
+        _context.Entry(existingUser).State = EntityState.Modified;
 
         try
         {
@@ -59,9 +93,14 @@ public class UsersController : ControllerBase
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!UserExists(id)) return NotFound();
-
-            throw;
+            if (!UserExists(id))
+            {
+                return NotFound();
+            }
+            else
+            {
+                throw;
+            }
         }
 
         return NoContent();
@@ -69,15 +108,30 @@ public class UsersController : ControllerBase
 
     // POST: /create
     [HttpPost("create")]
-    public async Task<ActionResult<User>> PostUser(User user)
+    public async Task<ActionResult<UserDto>> PostUser(CreateUserRequest userRequest)
     {
-        if (_context.User == null) return Problem("Entity set 'MovieTicketApiContext.Movie' is null.");
+        var user = new User(userRequest.Email, userRequest.isAdminn, userRequest.Password);
+
+        if (_context.User == null)
+            return Problem("Entity set is null.");
+
+        var hashingService = new HashingService();
+
+        byte[] salt = hashingService.GenerateSalt();
+
+        byte[] combinedBytes = hashingService.CombinePasswordAndSalt(user.Password, salt);
+
+        byte[] hash = hashingService.ComputeHash(combinedBytes);
+
+        user.PasswordHash = BitConverter.ToString(hash).Replace("-", "");
+        user.PasswordSalt = BitConverter.ToString(salt).Replace("-", "");
 
         _context.User.Add(user);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction("GetUser", new { id = user.Id }, user);
+        return Ok(new { userId = user.Id });
     }
+
 
     // DELETE: delete/5
     [HttpDelete("delete/{id:int}")]

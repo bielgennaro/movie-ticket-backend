@@ -6,11 +6,12 @@ public class Movie
     {
     }
 
-    public Movie(string gender, string synopsis, string director)
+    public Movie(string gender, string synopsis, string director, string bannerUrl)
     {
         Gender = gender;
         Synopsis = synopsis;
         Director = director;
+        BannerUrl = bannerUrl;
     }
 
     public int Id { get; set; }

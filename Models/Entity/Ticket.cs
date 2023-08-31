@@ -11,15 +11,19 @@ public class Ticket
     {
     }
 
-    public Ticket(int id)
+    public Ticket(int id, int sessionId, int userId, Session session, User user)
     {
         Id = id;
+        SessionId = sessionId;
+        UserId = userId;
+        Session = session;
+        User = user;
     }
 
     public int Id { get; set; }
-    public virtual int  SessionId { get; set; }
+    public int SessionId { get; set; }
     public Session Session { get; set; }
-    public virtual int UserId { get; set; }
+    public int UserId { get; set; }
     public User User { get; set; }
 
 

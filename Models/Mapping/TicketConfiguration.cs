@@ -15,7 +15,7 @@ namespace MovieTicketApi.Models
 
             builder.HasOne(t => t.Session)
                    .WithMany()
-                   .HasForeignKey(t => t.SessionId)                  
+                   .HasForeignKey(t => t.SessionId)
                    .HasConstraintName("session_id");
 
             builder.HasOne(t => t.User)

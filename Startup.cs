@@ -3,7 +3,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using MovieTicketApi.Data;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 #endregion
 
@@ -24,11 +24,14 @@ public class Startup
             options.UseNpgsql(Configuration.GetConnectionString("MovieTicketApiContext") ??
                               throw new InvalidOperationException("Connection string 'ConnectionDb' not found.")));
 
-        services.AddControllersWithViews();
+        services.AddControllers()
+        .AddJsonOptions(options =>
+        {
+            options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+            options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+        });
 
-        services.AddControllers().AddNewtonsoftJson(options =>
-            options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-        );
+        services.AddScoped<HashingService>();
 
         services.AddSwaggerGen(c =>
         {

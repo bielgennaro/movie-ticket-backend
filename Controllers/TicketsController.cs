@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MovieTicketApi.Data;
 using MovieTicketApi.Models;
+using MovieTicketApi.Models.Requests;
 
 #endregion
 
@@ -69,16 +70,17 @@ public class TicketsController : ControllerBase
 
 
     // POST: create
+    // User e Session saindo null!
     [HttpPost("create")]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public async Task<ActionResult<Ticket>> PostTicket(Ticket ticket)
+    public async Task<ActionResult<Ticket>> PostTicket(CreateTicketRequest ticketRequest)
     {
-        if (_context.Ticket == null) return Problem("Entity set 'MovieTicketApiContext.Ticket'  is null.");
+        var ticket = new Ticket(ticketRequest.Id, ticketRequest.SessionId, ticketRequest.UserId, ticketRequest.Session, ticketRequest.User);
 
-        _context.Ticket.Add(ticket);
+        await _context.Ticket.AddAsync(ticket);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction("GetTicket", new { id = ticket.Id }, ticket);
+        return Ok(new { ticketId = ticket.Id });
     }
 
     // DELETE: delete/5
