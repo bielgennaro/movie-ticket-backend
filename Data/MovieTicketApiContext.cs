@@ -10,7 +10,7 @@ namespace MovieTicketApi.Data;
 
 public class MovieTicketApiContext : DbContext
 {
-    public MovieTicketApiContext(DbContextOptions<MovieTicketApiContext> options)
+    public MovieTicketApiContext(DbContextOptions<MovieTicketApiContext> options)   
         : base(options)
     {
         Database.EnsureCreated();
