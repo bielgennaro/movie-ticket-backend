@@ -5,50 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc96a72e-2a25-4003-9988-992a76aab0f6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/65ce51e5-6b08-4ec2-b697-5921ab12fdee.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/65ce51e5-6b08-4ec2-b697-5921ab12fdee.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/MoviesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/MoviesController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/SessionsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/SessionsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/TicketsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/TicketsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/UsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/UsersController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/MovieTicketApiContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/MovieTicketApiContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230827071938_ConfigRefac.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230827071938_ConfigRefac.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230828232428_NewModel.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230828232428_NewModel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230828234826_Reconstruct.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230828234826_Reconstruct.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230829003228_Teste.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230829003228_Teste.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230830001749_ChangesUserModel.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230830001749_ChangesUserModel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230831010009_UserModel.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230831010009_UserModel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230831012355_RefacDtos.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230831012355_RefacDtos.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230831013836_RefacDtosAgain.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230831013836_RefacDtosAgain.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230831014207_RefacDtosAgainAgain.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230831014207_RefacDtosAgainAgain.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230831044259_RefactoringController.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230831044259_RefactoringController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230831044516_MeuDeusMeAjuda.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230831044516_MeuDeusMeAjuda.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230831050110_MeuDeusMeAjudaPorFavor.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230831050110_MeuDeusMeAjudaPorFavor.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230831052753_MeAjudaDeusQueroDormir.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230831052753_MeAjudaDeusQueroDormir.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/MovieTicketApiContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Migrations/MovieTicketApiContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/DTOs/MovieDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/DTOs/MovieDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/DTOs/SessionDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/DTOs/SessionDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/DTOs/TicketDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/DTOs/TicketDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/DTOs/UserDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/DTOs/UserDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Entity/Movie.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Entity/Movie.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Request/CreateMovieRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Request/CreateMovieRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Request/CreateUserRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Request/CreateUserRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/HashingService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/HashingService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MovieTicketApi.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/MovieTicketApi.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +27,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenDatabaseViewOnStart": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",

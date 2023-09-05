@@ -47,8 +47,11 @@ public class Startup
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-        app.UseSwagger();
-        app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1"); });
+        if(env.IsDevelopment())
+        { 
+            app.UseSwagger();
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1"); });
+        }
 
         app.UseRouting();
         app.UseHttpsRedirection();
@@ -57,7 +60,7 @@ public class Startup
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllerRoute(
-                "default",
+                "Default",
                 "{controller=Home}/{action=Index}/{id?}");
         });
     }
