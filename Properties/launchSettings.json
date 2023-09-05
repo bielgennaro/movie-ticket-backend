@@ -35,6 +35,15 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
+    },
+    "Azure": {
+      "commandName": "Project",
+      "launchUrl": "swagger",
+      "applicationUrl": "https://movie-ticket-api.azurewebsites.net",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
     }
   }
 }
