@@ -5,7 +5,7 @@
 namespace MovieTicketApi.Migrations
 {
     /// <inheritdoc />
-    public partial class MeuDeusMeAjuda : Migration
+    public partial class TesteDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

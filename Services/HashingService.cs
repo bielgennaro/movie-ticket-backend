@@ -1,6 +1,4 @@
-﻿// HashingService.cs
-
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 
 public class HashingService

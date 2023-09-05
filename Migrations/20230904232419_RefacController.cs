@@ -5,7 +5,7 @@
 namespace MovieTicketApi.Migrations
 {
     /// <inheritdoc />
-    public partial class RefacDtosAgainAgain : Migration
+    public partial class RefacController : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -53,6 +53,10 @@ namespace MovieTicketApi.Migrations
                         .HasColumnType("text")
                         .HasColumnName("synopsis");
 
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
                     b.ToTable("Movies", (string)null);

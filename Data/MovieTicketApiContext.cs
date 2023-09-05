@@ -13,12 +13,13 @@ public class MovieTicketApiContext : DbContext
     public MovieTicketApiContext(DbContextOptions<MovieTicketApiContext> options)
         : base(options)
     {
+        Database.EnsureCreated();
     }
 
-    public DbSet<User> User { get; set; }
-    public DbSet<Session> Session { get; set; }
-    public DbSet<Ticket> Ticket { get; set; }
-    public DbSet<Movie> Movie { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<Session> Sessions { get; set; }
+    public DbSet<Ticket> Tickets { get; set; }
+    public DbSet<Movie> Movies { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

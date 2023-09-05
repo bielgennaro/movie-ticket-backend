@@ -1,116 +1,169 @@
-#region
-
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MovieTicketApi.Data;
 using MovieTicketApi.Models;
+using MovieTicketApi.Models.Dto;
 using MovieTicketApi.Models.Requests;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-#endregion
-
-namespace MovieTicketApi.Controllers;
-
-
-
-/*OKAY
- OKAY
- OKAY
-OKAY 
- */
-[Route("/movies")]
-[ApiController]
-public class MoviesController : ControllerBase
+namespace MovieTicketApi.Controllers
 {
-    private readonly MovieTicketApiContext _context;
-
-    public MoviesController(MovieTicketApiContext context)
+    [Route("/movies")]
+    [ApiController]
+    public class MoviesController : ControllerBase
     {
-        _context = context;
-    }
+        private readonly MovieTicketApiContext _context;
 
-    // GET: /movies
-    [HttpGet("list")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<IEnumerable<Movie>>> GetMovie()
-    {
-        var movies = await _context.Movie.ToListAsync(); // Substitua 'Movies' pelo nome do DbSet em seu DbContext
-        return Ok(movies);
-    }
-
-    // GET: movies/5
-    [HttpGet("list/{id}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<Movie>> GetMovie(int id)
-    {
-        var movie = await _context.Movie.FindAsync(id);
-
-        if (movie == null)
+        public MoviesController(MovieTicketApiContext context)
         {
-            return NotFound();
+            _context = context;
         }
 
-        return Ok(movie);
-    }
-
-    // PUT: movies/edit/5
-    [HttpPut("edit/{id}")]
-    [ProducesResponseType(StatusCodes.Status100Continue)]
-    public async Task<IActionResult> PutMovie(int id, CreateMovieRequest movieRequest)
-    {
-        var existingMovie = await _context.Movie.FindAsync(id);
-
-        if (existingMovie == null) return NotFound();
-
-        var updateMovie = new Movie(
-            movieRequest.Gender, movieRequest.Director, movieRequest.Synopsis, movieRequest.BannerUrl
-        );
-
-        existingMovie.Gender = updateMovie.Gender;
-        existingMovie.Director = updateMovie.Director;
-        try
+        [HttpGet("list")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<Movie>>> GetMovies()
         {
-            _context.Update(existingMovie);
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!MovieExists(id)) return NotFound();
-
-            throw;
+            try
+            {
+                var movies = await _context.Movies.ToListAsync();
+                return Ok(movies);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno do servidor: {ex.Message}");
+            }
         }
 
-        return Ok();
-    }
+        [HttpGet("list/{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<Movie>> GetMovie(int id)
+        {
+            try
+            {
+                var movie = await _context.Movies.FindAsync(id);
 
-    [HttpPost("create")]
-    [ProducesResponseType(StatusCodes.Status201Created)]
-    public async Task<ActionResult<Movie>> PostMovie(CreateMovieRequest movieRequest)
-    {
-        var movie = new Movie(movieRequest.Gender, movieRequest.Synopsis, movieRequest.Director, movieRequest.BannerUrl);
+                if (movie == null)
+                {
+                    return NotFound();
+                }
 
-        await _context.Movie.AddAsync(movie);
-        await _context.SaveChangesAsync();
+                return Ok(movie);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno do servidor: {ex.Message}");
+            }
+        }
 
-        return Ok(new { movieId = movie.Id });
-    }
+        [HttpPut("edit/{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> PutMovie(int id, CreateMovieRequest movieRequest)
+        {
+            try
+            {
+                var existingMovie = await _context.Movies.FindAsync(id);
 
-    [HttpDelete("delete/{id}")]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> DeleteMovie(int id)
-    {
-        if (_context.Movie == null) return NotFound();
+                if (existingMovie == null)
+                {
+                    return NotFound();
+                }
 
-        var movie = await _context.Movie.FindAsync(id);
-        if (movie == null) return NotFound();
+                if (string.IsNullOrEmpty(movieRequest.Title))
+                {
+                    return BadRequest("O título do filme é obrigatório.");
+                }
 
-        _context.Movie.Remove(movie);
-        await _context.SaveChangesAsync();
+                existingMovie.Title = movieRequest.Title;
+                existingMovie.Gender = movieRequest.Gender;
+                existingMovie.Director = movieRequest.Director;
+                existingMovie.Synopsis = movieRequest.Synopsis;
+                existingMovie.BannerUrl = movieRequest.BannerUrl;
 
-        return NoContent();
-    }
+                await _context.SaveChangesAsync();
 
-    private bool MovieExists(int id)
-    {
-        return (_context.Movie?.Any(e => e.Id == id)).GetValueOrDefault();
+                return Ok();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!MovieExists(id))
+                {
+                    return NotFound();
+                }
+
+                throw;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno do servidor: {ex.Message}");
+            }
+        }
+
+        [HttpPost("create")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<MovieDto>> PostMovie(CreateMovieRequest movieRequest)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(movieRequest.Title))
+                {
+                    return BadRequest("O título do filme é obrigatório.");
+                }
+
+                var movie = new Movie
+                {
+                    Title = movieRequest.Title,
+                    Gender = movieRequest.Gender,
+                    Director = movieRequest.Director,
+                    Synopsis = movieRequest.Synopsis,
+                    BannerUrl = movieRequest.BannerUrl
+                };
+
+                await _context.Movies.AddAsync(movie);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction(nameof(GetMovie), new { id = movie.Id }, new { movieId = movie.Id });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno do servidor: {ex.Message}");
+            }
+        }
+
+        [HttpDelete("delete/{id:int}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> DeleteMovie(int id)
+        {
+            try
+            {
+                var movie = await _context.Movies.FindAsync(id);
+                if (movie == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Movies.Remove(movie);
+                await _context.SaveChangesAsync();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno do servidor: {ex.Message}");
+            }
+        }
+
+        private bool MovieExists(int id)
+        {
+            return _context.Movies.Any(e => e.Id == id);
+        }
     }
 }

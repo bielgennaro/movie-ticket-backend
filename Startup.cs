@@ -21,8 +21,8 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddDbContext<MovieTicketApiContext>(options =>
-            options.UseNpgsql(Configuration.GetConnectionString("MovieTicketApiContext") ??
-                              throw new InvalidOperationException("Connection string 'ConnectionDb' not found.")));
+            options.UseNpgsql(Configuration.GetConnectionString("MovieTicketApiCloud") ??
+                              throw new InvalidOperationException("Connection string not found.")));
 
         services.AddControllers()
         .AddJsonOptions(options =>
