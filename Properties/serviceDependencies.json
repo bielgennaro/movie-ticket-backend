@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "type": "secrets",
+      "connectionId": "VaultUri"
+    },
+    "postgresql1": {
+      "type": "postgresql",
+      "connectionId": "MovieTicketCloud",
+      "dynamicId": null
+    }
+  }
+}

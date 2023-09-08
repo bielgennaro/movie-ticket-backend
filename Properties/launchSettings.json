@@ -1,4 +1,4 @@
-﻿{
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
@@ -15,7 +15,9 @@
       "launchBrowser": true,
       "applicationUrl": "http://localhost:5116",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "VaultUri": "https://movieticketapivault.vault.azure.net/",
+        "AZURE_USERNAME": "zirondigabriel@gmail.com"
       }
     },
     "https": {
@@ -25,7 +27,9 @@
       "launchBrowser": true,
       "applicationUrl": "https://localhost:7266;http://localhost:5116",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "VaultUri": "https://movieticketapivault.vault.azure.net/",
+        "AZURE_USERNAME": "zirondigabriel@gmail.com"
       }
     },
     "IIS Express": {
@@ -33,16 +37,20 @@
       "launchUrl": "swagger",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "VaultUri": "https://movieticketapivault.vault.azure.net/",
+        "AZURE_USERNAME": "zirondigabriel@gmail.com"
       }
     },
     "Azure": {
       "commandName": "Project",
-      "launchUrl": "swagger",
       "launchBrowser": true,
-      "applicationUrl": "https://movie-ticket-api.azurewebsites.net",
+      "launchUrl": "swagger",
+      "applicationUrl": "https://movieticketapi.azurewebsites.net",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Production"
+        "ASPNETCORE_ENVIRONMENT": "Production",
+        "VaultUri": "https://movieticketapivault.vault.azure.net/",
+        "AZURE_USERNAME": "zirondigabriel@gmail.com"
       }
     }
   }

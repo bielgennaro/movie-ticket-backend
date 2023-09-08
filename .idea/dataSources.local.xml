@@ -30,13 +30,13 @@
         </introspection-scope>
       </schema-mapping>
     </data-source>
-    <data-source name="postgres@cloud" uuid="649ef2a0-2177-489b-a9d1-70086ee68d9e">
+    <data-source name="movieticket-db" uuid="8a4431ef-2ffa-4bbd-af8a-15fde138a0cc">
       <database-info product="PostgreSQL" version="15.3" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.6.0" dbms="POSTGRES" exact-version="15.3" exact-driver-version="42.6">
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
-      <user-name>movieticketadmin</user-name>
+      <user-name>tesserato_admin</user-name>
       <schema-mapping>
         <introspection-scope>
           <node kind="database" qname="@">

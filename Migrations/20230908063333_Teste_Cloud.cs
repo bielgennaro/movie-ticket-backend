@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MovieTicketApi.Migrations
 {
     /// <inheritdoc />
-    public partial class RefacModel : Migration
+    public partial class Teste_Cloud : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

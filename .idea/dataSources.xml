@@ -15,11 +15,11 @@
       <jdbc-url>jdbc:mysql://localhost:3306/salesweb</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="postgres@cloud" uuid="649ef2a0-2177-489b-a9d1-70086ee68d9e">
+    <data-source source="LOCAL" name="movieticket-db" uuid="8a4431ef-2ffa-4bbd-af8a-15fde138a0cc">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://movieticket-cloud.postgres.database.azure.com:5432/postgres</jdbc-url>
+      <jdbc-url>jdbc:postgresql://movieticket-db.postgres.database.azure.com:5432/postgres</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

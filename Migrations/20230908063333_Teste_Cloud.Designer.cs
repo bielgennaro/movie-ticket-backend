@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MovieTicketApi.Migrations
 {
     [DbContext(typeof(MovieTicketApiContext))]
-    [Migration("20230904232419_RefacController")]
-    partial class RefacController
+    [Migration("20230908063333_Teste_Cloud")]
+    partial class Teste_Cloud
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
