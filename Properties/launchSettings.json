@@ -39,10 +39,10 @@
     "Azure": {
       "commandName": "Project",
       "launchUrl": "swagger",
-      "applicationUrl": "https://movie-ticket-api.azurewebsites.net",
       "launchBrowser": true,
+      "applicationUrl": "https://movie-ticket-api.azurewebsites.net",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Production"
       }
     }
   }
