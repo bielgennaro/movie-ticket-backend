@@ -18,27 +18,6 @@ public class Startup
 
     public IConfiguration Configuration { get; }
 
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-    {
-        if (env.IsDevelopment())
-        {
-            app.UseSwagger();
-            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1"); });
-        }
-
-
-        app.UseRouting();
-        app.UseHttpsRedirection();
-        app.UseStaticFiles();
-
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapControllerRoute(
-                "default",
-                "{controller=Home}/{action=Index}/{id?}");
-        });
-    }
-
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddDbContext<MovieTicketApiContext>(options =>
@@ -64,5 +43,24 @@ public class Startup
         services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader()));
+    }
+
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+            app.UseSwagger();
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1"); });
+        
+
+
+        app.UseRouting();
+        app.UseHttpsRedirection();
+        app.UseStaticFiles();
+
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllerRoute(
+                "default",
+                "{controller=Home}/{action=Index}/{id?}");
+        });
     }
 }

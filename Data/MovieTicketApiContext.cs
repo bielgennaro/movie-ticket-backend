@@ -13,7 +13,7 @@ public class MovieTicketApiContext : DbContext
     public MovieTicketApiContext(DbContextOptions<MovieTicketApiContext> options)   
         : base(options)
     {
-        Database.EnsureCreated();
+        Database.Migrate();
     }
 
     public DbSet<User> Users { get; set; }
