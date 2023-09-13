@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace MovieTicketApi.Models.Dto;
 
 public class MovieDto

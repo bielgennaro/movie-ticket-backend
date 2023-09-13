@@ -45,7 +45,7 @@
     "Azure": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "swagger",
+      //"launchUrl": "swagger",
       "applicationUrl": "https://movieticketapi.azurewebsites.net",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Production",

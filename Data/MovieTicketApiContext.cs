@@ -1,6 +1,7 @@
 #region
 
 using Microsoft.EntityFrameworkCore;
+
 using MovieTicketApi.Models;
 using MovieTicketApi.Models.Mapping;
 
@@ -10,10 +11,10 @@ namespace MovieTicketApi.Data;
 
 public class MovieTicketApiContext : DbContext
 {
-    public MovieTicketApiContext(DbContextOptions<MovieTicketApiContext> options)   
-        : base(options)
+    public MovieTicketApiContext( DbContextOptions<MovieTicketApiContext> options )
+        : base( options )
     {
-        Database.Migrate();
+        this.Database.Migrate();
     }
 
     public DbSet<User> Users { get; set; }
@@ -21,11 +22,11 @@ public class MovieTicketApiContext : DbContext
     public DbSet<Ticket> Tickets { get; set; }
     public DbSet<Movie> Movies { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating( ModelBuilder modelBuilder )
     {
-        modelBuilder.ApplyConfiguration(new MovieConfiguration());
-        modelBuilder.ApplyConfiguration(new SessionConfiguration());
-        modelBuilder.ApplyConfiguration(new TicketConfiguration());
-        modelBuilder.ApplyConfiguration(new UserConfiguration());
+        modelBuilder.ApplyConfiguration( new MovieConfiguration() );
+        modelBuilder.ApplyConfiguration( new SessionConfiguration() );
+        modelBuilder.ApplyConfiguration( new TicketConfiguration() );
+        modelBuilder.ApplyConfiguration( new UserConfiguration() );
     }
 }
