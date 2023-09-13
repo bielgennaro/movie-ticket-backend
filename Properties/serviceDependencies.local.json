@@ -14,6 +14,9 @@
       "type": "postgresql.container",
       "connectionId": "MovieTicketCloud",
       "dynamicId": null
+    },
+    "secrets2": {
+      "type": "secrets.user"
     }
   }
 }

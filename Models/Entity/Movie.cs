@@ -6,13 +6,13 @@ public class Movie
     {
     }
 
-    public Movie(string title, string gender, string synopsis, string director, string bannerUrl)
+    public Movie( string title, string gender, string synopsis, string director, string bannerUrl )
     {
-        Title = title;
-        Gender = gender;
-        Synopsis = synopsis;
-        Director = director;
-        BannerUrl = bannerUrl;
+        this.Title = title;
+        this.Gender = gender;
+        this.Synopsis = synopsis;
+        this.Director = director;
+        this.BannerUrl = bannerUrl;
     }
 
     public int Id { get; set; }

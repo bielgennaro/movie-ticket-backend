@@ -1,21 +1,24 @@
 ﻿using System.Runtime.Serialization;
 
-[Serializable]
-internal class TicketNotFoundException : Exception
+namespace MovieTicketApi.Services
 {
-    public TicketNotFoundException()
+    [Serializable]
+    public class TicketNotFoundException : Exception
     {
-    }
+        public TicketNotFoundException()
+        {
+        }
 
-    public TicketNotFoundException(string? message) : base(message)
-    {
-    }
+        public TicketNotFoundException( string? message ) : base( message )
+        {
+        }
 
-    public TicketNotFoundException(string? message, Exception? innerException) : base(message, innerException)
-    {
-    }
+        public TicketNotFoundException( string? message, Exception? innerException ) : base( message, innerException )
+        {
+        }
 
-    protected TicketNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
-    {
+        protected TicketNotFoundException( SerializationInfo info, StreamingContext context ) : base( info, context )
+        {
+        }
     }
 }
