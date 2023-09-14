@@ -5,8 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc96a72e-2a25-4003-9988-992a76aab0f6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Models/DTOs/UserDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/DTOs/UserDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20230912171638_Testing.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20230912171638_Testing.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20230913231052_RefacModels.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20230913231052_RefacModels.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20230914004804_RefacController.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20230914004804_RefacController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20230914152004_GaranteeMigration.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20230914152004_GaranteeMigration.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20230914152318_Garantee_Migration_2.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20230914152318_Garantee_Migration_2.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Properties/launchSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Properties/serviceDependencies.json" beforeDir="false" afterPath="$PROJECT_DIR$/Properties/serviceDependencies.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
