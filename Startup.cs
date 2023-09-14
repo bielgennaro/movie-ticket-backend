@@ -27,7 +27,7 @@ public class Startup
     public void ConfigureServices( IServiceCollection services )
     {
         services.AddDbContext<MovieTicketApiContext>( options =>
-            options.UseNpgsql( this.Configuration.GetConnectionString( "MovieTicketApiContext" ) ??
+            options.UseNpgsql( this.Configuration.GetConnectionString( "CloudConn" ) ??
                               throw new InvalidOperationException( "Connection string not found." ) ) );
 
         services.AddTransient<TokenService>();
