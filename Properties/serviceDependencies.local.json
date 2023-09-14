@@ -6,17 +6,17 @@
       "type": "secrets.keyVault",
       "connectionId": "VaultUri"
     },
-    "postgresql1": {
-      "containerPorts": "5432:5432",
-      "secretStore": "AzureKeyVault",
-      "containerName": "movieticket-db",
-      "containerImage": "postgres",
-      "type": "postgresql.container",
-      "connectionId": "MovieTicketCloud",
-      "dynamicId": null
-    },
     "secrets2": {
       "type": "secrets.user"
+    },
+    "postgresql1": {
+      "containerPorts": "5432:5432",
+      "secretStore": null,
+      "containerName": "postgresql",
+      "containerImage": "postgres",
+      "resourceId": null,
+      "type": "postgresql.container",
+      "connectionId": "CloudConn"
     }
   }
 }
