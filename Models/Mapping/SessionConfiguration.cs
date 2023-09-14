@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace MovieTicketApi.Models
+using MovieTicketApi.Models.Entity;
+
+namespace MovieTicketApi.Models.Mapping
 {
     public class SessionConfiguration : IEntityTypeConfiguration<Session>
     {

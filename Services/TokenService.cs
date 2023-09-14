@@ -4,7 +4,7 @@ using System.Text;
 
 using Microsoft.IdentityModel.Tokens;
 
-using MovieTicketApi.Models;
+using MovieTicketApi.Models.Entity;
 
 namespace MovieTicketApi.Services
 {

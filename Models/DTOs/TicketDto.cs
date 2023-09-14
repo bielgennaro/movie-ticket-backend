@@ -1,4 +1,4 @@
-namespace MovieTicketApi.Models.Dto;
+namespace MovieTicketApi.Models.DTOs;
 
 public class TicketDto
 {

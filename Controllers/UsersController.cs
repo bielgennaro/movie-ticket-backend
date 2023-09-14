@@ -1,12 +1,10 @@
-using System.Data.Common;
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 using MovieTicketApi.Data;
-using MovieTicketApi.Models;
-using MovieTicketApi.Models.Dto;
-using MovieTicketApi.Models.Requests;
+using MovieTicketApi.Models.DTOs;
+using MovieTicketApi.Models.Entity;
+using MovieTicketApi.Models.Request;
 using MovieTicketApi.Services;
 
 namespace MovieTicketApi.Controllers
@@ -31,7 +29,10 @@ namespace MovieTicketApi.Controllers
         {
             try
             {
-                var users = await this._context.Users.ToListAsync();
+                var users = await this._context.Users
+                    .Select( u => new { u.Id, u.Email } )
+                    .ToListAsync();
+
                 return this.Ok( users );
             }
             catch( Exception ex )
@@ -93,7 +94,7 @@ namespace MovieTicketApi.Controllers
             }
         }
 
-        [HttpPost( "create" )]
+        [HttpPost( "register" )]
         [ProducesResponseType( StatusCodes.Status201Created )]
         [ProducesResponseType( StatusCodes.Status400BadRequest )]
         [ProducesResponseType( StatusCodes.Status500InternalServerError )]
@@ -109,7 +110,7 @@ namespace MovieTicketApi.Controllers
                 var tokenService = new TokenService();
                 string jwtToken = tokenService.Generate( user );
 
-                return this.CreatedAtAction( nameof( GetUser ), new { id = user.Id, authorization = jwtToken } );
+                return this.Ok( new { user.Id, auth = jwtToken } );
             }
             catch( Exception ex )
             {
@@ -122,41 +123,35 @@ namespace MovieTicketApi.Controllers
         [ProducesResponseType( StatusCodes.Status200OK )]
         [ProducesResponseType( StatusCodes.Status400BadRequest )]
         [ProducesResponseType( StatusCodes.Status500InternalServerError )]
-        public IActionResult LoginUser( [FromBody] User user )
+        public IActionResult LoginUser( [FromBody] LoginRequest loginRequest )
         {
             try
             {
-                if( user == null || string.IsNullOrEmpty( user.Email ) || string.IsNullOrEmpty( user.Password ) )
+                if( loginRequest == null || string.IsNullOrEmpty( loginRequest.Email ) || string.IsNullOrEmpty( loginRequest.Password ) )
                 {
                     return this.BadRequest( "Usuário ou senha inválidos." );
                 }
 
-                var existingUser = this._context.Users.FirstOrDefault( u => u.Email == user.Email );
+                var existingUser = this._context.Users.FirstOrDefault( u => u.Email == loginRequest.Email );
 
-                if( existingUser == null )
+                var passwordService = new PasswordHashService();
+
+                if( passwordService.VerifyPassword( loginRequest.Password, existingUser.PasswordHash ) )
                 {
-                    return this.BadRequest( "Usuário não encontrado." );
-                }
+                    var jwtToken = this._tokenService.Generate( existingUser );
 
-                if( !this.IsPasswordValid( existingUser.Password, user.Password ) )
+                    return this.Ok( new { existingUser.Id, auth = jwtToken } );
+                }
+                else
                 {
                     return this.BadRequest( "Senha incorreta." );
                 }
-
-                var token = this._tokenService.Generate( existingUser );
-
-                return this.Ok( new { userId = existingUser.Id, authorization = token } );
             }
-            catch( DbException ex )
+            catch( Exception )
             {
-                return this.StatusCode( StatusCodes.Status500InternalServerError, ex.Message );
-            }
-            catch( Exception ex )
-            {
-                return this.StatusCode( StatusCodes.Status500InternalServerError, ex.Message );
+                return this.StatusCode( StatusCodes.Status500InternalServerError, "Erro no servidor." );
             }
         }
-
 
 
         [HttpDelete( "delete/{id:int}" )]
@@ -182,17 +177,6 @@ namespace MovieTicketApi.Controllers
             catch( Exception ex )
             {
                 return this.StatusCode( StatusCodes.Status500InternalServerError, ex.Message );
-            }
-        }
-        private bool IsPasswordValid( string storedPasswordHash, string providedPassword )
-        {
-            try
-            {
-                return BCrypt.Net.BCrypt.Verify( providedPassword, storedPasswordHash );
-            }
-            catch( Exception )
-            {
-                return false;
             }
         }
     }

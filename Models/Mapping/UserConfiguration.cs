@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace MovieTicketApi.Models
+using MovieTicketApi.Models.Entity;
+
+namespace MovieTicketApi.Models.Mapping
 {
     public class UserConfiguration : IEntityTypeConfiguration<User>
     {
@@ -21,6 +23,10 @@ namespace MovieTicketApi.Models
 
             builder.Property( u => u.IsAdmin )
                    .HasColumnName( "is_admin" );
+
+            builder.Property(u => u.PasswordHash )
+                   .HasColumnName( "password_hash" )
+                   .HasMaxLength( 100 );
         }
     }
 }

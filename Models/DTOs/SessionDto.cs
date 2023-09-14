@@ -1,4 +1,6 @@
-namespace MovieTicketApi.Models.Dto;
+using MovieTicketApi.Models.Entity;
+
+namespace MovieTicketApi.Models.DTOs;
 
 public class SessionDto
 {
