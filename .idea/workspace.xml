@@ -5,23 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc96a72e-2a25-4003-9988-992a76aab0f6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/Movie-Ticket-Api.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/MovieTicketApiContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/MovieTicketApiContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230904225226_RefacModel.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230904225226_RefacModel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230904232419_RefacController.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230904232419_RefacController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230905051049_TesteDb.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230905051049_TesteDb.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230908030906_Teste_Cloud.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230908030906_Teste_Cloud.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieTicketApi.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/MovieTicketApi.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/UsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/UsersController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
