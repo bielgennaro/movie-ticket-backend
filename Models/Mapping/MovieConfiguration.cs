@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+using MovieTicketApi.Models.Entity;
+
 namespace MovieTicketApi.Models.Mapping
 {
     public class MovieConfiguration : IEntityTypeConfiguration<Movie>

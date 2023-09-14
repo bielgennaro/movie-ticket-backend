@@ -3,7 +3,8 @@
 
 #endregion
 
-namespace MovieTicketApi.Models;
+
+namespace MovieTicketApi.Models.Entity;
 
 public class Ticket
 {
@@ -19,10 +20,16 @@ public class Ticket
     }
 
     public int Id { get; set; }
+
     public int SessionId { get; set; }
+
     public Session Session { get; set; }
+
     public int UserId { get; set; }
+
     public int MovieId { get; set; }
+
     public Movie Movie { get; set; }
+
     public User User { get; set; }
 }

@@ -1,4 +1,4 @@
-﻿namespace MovieTicketApi.Models;
+﻿namespace MovieTicketApi.Models.Entity;
 
 public class Session
 {

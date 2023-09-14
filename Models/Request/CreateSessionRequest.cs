@@ -1,4 +1,4 @@
-﻿namespace MovieTicketApi.Models.Requests;
+﻿namespace MovieTicketApi.Models.Request;
 
 public class CreateSessionRequest
 {

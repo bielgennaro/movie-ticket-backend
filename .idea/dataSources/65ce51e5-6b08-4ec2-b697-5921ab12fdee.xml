@@ -3,9 +3,9 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.49">
     <root id="1">
       <DateStyle>dmy</DateStyle>
-      <IntrospectionStateNumber>905</IntrospectionStateNumber>
+      <IntrospectionStateNumber>925</IntrospectionStateNumber>
       <ServerVersion>15.4</ServerVersion>
-      <StartupTime>1694141168</StartupTime>
+      <StartupTime>1694621282</StartupTime>
       <TimeZones>true ACDT
 true ACSST
 false ACST
@@ -802,7 +802,7 @@ false Zulu
 13183||10|C|G
 13183||-9223372036854775808|U|G
 13183||10|U|G</Grants>
-      <IntrospectionStateNumber>905</IntrospectionStateNumber>
+      <IntrospectionStateNumber>925</IntrospectionStateNumber>
       <ObjectId>5</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -4229,9 +4229,9 @@ false Zulu
     <schema id="262" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>905</IntrospectionStateNumber>
-      <IntrospectionTimestamp>2023-09-12.20:31:41.577</IntrospectionTimestamp>
-      <LocalIntrospectionTimestamp>2023-09-12.23:31:43</LocalIntrospectionTimestamp>
+      <IntrospectionStateNumber>925</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2023-09-14.12:23:49.969</IntrospectionTimestamp>
+      <LocalIntrospectionTimestamp>2023-09-14.15:23:51</LocalIntrospectionTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>518</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
@@ -4247,7 +4247,7 @@ false Zulu
     <sequence id="264" parent="262" name="Sessions_id_seq">
       <DasType>integer|0s</DasType>
       <ObjectId>24656</ObjectId>
-      <SequenceIdentity>1(3)</SequenceIdentity>
+      <SequenceIdentity>1(4)</SequenceIdentity>
       <StartValue>1</StartValue>
       <StateNumber>897</StateNumber>
       <OwnerName>postgres</OwnerName>
@@ -4255,7 +4255,7 @@ false Zulu
     <sequence id="265" parent="262" name="Tickets_id_seq">
       <DasType>integer|0s</DasType>
       <ObjectId>24667</ObjectId>
-      <SequenceIdentity>1(1)</SequenceIdentity>
+      <SequenceIdentity>1(3)</SequenceIdentity>
       <StartValue>1</StartValue>
       <StateNumber>897</StateNumber>
       <OwnerName>postgres</OwnerName>
@@ -4263,7 +4263,7 @@ false Zulu
     <sequence id="266" parent="262" name="Users_Id_seq">
       <DasType>integer|0s</DasType>
       <ObjectId>24650</ObjectId>
-      <SequenceIdentity>1(1)</SequenceIdentity>
+      <SequenceIdentity>1(5)</SequenceIdentity>
       <StartValue>1</StartValue>
       <StateNumber>897</StateNumber>
       <OwnerName>postgres</OwnerName>
@@ -4282,13 +4282,13 @@ false Zulu
     </table>
     <table id="269" parent="262" name="Tickets">
       <ObjectId>24668</ObjectId>
-      <StateNumber>897</StateNumber>
+      <StateNumber>908</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
     <table id="270" parent="262" name="Users">
       <ObjectId>24651</ObjectId>
-      <StateNumber>897</StateNumber>
+      <StateNumber>923</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
@@ -4437,7 +4437,15 @@ false Zulu
       <StateNumber>897</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <foreign-key id="291" parent="269" name="session_id">
+    <column id="291" parent="269" name="MovieId">
+      <DasType>integer|0s</DasType>
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StateNumber>908</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <foreign-key id="292" parent="269" name="session_id">
       <ColNames>SessionId</ColNames>
       <ObjectId>24673</ObjectId>
       <OnDelete>cascade</OnDelete>
@@ -4445,7 +4453,7 @@ false Zulu
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>24657</RefTableId>
     </foreign-key>
-    <foreign-key id="292" parent="269" name="user_id">
+    <foreign-key id="293" parent="269" name="user_id">
       <ColNames>UserId</ColNames>
       <ObjectId>24678</ObjectId>
       <OnDelete>cascade</OnDelete>
@@ -4453,7 +4461,15 @@ false Zulu
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>24651</RefTableId>
     </foreign-key>
-    <index id="293" parent="269" name="PK_Tickets">
+    <foreign-key id="294" parent="269" name="FK_Tickets_Movies_MovieId">
+      <ColNames>MovieId</ColNames>
+      <ObjectId>24688</ObjectId>
+      <OnDelete>cascade</OnDelete>
+      <StateNumber>908</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>24643</RefTableId>
+    </foreign-key>
+    <index id="295" parent="269" name="PK_Tickets">
       <ColNames>id</ColNames>
       <ObjectId>24671</ObjectId>
       <Primary>1</Primary>
@@ -4461,25 +4477,31 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="294" parent="269" name="IX_Tickets_SessionId">
+    <index id="296" parent="269" name="IX_Tickets_SessionId">
       <ColNames>SessionId</ColNames>
       <ObjectId>24684</ObjectId>
       <StateNumber>897</StateNumber>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="295" parent="269" name="IX_Tickets_UserId">
+    <index id="297" parent="269" name="IX_Tickets_UserId">
       <ColNames>UserId</ColNames>
       <ObjectId>24685</ObjectId>
       <StateNumber>897</StateNumber>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="296" parent="269" name="PK_Tickets">
+    <index id="298" parent="269" name="IX_Tickets_MovieId">
+      <ColNames>MovieId</ColNames>
+      <ObjectId>24687</ObjectId>
+      <StateNumber>908</StateNumber>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="299" parent="269" name="PK_Tickets">
       <ObjectId>24672</ObjectId>
       <Primary>1</Primary>
       <StateNumber>897</StateNumber>
       <UnderlyingIndexId>24671</UnderlyingIndexId>
     </key>
-    <column id="297" parent="270" name="Id">
+    <column id="300" parent="270" name="Id">
       <DasType>integer|0s</DasType>
       <IdentityKind>by-default</IdentityKind>
       <NotNull>1</NotNull>
@@ -4488,56 +4510,64 @@ false Zulu
       <SequenceId>24650</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="298" parent="270" name="email">
+    <column id="301" parent="270" name="email">
       <DasType>varchar(100)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>897</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="299" parent="270" name="password">
+    <column id="302" parent="270" name="password">
       <DasType>varchar(100)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>897</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="300" parent="270" name="is_admin">
+    <column id="303" parent="270" name="is_admin">
       <DasType>boolean|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>897</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <index id="301" parent="270" name="PK_Users">
+    <column id="304" parent="270" name="password_hash">
+      <DasType>varchar(100)|0s</DasType>
+      <DefaultExpression>&apos;&apos;::text</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+      <StateNumber>923</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="305" parent="270" name="PK_Users">
       <ColNames>Id</ColNames>
       <ObjectId>24654</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>897</StateNumber>
+      <StateNumber>923</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="302" parent="270" name="PK_Users">
+    <key id="306" parent="270" name="PK_Users">
       <ObjectId>24655</ObjectId>
       <Primary>1</Primary>
       <StateNumber>897</StateNumber>
       <UnderlyingIndexId>24654</UnderlyingIndexId>
     </key>
-    <column id="303" parent="271" name="MigrationId">
+    <column id="307" parent="271" name="MigrationId">
       <DasType>varchar(150)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>895</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="304" parent="271" name="ProductVersion">
+    <column id="308" parent="271" name="ProductVersion">
       <DasType>varchar(32)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>895</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="305" parent="271" name="PK___EFMigrationsHistory">
+    <index id="309" parent="271" name="PK___EFMigrationsHistory">
       <ColNames>MigrationId</ColNames>
       <ObjectId>24640</ObjectId>
       <Primary>1</Primary>
@@ -4548,7 +4578,7 @@ false Zulu
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="306" parent="271" name="PK___EFMigrationsHistory">
+    <key id="310" parent="271" name="PK___EFMigrationsHistory">
       <ObjectId>24641</ObjectId>
       <Primary>1</Primary>
       <StateNumber>895</StateNumber>

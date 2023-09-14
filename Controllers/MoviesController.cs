@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 using MovieTicketApi.Data;
-using MovieTicketApi.Models;
-using MovieTicketApi.Models.Dto;
-using MovieTicketApi.Models.Requests;
+using MovieTicketApi.Models.DTOs;
+using MovieTicketApi.Models.Entity;
+using MovieTicketApi.Models.Request;
 
 namespace MovieTicketApi.Controllers
 {
@@ -101,7 +101,7 @@ namespace MovieTicketApi.Controllers
             }
         }
 
-        [HttpPost( "create" )]
+        [HttpPost( "add" )]
         [ProducesResponseType( StatusCodes.Status201Created )]
         [ProducesResponseType( StatusCodes.Status400BadRequest )]
         public async Task<ActionResult<MovieDto>> PostMovie( CreateMovieRequest movieRequest )

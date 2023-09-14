@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 using MovieTicketApi.Data;
-using MovieTicketApi.Models;
-using MovieTicketApi.Models.Requests;
+using MovieTicketApi.Models.Entity;
+using MovieTicketApi.Models.Request;
 
 namespace MovieTicketApi.Controllers
 {
