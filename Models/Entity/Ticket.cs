@@ -11,18 +11,18 @@ public class Ticket
     {
     }
 
-    public Ticket( int id, int sessionId, int userId, Session session, User user )
+    public Ticket( int userId, int movieId, int sessionId )
     {
-        this.Id = id;
-        this.SessionId = sessionId;
         this.UserId = userId;
-        this.Session = session;
-        this.User = user;
+        this.MovieId = movieId;
+        this.SessionId = sessionId;
     }
 
     public int Id { get; set; }
     public int SessionId { get; set; }
     public Session Session { get; set; }
     public int UserId { get; set; }
+    public int MovieId { get; set; }
+    public Movie Movie { get; set; }
     public User User { get; set; }
 }

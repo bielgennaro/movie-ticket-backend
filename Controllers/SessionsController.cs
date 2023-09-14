@@ -27,11 +27,11 @@ namespace MovieTicketApi.Controllers
                 // puxar os filmes junto com as sessões
                 var sessions = await this._context.Sessions.ToListAsync();
 
-                foreach ( var session in sessions )
+                foreach( var session in sessions )
                 {
                     session.Movie = await this._context.Movies.FindAsync( session.MovieId );
 
-                    if ( session.Movie == null )
+                    if( session.Movie == null )
                     {
                         return this.NotFound( $"Filme com ID {session.MovieId} não encontrado." );
                     }

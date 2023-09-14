@@ -65,10 +65,12 @@ namespace MovieTicketApi.Controllers
         [ProducesResponseType( StatusCodes.Status204NoContent )]
         [ProducesResponseType( StatusCodes.Status404NotFound )]
         [ProducesResponseType( StatusCodes.Status400BadRequest )]
-        public async Task<IActionResult> PutTicket( int id, Ticket ticket )
+        public async Task<IActionResult> PutTicket( int id, CreateTicketRequest request )
         {
             try
             {
+                var ticket = new Ticket( request.SessionId, request.UserId, request.MovieId );
+
                 if( !this.TicketExists( id ) )
                 {
                     throw new TicketNotFoundException();
@@ -101,19 +103,21 @@ namespace MovieTicketApi.Controllers
         [HttpPost( "create" )]
         [ProducesResponseType( StatusCodes.Status201Created )]
         [ProducesResponseType( StatusCodes.Status400BadRequest )]
-        public async Task<ActionResult<TicketDto>> PostTicket( CreateTicketRequest ticketRequest )
+        public async Task<ActionResult<TicketDto>> PostTicket( CreateTicketRequest request )
         {
             try
             {
-                var session = await this._context.Sessions.FindAsync( ticketRequest.SessionId );
-                var user = await this._context.Users.FindAsync( ticketRequest.UserId );
+                var ticket = new Ticket( request.UserId, request.MovieId, request.SessionId );
+                var user = await this._context.Users.FindAsync( request.UserId );
+                var session = await this._context.Sessions.FindAsync( request.SessionId );
+
+                await this._context.Tickets.AddAsync( ticket );
+                await this._context.SaveChangesAsync();
 
                 if( session == null || user == null )
                 {
                     throw new InvalidRequestException( "Sessão ou usuário não encontrados." );
                 }
-
-                var ticket = new Ticket( ticketRequest.Id, ticketRequest.SessionId, ticketRequest.UserId, session, user );
 
                 await this._context.Tickets.AddAsync( ticket );
                 await this._context.SaveChangesAsync();

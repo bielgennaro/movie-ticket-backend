@@ -1,9 +1,8 @@
 ﻿using MovieTicketApi.Models.Interfaces;
-using BCrypt.Net;
 
 namespace MovieTicketApi.Services
 {
-    
+
 
     public class PasswordHashService : IPasswordHashService
     {
