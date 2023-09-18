@@ -30,8 +30,6 @@ public class Startup
             options.UseNpgsql( this.Configuration.GetConnectionString( "CloudConn" ) ??
                               throw new InvalidOperationException( "Connection string not found." ) ) );
 
-        services.AddHealthChecks().AddDbContextCheck<MovieTicketApiContext>();
-
         services.AddTransient<TokenService>();
 
         services.AddAuthentication( JwtBearerDefaults.AuthenticationScheme )
