@@ -43,6 +43,9 @@ public class Startup
                 };
             } );
 
+        services.AddAuthorization();
+        services.AddAuthentication();
+
         services.AddControllers()
         .AddJsonOptions( options =>
         {
@@ -66,6 +69,7 @@ public class Startup
 
     public void Configure( IApplicationBuilder app, IWebHostEnvironment env, IConfiguration configuration )
     {
+
         if( env.IsDevelopment() )
         {
             app.UseSwagger();
