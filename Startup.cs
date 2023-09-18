@@ -30,6 +30,8 @@ public class Startup
             options.UseNpgsql( this.Configuration.GetConnectionString( "CloudConn" ) ??
                               throw new InvalidOperationException( "Connection string not found." ) ) );
 
+        services.AddHealthChecks().AddDbContextCheck<MovieTicketApiContext>();
+
         services.AddTransient<TokenService>();
 
         services.AddAuthentication( JwtBearerDefaults.AuthenticationScheme )
@@ -66,6 +68,7 @@ public class Startup
 
     public void Configure( IApplicationBuilder app, IWebHostEnvironment env, IConfiguration configuration )
     {
+
         if( env.IsDevelopment() )
         {
             app.UseSwagger();

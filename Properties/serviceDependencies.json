@@ -8,10 +8,6 @@
       "connectionId": "VaultUri",
       "dynamicId": null
     },
-    "postgresql1": {
-      "type": "postgresql",
-      "connectionId": "CloudConn"
-    },
     "mssql1": {
       "ignored": "true",
       "type": "mssql"
