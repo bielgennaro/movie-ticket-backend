@@ -1,169 +1,170 @@
 using Microsoft.AspNetCore.Mvc;
-using MovieTicketApi.Data;
-using MovieTicketApi.Models.Requests;
-using MovieTicketApi.Models;
 using Microsoft.EntityFrameworkCore;
-using MovieTicketApi.Models.Dto;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
-[Route("/tickets")]
-[ApiController]
-public class TicketsController : ControllerBase
+using MovieTicketApi.Data;
+using MovieTicketApi.Models.DTOs;
+using MovieTicketApi.Models.Entity;
+using MovieTicketApi.Models.Request;
+
+namespace MovieTicketApi.Controllers
 {
-    private readonly MovieTicketApiContext _context;
-
-    public TicketsController(MovieTicketApiContext context)
+    [Route( "api/tickets" )]
+    [ApiController]
+    public class TicketsController : ControllerBase
     {
-        _context = context;
-    }
+        private readonly MovieTicketApiContext _context;
 
-    [HttpGet("list")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<IEnumerable<Ticket>>> GetTicket()
-    {
-        try
+        public TicketsController( MovieTicketApiContext context )
         {
-            var tickets = await _context.Tickets.ToListAsync();
-            return Ok(tickets);
+            this._context = context ?? throw new ArgumentNullException( nameof( context ) );
         }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
-    }
 
-    [HttpGet("list/{id:int}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<Ticket>> GetTicket(int id)
-    {
-        try
+        [HttpGet( "list" )]
+        [ProducesResponseType( StatusCodes.Status200OK )]
+        public async Task<ActionResult<IEnumerable<object>>> GetTickets()
         {
-            var ticket = await _context.Tickets.FindAsync(id);
-
-            if (ticket == null)
+            try
             {
-                throw new TicketNotFoundException();
+                var tickets = await this._context.Tickets
+                    .Select( t => new
+                    {
+                        t.Id,
+                        t.UserId,
+                        t.SessionId
+                    } )
+                    .ToListAsync();
+
+                return this.Ok( tickets );
             }
-
-            return Ok(ticket);
-        }
-        catch (TicketNotFoundException)
-        {
-            return NotFound("O ticket não foi encontrado.");
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
-    }
-
-    [HttpPut("edit/{id:int}")]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> PutTicket(int id, Ticket ticket)
-    {
-        try
-        {
-            if (!TicketExists(id))
+            catch( Exception ex )
             {
-                throw new TicketNotFoundException();
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro no servidor", message = ex.Message } );
             }
+        }
 
-            if (id != ticket.Id)
+
+        [HttpGet( "list/{id:int}" )]
+        [ProducesResponseType( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        public async Task<ActionResult<Ticket>> GetTicket( int id )
+        {
+            try
             {
-                throw new InvalidRequestException("O ID no corpo da solicitação não corresponde ao ID da URL.");
+                var ticket = await this._context.Tickets
+                    .Where( t => t.Id == id )
+                    .Select( t => new
+                    {
+                        t.Id,
+                        t.UserId,
+                        t.SessionId
+                    } )
+                    .FirstOrDefaultAsync();
+
+                if( ticket == null )
+                {
+                    return this.NotFound( "O ticket não foi encontrado." );
+                }
+
+                return this.Ok( ticket );
             }
-
-            _context.Entry(ticket).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-        catch (TicketNotFoundException)
-        {
-            return NotFound("O ticket não foi encontrado.");
-        }
-        catch (InvalidRequestException ex)
-        {
-            return BadRequest(ex.Message);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
-    }
-
-    [HttpPost("create")]
-    [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<TicketDto>> PostTicket(CreateTicketRequest ticketRequest)
-    {
-        try
-        {
-            var session = await _context.Sessions.FindAsync(ticketRequest.SessionId);
-            var user = await _context.Users.FindAsync(ticketRequest.UserId);
-
-            if (session == null || user == null)
+            catch( Exception ex )
             {
-                throw new InvalidRequestException("Sessão ou usuário não encontrados.");
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro no servidor", message = ex.Message } );
             }
-
-            var ticket = new Ticket(ticketRequest.Id, ticketRequest.SessionId, ticketRequest.UserId, session, user);
-
-            await _context.Tickets.AddAsync(ticket);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetTicket), new { id = ticket.Id }, ticket);
         }
-        catch (InvalidRequestException ex)
-        {
-            return BadRequest(ex.Message);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
-    }
 
-    [HttpDelete("delete/{id:int}")]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> DeleteTicket(int id)
-    {
-        try
+
+        [HttpPut( "edit/{id:int}" )]
+        [ProducesResponseType( StatusCodes.Status204NoContent )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        [ProducesResponseType( StatusCodes.Status400BadRequest )]
+        public async Task<IActionResult> PutTicket( int id, CreateTicketRequest request )
         {
-            if (!TicketExists(id))
+            try
             {
-                throw new TicketNotFoundException();
-            }
+                if( !this.TicketExists( id ) )
+                {
+                    return this.NotFound( "O ticket não foi encontrado." );
+                }
 
-            var ticket = await _context.Tickets.FindAsync(id);
-            if (ticket == null)
+                var ticket = new Ticket( request.SessionId, request.UserId );
+
+                if( id != ticket.Id )
+                {
+                    return this.BadRequest( "O ID no corpo da solicitação não corresponde ao ID da URL." );
+                }
+
+                this._context.Entry( ticket ).State = EntityState.Modified;
+                await this._context.SaveChangesAsync();
+
+                return this.NoContent();
+            }
+            catch( Exception ex )
             {
-                throw new TicketNotFoundException();
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro no servidor", message = ex.Message } );
             }
-
-            _context.Tickets.Remove(ticket);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
         }
-        catch (TicketNotFoundException)
+
+        [HttpPost( "generate" )]
+        [ProducesResponseType( StatusCodes.Status201Created )]
+        [ProducesResponseType( StatusCodes.Status400BadRequest )]
+        public async Task<ActionResult<TicketDto>> PostTicket( CreateTicketRequest request )
         {
-            return NotFound("O ticket não foi encontrado.");
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
-    }
+            try
+            {
+                var ticket = new Ticket( request.UserId, request.SessionId );
+                var user = await this._context.Users.FindAsync( request.UserId );
+                var session = await this._context.Sessions.FindAsync( request.SessionId );
 
-    private bool TicketExists(int id)
-    {
-        return _context.Tickets.Any(e => e.Id == id);
+                if( session == null || user == null )
+                {
+                    return this.BadRequest( "Sessão ou usuário não encontrados." );
+                }
+
+                await this._context.Tickets.AddAsync( ticket );
+                await this._context.SaveChangesAsync();
+
+                return this.Ok( new { id = ticket.Id } );
+            }
+            catch( Exception ex )
+            {
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro no servidor", message = ex.Message } );
+            }
+        }
+
+        [HttpDelete( "delete/{id:int}" )]
+        [ProducesResponseType( StatusCodes.Status204NoContent )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        public async Task<IActionResult> DeleteTicket( int id )
+        {
+            try
+            {
+                if( !this.TicketExists( id ) )
+                {
+                    return this.NotFound( "O ticket não foi encontrado." );
+                }
+
+                var ticket = await this._context.Tickets.FindAsync( id );
+
+                if( ticket == null )
+                {
+                    return this.NotFound( "O ticket não foi encontrado." );
+                }
+
+                this._context.Tickets.Remove( ticket );
+                await this._context.SaveChangesAsync();
+
+                return this.NoContent();
+            }
+            catch( Exception ex )
+            {
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro no servidor", message = ex.Message } );
+            }
+        }
+
+        private bool TicketExists( int id )
+        {
+            return this._context.Tickets.Any( e => e.Id == id );
+        }
     }
 }

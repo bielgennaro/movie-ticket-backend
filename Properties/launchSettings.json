@@ -45,11 +45,9 @@
     "Azure": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "swagger",
-      "applicationUrl": "https://movieticketapi.azurewebsites.net",
+      "applicationUrl": "https://movieticketapi20230918105229.azurewebsites.net",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Production",
-        "VaultUri": "https://movieticketapivault.vault.azure.net/",
         "AZURE_USERNAME": "zirondigabriel@gmail.com"
       }
     }

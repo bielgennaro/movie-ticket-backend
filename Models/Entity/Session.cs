@@ -1,4 +1,4 @@
-﻿namespace MovieTicketApi.Models;
+﻿namespace MovieTicketApi.Models.Entity;
 
 public class Session
 {
@@ -6,16 +6,24 @@ public class Session
     {
     }
 
-    public Session(DateTime dateTime, string room, Movie movie)
+    public Session( DateTime dateTime, string room, int movieId )
     {
-        DateTime = dateTime;
-        Room = room;
-        Movie = movie;
+        this.DateTime = dateTime;
+        this.Room = room;
+        this.MovieId = movieId;
     }
 
     public int Id { get; set; }
+
     public string Room { get; set; }
+
+    public int AvailableTickets { get; set; }
+
+    public double Price { get; set; }
+
     public DateTime DateTime { get; set; } = DateTime.Now;
+
     public int MovieId { get; set; }
+
     public Movie Movie { get; set; }
 }

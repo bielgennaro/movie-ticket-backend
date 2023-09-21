@@ -1,18 +1,16 @@
 {
   "dependencies": {
     "secrets1": {
-      "secretStore": null,
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.KeyVault/vaults/MovieTicketApivault",
-      "type": "secrets.keyVault",
-      "connectionId": "VaultUri"
+      "type": "secrets.user",
+      "dynamicId": null
     },
     "postgresql1": {
       "containerPorts": "5432:5432",
-      "secretStore": "AzureKeyVault",
-      "containerName": "movieticket-db",
+      "secretStore": "LocalSecretsFile",
+      "containerName": "postgresql",
       "containerImage": "postgres",
       "type": "postgresql.container",
-      "connectionId": "MovieTicketCloud",
+      "connectionId": "CloudConn",
       "dynamicId": null
     }
   }

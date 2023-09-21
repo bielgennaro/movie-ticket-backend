@@ -1,7 +1,12 @@
-namespace MovieTicketApi.Models.Dto;
+using Newtonsoft.Json;
 
-public class TicketDto
+namespace MovieTicketApi.Models.DTOs;
+
+public sealed class TicketDto
 {
+    [JsonProperty( "session" )]
     public SessionDto Session { get; set; }
+
+    [JsonProperty( "userId" )]
     public int UserId { get; set; }
 }

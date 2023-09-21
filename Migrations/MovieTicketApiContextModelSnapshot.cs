@@ -17,12 +17,13 @@ namespace MovieTicketApi.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.10")
+                .HasDefaultSchema("develop")
+                .HasAnnotation("ProductVersion", "7.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("MovieTicketApi.Models.Movie", b =>
+            modelBuilder.Entity("MovieTicketApi.Models.Entity.Movie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -59,10 +60,10 @@ namespace MovieTicketApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Movies", (string)null);
+                    b.ToTable("Movies", "develop");
                 });
 
-            modelBuilder.Entity("MovieTicketApi.Models.Session", b =>
+            modelBuilder.Entity("MovieTicketApi.Models.Entity.Session", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -71,12 +72,18 @@ namespace MovieTicketApi.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("AvailableTickets")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("date_time");
 
                     b.Property<int>("MovieId")
                         .HasColumnType("integer");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("double precision");
 
                     b.Property<string>("Room")
                         .IsRequired()
@@ -88,10 +95,10 @@ namespace MovieTicketApi.Migrations
 
                     b.HasIndex("MovieId");
 
-                    b.ToTable("Sessions", (string)null);
+                    b.ToTable("Sessions", "develop");
                 });
 
-            modelBuilder.Entity("MovieTicketApi.Models.Ticket", b =>
+            modelBuilder.Entity("MovieTicketApi.Models.Entity.Ticket", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -112,10 +119,10 @@ namespace MovieTicketApi.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Tickets", (string)null);
+                    b.ToTable("Tickets", "develop");
                 });
 
-            modelBuilder.Entity("MovieTicketApi.Models.User", b =>
+            modelBuilder.Entity("MovieTicketApi.Models.Entity.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -129,32 +136,24 @@ namespace MovieTicketApi.Migrations
                         .HasColumnType("character varying(100)")
                         .HasColumnName("email");
 
+                    b.Property<string>("HashedPassword")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("password_hash");
+
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("boolean")
                         .HasColumnName("is_admin");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("password");
-
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("PasswordSalt")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users", "develop");
                 });
 
-            modelBuilder.Entity("MovieTicketApi.Models.Session", b =>
+            modelBuilder.Entity("MovieTicketApi.Models.Entity.Session", b =>
                 {
-                    b.HasOne("MovieTicketApi.Models.Movie", "Movie")
+                    b.HasOne("MovieTicketApi.Models.Entity.Movie", "Movie")
                         .WithMany()
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -164,16 +163,16 @@ namespace MovieTicketApi.Migrations
                     b.Navigation("Movie");
                 });
 
-            modelBuilder.Entity("MovieTicketApi.Models.Ticket", b =>
+            modelBuilder.Entity("MovieTicketApi.Models.Entity.Ticket", b =>
                 {
-                    b.HasOne("MovieTicketApi.Models.Session", "Session")
+                    b.HasOne("MovieTicketApi.Models.Entity.Session", "Session")
                         .WithMany()
                         .HasForeignKey("SessionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("session_id");
 
-                    b.HasOne("MovieTicketApi.Models.User", "User")
+                    b.HasOne("MovieTicketApi.Models.Entity.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -1,21 +1,24 @@
 ﻿using System.Runtime.Serialization;
 
-[Serializable]
-internal class InvalidRequestException : Exception
+namespace MovieTicketApi.Services
 {
-    public InvalidRequestException()
+    [Serializable]
+    public class InvalidRequestException : Exception
     {
-    }
+        public InvalidRequestException()
+        {
+        }
 
-    public InvalidRequestException(string? message) : base(message)
-    {
-    }
+        public InvalidRequestException( string? message ) : base( message )
+        {
+        }
 
-    public InvalidRequestException(string? message, Exception? innerException) : base(message, innerException)
-    {
-    }
+        public InvalidRequestException( string? message, Exception? innerException ) : base( message, innerException )
+        {
+        }
 
-    protected InvalidRequestException(SerializationInfo info, StreamingContext context) : base(info, context)
-    {
+        protected InvalidRequestException( SerializationInfo info, StreamingContext context ) : base( info, context )
+        {
+        }
     }
 }

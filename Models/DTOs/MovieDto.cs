@@ -1,11 +1,21 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace MovieTicketApi.Models.Dto;
+using Newtonsoft.Json;
 
-public class MovieDto
+namespace MovieTicketApi.Models.DTOs;
+
+public sealed class MovieDto
 {
+    [JsonProperty( "genre" )]
     public string Genre { get; set; }
+
+    [JsonProperty( "synopsis" )]
     public string Synopsis { get; set; }
+
+    [JsonProperty( "director" )]
     public string Director { get; set; }
+
+    [JsonProperty( "bannerUrl" )]
+    [Url]
     public string BannerUrl { get; set; }
 }

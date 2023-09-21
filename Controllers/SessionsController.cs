@@ -1,159 +1,159 @@
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+
 using MovieTicketApi.Data;
-using MovieTicketApi.Models;
-using MovieTicketApi.Models.Requests;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using MovieTicketApi.Models.DTOs;
+using MovieTicketApi.Models.Entity;
+using MovieTicketApi.Models.Request;
 
 namespace MovieTicketApi.Controllers
 {
-    [Route("/sessions")]
+    [Route( "api/sessions" )]
     [ApiController]
     public class SessionsController : ControllerBase
     {
         private readonly MovieTicketApiContext _context;
 
-        public SessionsController(MovieTicketApiContext context)
+        public SessionsController( MovieTicketApiContext context )
         {
-            _context = context;
+            this._context = context ?? throw new ArgumentNullException( nameof( context ) );
         }
 
-        [HttpGet("list")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<Session>>> GetSession()
+        [HttpGet( "list" )]
+        [ProducesResponseType( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status500InternalServerError )]
+        public async Task<ActionResult<IEnumerable<Session>>> GetSessions()
         {
             try
             {
-                var sessions = await _context.Sessions.ToListAsync();
-                return Ok(sessions);
+                var sessions = await this._context.Sessions.Include( s => s.Movie ).ToListAsync();
+
+                return this.Ok( sessions );
             }
-            catch (Exception ex)
+            catch( Exception ex )
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno: {ex.Message}");
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro interno", message = ex.Message } );
             }
         }
 
-        [HttpGet("list/{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<Session>> GetSession(int id)
+        [HttpGet( "list/{id}" )]
+        [ProducesResponseType( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        [ProducesResponseType( StatusCodes.Status500InternalServerError )]
+        public async Task<ActionResult<Session>> GetSession( int id )
         {
             try
             {
-                var session = await _context.Sessions.FindAsync(id);
+                var session = await this._context.Sessions.Include( s => s.Movie ).FirstOrDefaultAsync( s => s.Id == id );
 
-                if (session == null)
+                if( session == null )
                 {
-                    return NotFound();
+                    return this.NotFound();
                 }
 
-                return Ok(session);
+                return this.Ok( session );
             }
-            catch (Exception ex)
+            catch( Exception ex )
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno: {ex.Message}");
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro interno", message = ex.Message } );
             }
         }
 
-        [HttpPut("edit/{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> PutSession(int id, CreateSessionRequest sessionRequest)
+        [HttpPut( "edit/{id}" )]
+        [ProducesResponseType( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        [ProducesResponseType( StatusCodes.Status500InternalServerError )]
+        public async Task<IActionResult> PutSession( int id, CreateSessionRequest sessionRequest )
         {
             try
             {
-                var existingSession = await _context.Sessions.FindAsync(id);
+                var existingSession = await this._context.Sessions.FindAsync( id );
 
-                if (existingSession == null)
+                if( existingSession == null )
                 {
-                    return NotFound();
+                    return this.NotFound();
                 }
-
-                var updateSession = new Session(
-                    sessionRequest.DateTime,
-                    sessionRequest.Room,
-                    sessionRequest.Movie
-                );
 
                 existingSession.Room = sessionRequest.Room;
                 existingSession.DateTime = sessionRequest.DateTime;
+                existingSession.MovieId = sessionRequest.MovieId;
 
-                updateSession.Movie.Id = sessionRequest.Movie.Id;
+                this._context.Update( existingSession );
+                await this._context.SaveChangesAsync();
 
-                _context.Update(existingSession);
-                await _context.SaveChangesAsync();
-
-                return Ok();
+                return this.Ok();
             }
-            catch (DbUpdateConcurrencyException)
+            catch( DbUpdateConcurrencyException )
             {
-                if (!SessionExists(id))
+                if( !this.SessionExists( id ) )
                 {
-                    return NotFound();
+                    return this.NotFound();
                 }
 
-                return StatusCode(StatusCodes.Status500InternalServerError, "Erro interno ao atualizar a sessão.");
+                return this.StatusCode( StatusCodes.Status500InternalServerError, "Erro interno ao atualizar a sessão." );
             }
-            catch (Exception ex)
+            catch( Exception ex )
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno: {ex.Message}");
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro interno", message = ex.Message } );
             }
         }
 
-        [HttpPost("create")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<Session>> PostSession(CreateSessionRequest sessionRequest)
+        [HttpPost( "create" )]
+        [ProducesResponseType( StatusCodes.Status201Created )]
+        [ProducesResponseType( StatusCodes.Status500InternalServerError )]
+        public async Task<ActionResult<SessionDto>> PostSession( CreateSessionRequest sessionRequest )
         {
             try
             {
-                var movie = new Movie(sessionRequest.Movie.Title, sessionRequest.Movie.Gender, sessionRequest.Movie.Synopsis, sessionRequest.Movie.Director, sessionRequest.Movie.BannerUrl);
-                var session = new Session(sessionRequest.DateTime, sessionRequest.Room, movie);
+                var movie = await this._context.Movies.FindAsync( sessionRequest.MovieId );
 
-                await _context.Sessions.AddAsync(session);
-                await _context.SaveChangesAsync();
+                if( movie == null )
+                {
+                    return this.NotFound( new { error = $"Filme com ID {sessionRequest.MovieId} não encontrado." } );
+                }
 
-                return CreatedAtAction(nameof(GetSession), new { id = session.Id }, session);
+                var session = new Session( sessionRequest.DateTime, sessionRequest.Room, sessionRequest.MovieId );
+
+                this._context.Sessions.Add( session );
+                await this._context.SaveChangesAsync();
+
+                return this.CreatedAtAction( nameof( GetSession ), new { id = session.Id } );
             }
-            catch (Exception ex)
+            catch( Exception ex )
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno: {ex.Message}");
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro interno", message = ex.Message } );
             }
         }
 
-        [HttpDelete("delete/{id}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> DeleteSession(int id)
+        [HttpDelete( "delete/{id}" )]
+        [ProducesResponseType( StatusCodes.Status204NoContent )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        [ProducesResponseType( StatusCodes.Status500InternalServerError )]
+        public async Task<IActionResult> DeleteSession( int id )
         {
             try
             {
-                var session = await _context.Sessions.FindAsync(id);
+                var session = await this._context.Sessions.FindAsync( id );
 
-                if (session == null)
+                if( session == null )
                 {
-                    return NotFound();
+                    return this.NotFound();
                 }
 
-                _context.Sessions.Remove(session);
-                await _context.SaveChangesAsync();
+                this._context.Sessions.Remove( session );
+                await this._context.SaveChangesAsync();
 
-                return NoContent();
+                return this.NoContent();
             }
-            catch (Exception ex)
+            catch( Exception ex )
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro interno: {ex.Message}");
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro interno", message = ex.Message } );
             }
         }
 
-        private bool SessionExists(int id)
+        private bool SessionExists( int id )
         {
-            return _context.Sessions.Any(e => e.Id == id);
+            return this._context.Sessions.Any( e => e.Id == id );
         }
     }
 }

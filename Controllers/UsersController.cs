@@ -1,159 +1,168 @@
 using Microsoft.AspNetCore.Mvc;
-using MovieTicketApi.Data;
-using MovieTicketApi.Models.Dto;
-using MovieTicketApi.Models.Requests;
-using MovieTicketApi.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
-[Route("/users")]
-[ApiController]
-public class UsersController : ControllerBase
+using MovieTicketApi.Data;
+using MovieTicketApi.Models.DTOs;
+using MovieTicketApi.Models.Entity;
+using MovieTicketApi.Models.Request;
+using MovieTicketApi.Services;
+
+namespace MovieTicketApi.Controllers
 {
-    private readonly MovieTicketApiContext _context;
-    private readonly HashingService _hashingService;
-
-    public UsersController(MovieTicketApiContext context, HashingService hashingService)
+    [Route( "api/users" )]
+    [ApiController]
+    public class UsersController : ControllerBase
     {
-        _context = context;
-        _hashingService = hashingService;
-    }
+        private readonly MovieTicketApiContext _context;
+        private readonly TokenService _tokenService;
+        private readonly PasswordHashService _passwordHashService;
 
-    [HttpGet("list")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<IEnumerable<User>>> GetUser()
-    {
-        try
+        public UsersController( MovieTicketApiContext context, TokenService tokenService, PasswordHashService passwordHashService )
         {
-            var users = await _context.Users.ToListAsync();
-            return Ok(users);
+            this._context = context ?? throw new ArgumentNullException( nameof( context ) );
+            this._tokenService = tokenService ?? throw new ArgumentNullException( nameof( tokenService ) );
+            this._passwordHashService = passwordHashService;
         }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
-    }
 
-    [HttpGet("list/{id:int}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<UserDto>> GetUser(int id)
-    {
-        try
+        [HttpGet( "list" )]
+        [ProducesResponseType( StatusCodes.Status200OK )]
+        public async Task<ActionResult<IEnumerable<UserDto>>> GetUserList()
         {
-            var user = await _context.Users.FindAsync(id);
-
-            if (user == null)
+            try
             {
-                return NotFound();
+                List<UserDto> users = await this._context.Users
+                    .Select( u => new UserDto
+                    {
+                        Id = u.Id,
+                        Email = u.Email,
+                        IsAdmin = u.IsAdmin,
+                        PasswordHash = u.HashedPassword
+                    } )
+                    .ToListAsync();
+
+                return this.Ok( users );
             }
-
-            return Ok(new UserDto { Email = user.Email, IsAdmin = user.IsAdmin });
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
-    }
-
-    [HttpPut("edit/{id:int}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> PutUser(int id, [FromBody] CreateUserRequest userRequest)
-    {
-        try
-        {
-            var existingUser = await _context.Users.FindAsync(id);
-
-            if (existingUser == null)
+            catch( Exception ex )
             {
-                return NotFound();
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro no servidor", message = ex.Message } );
             }
+        }
 
-            if (!string.IsNullOrEmpty(userRequest.Password))
+
+        [HttpGet( "list/{id:int}" )]
+        [ProducesResponseType( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        public async Task<ActionResult<UserDto>> GetUser( int id )
+        {
+            try
             {
-                byte[] salt = _hashingService.GenerateSalt();
-                byte[] combinedBytes = _hashingService.CombinePasswordAndSalt(userRequest.Password, salt);
-                byte[] hash = _hashingService.ComputeHash(combinedBytes);
+                User? user = await this._context.Users.FindAsync( id );
 
-                existingUser.PasswordHash = BitConverter.ToString(hash).Replace("-", "");
-                existingUser.PasswordSalt = BitConverter.ToString(salt).Replace("-", "");
+                if( user == null )
+                {
+                    return this.NotFound();
+                }
+
+                return this.Ok( new UserDto { Id = user.Id, Email = user.Email, IsAdmin = user.IsAdmin } );
             }
-
-            existingUser.Email = userRequest.Email;
-            existingUser.IsAdmin = userRequest.IsAdmin;
-
-            _context.Entry(existingUser).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-
-            await _context.SaveChangesAsync();
-
-            return Ok(new { userId = existingUser.Id });
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
-    }
-
-    [HttpPost("create")]
-    [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<ActionResult<UserDto>> PostUser(CreateUserRequest userRequest)
-    {
-        try
-        {
-            byte[] salt = _hashingService.GenerateSalt();
-            byte[] combinedBytes = _hashingService.CombinePasswordAndSalt(userRequest.Password, salt);
-            byte[] hash = _hashingService.ComputeHash(combinedBytes);
-
-            BitConverter.ToString(hash).Replace("-", "");
-            BitConverter.ToString(salt).Replace("-", "");
-
-            var user = new User(userRequest.Email, userRequest.IsAdmin,userRequest.Password);
-
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, new UserDto { Email = user.Email, IsAdmin = user.IsAdmin });
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
-    }
-
-    [HttpDelete("delete/{id:int}")]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> DeleteUser(int id)
-    {
-        try
-        {
-            var user = await _context.Users.FindAsync(id);
-
-            if (user == null)
+            catch( Exception ex )
             {
-                return NotFound();
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro no servidor", message = ex.Message } );
             }
-
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
         }
-        catch (Exception ex)
+
+        [HttpPut( "edit/{id:int}" )]
+        [ProducesResponseType( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        [ProducesResponseType( StatusCodes.Status500InternalServerError )]
+        public async Task<IActionResult> PutUser( int id, [FromBody] CreateUserRequest userRequest )
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
-    }
+            try
+            {
+                User? existingUser = await this._context.Users.FindAsync( id );
 
-    private bool UserExists(int id)
-    {
-        return _context.Users.Any(e => e.Id == id);
+                if( existingUser == null )
+                {
+                    return this.NotFound();
+                }
+
+                existingUser.Email = userRequest.Email;
+                existingUser.IsAdmin = userRequest.IsAdmin;
+                existingUser.Password = userRequest.Password;
+
+                this._context.Entry( existingUser ).State = EntityState.Modified;
+
+                await this._context.SaveChangesAsync();
+
+                return this.Ok( new { existingUser.Id } );
+            }
+            catch( Exception ex )
+            {
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro no servidor", message = ex.Message } );
+            }
+        }
+
+        [HttpPost( "register" )]
+        [ProducesResponseType( StatusCodes.Status201Created )]
+        [ProducesResponseType( StatusCodes.Status400BadRequest )]
+        [ProducesResponseType( StatusCodes.Status500InternalServerError )]
+        public async Task<ActionResult<UserDto>> PostUser( CreateUserRequest request )
+        {
+            try
+            {
+                if( request == null )
+                {
+                    return this.BadRequest( new { error = "Requisição inválida" } );
+                }
+
+                if( await this._context.Users.AnyAsync( u => u.Email == request.Email ) )
+                {
+                    return this.BadRequest( new { error = "Email já está em uso" } );
+                }
+
+                string hashedPassword = this._passwordHashService.HashPassword( request.Password );
+
+                User user = new User( request.Email, request.IsAdmin,request.Password, hashedPassword );
+
+                string jwtToken = this._tokenService.Generate( user );
+
+                this._context.Users.Add( user );
+                await this._context.SaveChangesAsync();
+
+                return this.CreatedAtAction( nameof( GetUser ), new { id = user.Id }, new { auth = jwtToken } );
+            }
+            catch( Exception ex )
+            {
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro ao criar usuário", message = ex.Message } );
+            }
+        }
+
+
+
+        [HttpDelete( "delete/{id:int}" )]
+        [ProducesResponseType( StatusCodes.Status204NoContent )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        [ProducesResponseType( StatusCodes.Status500InternalServerError )]
+        public async Task<IActionResult> DeleteUser( int id )
+        {
+            try
+            {
+                User? user = await this._context.Users.FindAsync( id );
+
+                if( user == null )
+                {
+                    return this.NotFound();
+                }
+
+                this._context.Users.Remove( user );
+                await this._context.SaveChangesAsync();
+
+                return this.NoContent();
+            }
+            catch( Exception ex )
+            {
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro no servidor", message = ex.Message } );
+            }
+        }
     }
 }
