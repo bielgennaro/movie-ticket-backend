@@ -11,6 +11,7 @@ MOVIE
 | id         | PK   |
 |------------|------|
 | name       | text |
+| gender     | text |
 | synopsis   | text |
 | director   | text |
 | banner_url | text |
@@ -18,11 +19,13 @@ MOVIE
 <br />
 SESSION
 
-| id       | PK        |
-|----------|-----------|
-| datetime | timestamp |
-| room     | int       |
-| movie_id | FK        |
+| id              | PK        |
+|-----------------|-----------|
+| datetime        | timestamp |
+| room            | int       |
+| movie_id        | FK        |
+| price           | float     |
+| avaible_tickets | integer   |
 
 <br />
 USER
