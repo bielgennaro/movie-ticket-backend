@@ -17,10 +17,6 @@ namespace MovieTicketApi.Models.Mapping
                    .HasColumnName( "email" )
                    .HasMaxLength( 100 );
 
-            builder.Property( u => u.HashedPassword )
-                   .HasColumnName( "password_hash" )
-                   .HasMaxLength( 100 );
-
             builder.Property( u => u.IsAdmin )
                    .HasColumnName( "is_admin" );
         }
