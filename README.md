@@ -23,6 +23,7 @@ SESSION
 | datetime | timestamp |
 | room     | int       |
 | movie_id | FK        |
+| price    | float     |
 
 <br />
 USER
