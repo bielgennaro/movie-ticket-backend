@@ -1,13 +1,17 @@
 {
   "dependencies": {
-    "secrets1": {
-      "type": "secrets",
-      "connectionId": "VaultUri",
-      "dynamicId": null
-    },
     "mssql1": {
       "ignored": "true",
       "type": "mssql"
+    },
+    "secrets1": {
+      "type": "secrets",
+      "dynamicId": null
+    },
+    "postgresql1": {
+      "type": "postgresql",
+      "connectionId": "CloudConn",
+      "dynamicId": null
     }
   }
 }

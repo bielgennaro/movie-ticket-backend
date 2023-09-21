@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="afdbae53-4ba4-469f-ad7e-57ac634418f9" name="movieticket@localhost Mapping">
+      <data-sources db="13f23579-5572-40af-a510-5f460436c238" />
+      <scope>
+        <node kind="database" qname="postgres">
+          <node kind="schema" qname="develop" />
+        </node>
+      </scope>
+    </mapping>
+  </component>
+</project>

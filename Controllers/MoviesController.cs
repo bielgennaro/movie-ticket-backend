@@ -8,7 +8,7 @@ using MovieTicketApi.Models.Request;
 
 namespace MovieTicketApi.Controllers
 {
-    [Route( "/movies" )]
+    [Route( "api/movies" )]
     [ApiController]
     public class MoviesController : ControllerBase
     {
@@ -16,7 +16,7 @@ namespace MovieTicketApi.Controllers
 
         public MoviesController( MovieTicketApiContext context )
         {
-            this._context = context;
+            this._context = context ?? throw new ArgumentNullException( nameof( context ) );
         }
 
         [HttpGet( "list" )]
@@ -30,7 +30,7 @@ namespace MovieTicketApi.Controllers
             }
             catch( Exception ex )
             {
-                return this.StatusCode( StatusCodes.Status500InternalServerError, $"Erro interno do servidor: {ex.Message}" );
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro interno do servidor", message = ex.Message } );
             }
         }
 
@@ -52,7 +52,7 @@ namespace MovieTicketApi.Controllers
             }
             catch( Exception ex )
             {
-                return this.StatusCode( StatusCodes.Status500InternalServerError, $"Erro interno do servidor: {ex.Message}" );
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro interno do servidor", message = ex.Message } );
             }
         }
 
@@ -97,7 +97,7 @@ namespace MovieTicketApi.Controllers
             }
             catch( Exception ex )
             {
-                return this.StatusCode( StatusCodes.Status500InternalServerError, $"Erro interno do servidor: {ex.Message}" );
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro interno do servidor", message = ex.Message } );
             }
         }
 
@@ -129,7 +129,7 @@ namespace MovieTicketApi.Controllers
             }
             catch( Exception ex )
             {
-                return this.StatusCode( StatusCodes.Status500InternalServerError, $"Erro interno do servidor: {ex.Message}" );
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro interno do servidor", message = ex.Message } );
             }
         }
 
@@ -153,7 +153,7 @@ namespace MovieTicketApi.Controllers
             }
             catch( Exception ex )
             {
-                return this.StatusCode( StatusCodes.Status500InternalServerError, $"Erro interno do servidor: {ex.Message}" );
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro interno do servidor", message = ex.Message } );
             }
         }
 

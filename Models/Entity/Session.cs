@@ -17,6 +17,10 @@ public class Session
 
     public string Room { get; set; }
 
+    public int AvailableTickets { get; set; }
+
+    public double Price { get; set; }
+
     public DateTime DateTime { get; set; } = DateTime.Now;
 
     public int MovieId { get; set; }

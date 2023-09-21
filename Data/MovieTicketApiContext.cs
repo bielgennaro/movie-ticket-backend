@@ -1,4 +1,4 @@
-#region
+﻿#region
 
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +15,8 @@ public class MovieTicketApiContext : DbContext
         : base( options )
     {
         this.Database.Migrate();
+
+        this.Database.EnsureCreated();
     }
 
     public DbSet<User> Users { get; set; }
@@ -24,6 +26,8 @@ public class MovieTicketApiContext : DbContext
 
     protected override void OnModelCreating( ModelBuilder modelBuilder )
     {
+        modelBuilder.HasDefaultSchema( "develop" );
+
         modelBuilder.ApplyConfiguration( new MovieConfiguration() );
         modelBuilder.ApplyConfiguration( new SessionConfiguration() );
         modelBuilder.ApplyConfiguration( new TicketConfiguration() );

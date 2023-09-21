@@ -2,12 +2,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 using MovieTicketApi.Data;
+using MovieTicketApi.Models.DTOs;
 using MovieTicketApi.Models.Entity;
 using MovieTicketApi.Models.Request;
 
 namespace MovieTicketApi.Controllers
 {
-    [Route( "/sessions" )]
+    [Route( "api/sessions" )]
     [ApiController]
     public class SessionsController : ControllerBase
     {
@@ -15,56 +16,46 @@ namespace MovieTicketApi.Controllers
 
         public SessionsController( MovieTicketApiContext context )
         {
-            this._context = context;
+            this._context = context ?? throw new ArgumentNullException( nameof( context ) );
         }
 
         [HttpGet( "list" )]
         [ProducesResponseType( StatusCodes.Status200OK )]
-        public async Task<ActionResult<IEnumerable<Session>>> GetSession()
+        [ProducesResponseType( StatusCodes.Status500InternalServerError )]
+        public async Task<ActionResult<IEnumerable<Session>>> GetSessions()
         {
             try
             {
-                // puxar os filmes junto com as sessões
-                var sessions = await this._context.Sessions.ToListAsync();
-
-                foreach( var session in sessions )
-                {
-                    session.Movie = await this._context.Movies.FindAsync( session.MovieId );
-
-                    if( session.Movie == null )
-                    {
-                        return this.NotFound( $"Filme com ID {session.MovieId} não encontrado." );
-                    }
-                }
+                var sessions = await this._context.Sessions.Include( s => s.Movie ).ToListAsync();
 
                 return this.Ok( sessions );
             }
             catch( Exception ex )
             {
-                return this.StatusCode( StatusCodes.Status500InternalServerError, $"Erro interno: {ex.Message}" );
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro interno", message = ex.Message } );
             }
         }
 
         [HttpGet( "list/{id}" )]
         [ProducesResponseType( StatusCodes.Status200OK )]
+        [ProducesResponseType( StatusCodes.Status404NotFound )]
+        [ProducesResponseType( StatusCodes.Status500InternalServerError )]
         public async Task<ActionResult<Session>> GetSession( int id )
         {
             try
             {
-                var session = await this._context.Sessions.FindAsync( id );
+                var session = await this._context.Sessions.Include( s => s.Movie ).FirstOrDefaultAsync( s => s.Id == id );
 
                 if( session == null )
                 {
                     return this.NotFound();
                 }
 
-                session.Movie = await this._context.Movies.FindAsync( session.MovieId );
-
                 return this.Ok( session );
             }
             catch( Exception ex )
             {
-                return this.StatusCode( StatusCodes.Status500InternalServerError, $"Erro interno: {ex.Message}" );
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro interno", message = ex.Message } );
             }
         }
 
@@ -94,7 +85,7 @@ namespace MovieTicketApi.Controllers
             }
             catch( DbUpdateConcurrencyException )
             {
-                if( !this._context.Sessions.Any( e => e.Id == id ) )
+                if( !this.SessionExists( id ) )
                 {
                     return this.NotFound();
                 }
@@ -103,38 +94,36 @@ namespace MovieTicketApi.Controllers
             }
             catch( Exception ex )
             {
-                return this.StatusCode( StatusCodes.Status500InternalServerError, $"Erro interno: {ex.Message}" );
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro interno", message = ex.Message } );
             }
         }
 
         [HttpPost( "create" )]
         [ProducesResponseType( StatusCodes.Status201Created )]
         [ProducesResponseType( StatusCodes.Status500InternalServerError )]
-        public async Task<ActionResult<Session>> PostSession( CreateSessionRequest sessionRequest )
+        public async Task<ActionResult<SessionDto>> PostSession( CreateSessionRequest sessionRequest )
         {
             try
             {
-                var session = new Session( sessionRequest.DateTime, sessionRequest.Room, sessionRequest.MovieId );
-
                 var movie = await this._context.Movies.FindAsync( sessionRequest.MovieId );
+
                 if( movie == null )
                 {
-                    return this.NotFound( $"Filme com ID {sessionRequest.MovieId} não encontrado." );
+                    return this.NotFound( new { error = $"Filme com ID {sessionRequest.MovieId} não encontrado." } );
                 }
 
-                session.Movie = movie;
+                var session = new Session( sessionRequest.DateTime, sessionRequest.Room, sessionRequest.MovieId );
 
-                await this._context.Sessions.AddAsync( session );
+                this._context.Sessions.Add( session );
                 await this._context.SaveChangesAsync();
 
                 return this.CreatedAtAction( nameof( GetSession ), new { id = session.Id } );
             }
             catch( Exception ex )
             {
-                return this.StatusCode( StatusCodes.Status500InternalServerError, $"Erro interno: {ex.Message}" );
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro interno", message = ex.Message } );
             }
         }
-
 
         [HttpDelete( "delete/{id}" )]
         [ProducesResponseType( StatusCodes.Status204NoContent )]
@@ -158,8 +147,13 @@ namespace MovieTicketApi.Controllers
             }
             catch( Exception ex )
             {
-                return this.StatusCode( StatusCodes.Status500InternalServerError, $"Erro interno: {ex.Message}" );
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro interno", message = ex.Message } );
             }
+        }
+
+        private bool SessionExists( int id )
+        {
+            return this._context.Sessions.Any( e => e.Id == id );
         }
     }
 }

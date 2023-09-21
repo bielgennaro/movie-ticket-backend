@@ -5,11 +5,10 @@ using MovieTicketApi.Data;
 using MovieTicketApi.Models.DTOs;
 using MovieTicketApi.Models.Entity;
 using MovieTicketApi.Models.Request;
-using MovieTicketApi.Services;
 
 namespace MovieTicketApi.Controllers
 {
-    [Route( "/tickets" )]
+    [Route( "api/tickets" )]
     [ApiController]
     public class TicketsController : ControllerBase
     {
@@ -17,23 +16,32 @@ namespace MovieTicketApi.Controllers
 
         public TicketsController( MovieTicketApiContext context )
         {
-            this._context = context;
+            this._context = context ?? throw new ArgumentNullException( nameof( context ) );
         }
 
         [HttpGet( "list" )]
         [ProducesResponseType( StatusCodes.Status200OK )]
-        public async Task<ActionResult<IEnumerable<Ticket>>> GetTicket()
+        public async Task<ActionResult<IEnumerable<object>>> GetTickets()
         {
             try
             {
-                var tickets = await this._context.Tickets.ToListAsync();
+                var tickets = await this._context.Tickets
+                    .Select( t => new
+                    {
+                        t.Id,
+                        t.UserId,
+                        t.SessionId
+                    } )
+                    .ToListAsync();
+
                 return this.Ok( tickets );
             }
             catch( Exception ex )
             {
-                return this.StatusCode( StatusCodes.Status500InternalServerError, ex.Message );
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro no servidor", message = ex.Message } );
             }
         }
+
 
         [HttpGet( "list/{id:int}" )]
         [ProducesResponseType( StatusCodes.Status200OK )]
@@ -42,24 +50,29 @@ namespace MovieTicketApi.Controllers
         {
             try
             {
-                var ticket = await this._context.Tickets.FindAsync( id );
+                var ticket = await this._context.Tickets
+                    .Where( t => t.Id == id )
+                    .Select( t => new
+                    {
+                        t.Id,
+                        t.UserId,
+                        t.SessionId
+                    } )
+                    .FirstOrDefaultAsync();
 
                 if( ticket == null )
                 {
-                    throw new TicketNotFoundException();
+                    return this.NotFound( "O ticket não foi encontrado." );
                 }
 
                 return this.Ok( ticket );
             }
-            catch( TicketNotFoundException )
-            {
-                return this.NotFound( "O ticket não foi encontrado." );
-            }
             catch( Exception ex )
             {
-                return this.StatusCode( StatusCodes.Status500InternalServerError, ex.Message );
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro no servidor", message = ex.Message } );
             }
         }
+
 
         [HttpPut( "edit/{id:int}" )]
         [ProducesResponseType( StatusCodes.Status204NoContent )]
@@ -69,16 +82,16 @@ namespace MovieTicketApi.Controllers
         {
             try
             {
-                var ticket = new Ticket( request.SessionId, request.UserId, request.MovieId );
-
                 if( !this.TicketExists( id ) )
                 {
-                    throw new TicketNotFoundException();
+                    return this.NotFound( "O ticket não foi encontrado." );
                 }
+
+                var ticket = new Ticket( request.SessionId, request.UserId );
 
                 if( id != ticket.Id )
                 {
-                    throw new InvalidRequestException( "O ID no corpo da solicitação não corresponde ao ID da URL." );
+                    return this.BadRequest( "O ID no corpo da solicitação não corresponde ao ID da URL." );
                 }
 
                 this._context.Entry( ticket ).State = EntityState.Modified;
@@ -86,17 +99,9 @@ namespace MovieTicketApi.Controllers
 
                 return this.NoContent();
             }
-            catch( TicketNotFoundException )
-            {
-                return this.NotFound( "O ticket não foi encontrado." );
-            }
-            catch( InvalidRequestException ex )
-            {
-                return this.BadRequest( ex.Message );
-            }
             catch( Exception ex )
             {
-                return this.StatusCode( StatusCodes.Status500InternalServerError, ex.Message );
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro no servidor", message = ex.Message } );
             }
         }
 
@@ -107,30 +112,23 @@ namespace MovieTicketApi.Controllers
         {
             try
             {
-                var ticket = new Ticket( request.UserId, request.MovieId, request.SessionId );
+                var ticket = new Ticket( request.UserId, request.SessionId );
                 var user = await this._context.Users.FindAsync( request.UserId );
                 var session = await this._context.Sessions.FindAsync( request.SessionId );
 
-                await this._context.Tickets.AddAsync( ticket );
-                await this._context.SaveChangesAsync();
-
                 if( session == null || user == null )
                 {
-                    throw new InvalidRequestException( "Sessão ou usuário não encontrados." );
+                    return this.BadRequest( "Sessão ou usuário não encontrados." );
                 }
 
                 await this._context.Tickets.AddAsync( ticket );
                 await this._context.SaveChangesAsync();
 
-                return this.CreatedAtAction( nameof( GetTicket ), new { id = ticket.Id }, ticket );
-            }
-            catch( InvalidRequestException ex )
-            {
-                return this.BadRequest( ex.Message );
+                return this.Ok( new { id = ticket.Id } );
             }
             catch( Exception ex )
             {
-                return this.StatusCode( StatusCodes.Status500InternalServerError, ex.Message );
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro no servidor", message = ex.Message } );
             }
         }
 
@@ -143,13 +141,14 @@ namespace MovieTicketApi.Controllers
             {
                 if( !this.TicketExists( id ) )
                 {
-                    throw new TicketNotFoundException();
+                    return this.NotFound( "O ticket não foi encontrado." );
                 }
 
                 var ticket = await this._context.Tickets.FindAsync( id );
+
                 if( ticket == null )
                 {
-                    throw new TicketNotFoundException();
+                    return this.NotFound( "O ticket não foi encontrado." );
                 }
 
                 this._context.Tickets.Remove( ticket );
@@ -157,13 +156,9 @@ namespace MovieTicketApi.Controllers
 
                 return this.NoContent();
             }
-            catch( TicketNotFoundException )
-            {
-                return this.NotFound( "O ticket não foi encontrado." );
-            }
             catch( Exception ex )
             {
-                return this.StatusCode( StatusCodes.Status500InternalServerError, ex.Message );
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro no servidor", message = ex.Message } );
             }
         }
 

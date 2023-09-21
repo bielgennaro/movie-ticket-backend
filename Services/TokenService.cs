@@ -26,7 +26,7 @@ namespace MovieTicketApi.Services
             {
                 Subject = GenerateClaims( user ),
                 SigningCredentials = credentials,
-                Expires = System.DateTime.UtcNow.AddHours( 2 ),
+                Expires = DateTime.UtcNow.AddHours( 3 ),
             };
 
             var token = handler.CreateToken( tokenDescriptor );

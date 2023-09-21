@@ -9,37 +9,45 @@ using MovieTicketApi.Services;
 
 namespace MovieTicketApi.Controllers
 {
-    [Route( "/users" )]
+    [Route( "api/users" )]
     [ApiController]
     public class UsersController : ControllerBase
     {
         private readonly MovieTicketApiContext _context;
         private readonly TokenService _tokenService;
+        private readonly PasswordHashService _passwordHashService;
 
-        public UsersController( MovieTicketApiContext context, TokenService tokenService )
+        public UsersController( MovieTicketApiContext context, TokenService tokenService, PasswordHashService passwordHashService )
         {
-            this._context = context;
-            this._tokenService = tokenService;
+            this._context = context ?? throw new ArgumentNullException( nameof( context ) );
+            this._tokenService = tokenService ?? throw new ArgumentNullException( nameof( tokenService ) );
+            this._passwordHashService = passwordHashService;
         }
-
 
         [HttpGet( "list" )]
         [ProducesResponseType( StatusCodes.Status200OK )]
-        public async Task<ActionResult<IEnumerable<User>>> GetUser()
+        public async Task<ActionResult<IEnumerable<UserDto>>> GetUserList()
         {
             try
             {
-                var users = await this._context.Users
-                    .Select( u => new { u.Id, u.Email } )
+                List<UserDto> users = await this._context.Users
+                    .Select( u => new UserDto
+                    {
+                        Id = u.Id,
+                        Email = u.Email,
+                        IsAdmin = u.IsAdmin,
+                        PasswordHash = u.HashedPassword
+                    } )
                     .ToListAsync();
 
                 return this.Ok( users );
             }
             catch( Exception ex )
             {
-                return this.StatusCode( StatusCodes.Status500InternalServerError, ex.Message );
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro no servidor", message = ex.Message } );
             }
         }
+
 
         [HttpGet( "list/{id:int}" )]
         [ProducesResponseType( StatusCodes.Status200OK )]
@@ -48,18 +56,18 @@ namespace MovieTicketApi.Controllers
         {
             try
             {
-                var user = await this._context.Users.FindAsync( id );
+                User? user = await this._context.Users.FindAsync( id );
 
                 if( user == null )
                 {
                     return this.NotFound();
                 }
 
-                return this.Ok( new UserDto { Email = user.Email, IsAdmin = user.IsAdmin } );
+                return this.Ok( new UserDto { Id = user.Id, Email = user.Email, IsAdmin = user.IsAdmin } );
             }
             catch( Exception ex )
             {
-                return this.StatusCode( StatusCodes.Status500InternalServerError, ex.Message );
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro no servidor", message = ex.Message } );
             }
         }
 
@@ -71,7 +79,7 @@ namespace MovieTicketApi.Controllers
         {
             try
             {
-                var existingUser = await this._context.Users.FindAsync( id );
+                User? existingUser = await this._context.Users.FindAsync( id );
 
                 if( existingUser == null )
                 {
@@ -90,7 +98,7 @@ namespace MovieTicketApi.Controllers
             }
             catch( Exception ex )
             {
-                return this.StatusCode( StatusCodes.Status500InternalServerError, ex.Message );
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro no servidor", message = ex.Message } );
             }
         }
 
@@ -102,56 +110,33 @@ namespace MovieTicketApi.Controllers
         {
             try
             {
-                var user = new User( request.Email, request.IsAdmin, request.Password );
+                if( request == null )
+                {
+                    return this.BadRequest( new { error = "Requisição inválida" } );
+                }
+
+                if( await this._context.Users.AnyAsync( u => u.Email == request.Email ) )
+                {
+                    return this.BadRequest( new { error = "Email já está em uso" } );
+                }
+
+                string hashedPassword = this._passwordHashService.HashPassword( request.Password );
+
+                User user = new User( request.Email, request.IsAdmin,request.Password, hashedPassword );
+
+                string jwtToken = this._tokenService.Generate( user );
 
                 this._context.Users.Add( user );
                 await this._context.SaveChangesAsync();
 
-                var tokenService = new TokenService();
-                string jwtToken = tokenService.Generate( user );
-
-                return this.Ok( new { user.Id, auth = jwtToken } );
+                return this.CreatedAtAction( nameof( GetUser ), new { id = user.Id }, new { auth = jwtToken } );
             }
             catch( Exception ex )
             {
-                return this.StatusCode( StatusCodes.Status500InternalServerError, ex.Message );
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro ao criar usuário", message = ex.Message } );
             }
         }
 
-
-        [HttpPost( "login" )]
-        [ProducesResponseType( StatusCodes.Status200OK )]
-        [ProducesResponseType( StatusCodes.Status400BadRequest )]
-        [ProducesResponseType( StatusCodes.Status500InternalServerError )]
-        public IActionResult LoginUser( [FromBody] LoginRequest loginRequest )
-        {
-            try
-            {
-                if( loginRequest == null || string.IsNullOrEmpty( loginRequest.Email ) || string.IsNullOrEmpty( loginRequest.Password ) )
-                {
-                    return this.BadRequest( "Usuário ou senha inválidos." );
-                }
-
-                var existingUser = this._context.Users.FirstOrDefault( u => u.Email == loginRequest.Email );
-
-                var passwordService = new PasswordHashService();
-
-                if( passwordService.VerifyPassword( loginRequest.Password, existingUser.PasswordHash ) )
-                {
-                    var jwtToken = this._tokenService.Generate( existingUser );
-
-                    return this.Ok( new { existingUser.Id, auth = jwtToken } );
-                }
-                else
-                {
-                    return this.BadRequest( "Senha incorreta." );
-                }
-            }
-            catch( Exception )
-            {
-                return this.StatusCode( StatusCodes.Status500InternalServerError, "Erro no servidor." );
-            }
-        }
 
 
         [HttpDelete( "delete/{id:int}" )]
@@ -162,7 +147,7 @@ namespace MovieTicketApi.Controllers
         {
             try
             {
-                var user = await this._context.Users.FindAsync( id );
+                User? user = await this._context.Users.FindAsync( id );
 
                 if( user == null )
                 {
@@ -176,7 +161,7 @@ namespace MovieTicketApi.Controllers
             }
             catch( Exception ex )
             {
-                return this.StatusCode( StatusCodes.Status500InternalServerError, ex.Message );
+                return this.StatusCode( StatusCodes.Status500InternalServerError, new { error = "Erro no servidor", message = ex.Message } );
             }
         }
     }

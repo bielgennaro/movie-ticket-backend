@@ -1,24 +1,16 @@
-﻿using MovieTicketApi.Models.Interfaces;
-
-namespace MovieTicketApi.Services
+﻿namespace MovieTicketApi.Services
 {
-
-
-    public class PasswordHashService : IPasswordHashService
+    public class PasswordHashService
     {
         public string HashPassword( string password )
         {
-            string hashedPassword = BCrypt.Net.BCrypt.HashPassword( password, BCrypt.Net.BCrypt.GenerateSalt() );
-
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword( password );
             return hashedPassword;
         }
 
-        public bool VerifyPassword( string inputPassword, string storedPasswordHash )
+        public bool VerifyPassword( string password, string hashedPassword )
         {
-            bool passwordMatches = BCrypt.Net.BCrypt.Verify( inputPassword, storedPasswordHash );
-
-            return passwordMatches;
+            return BCrypt.Net.BCrypt.Verify( password, hashedPassword );
         }
     }
-
 }

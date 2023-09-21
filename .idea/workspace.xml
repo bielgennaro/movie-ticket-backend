@@ -5,19 +5,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc96a72e-2a25-4003-9988-992a76aab0f6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/movieticketapi.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/65ce51e5-6b08-4ec2-b697-5921ab12fdee.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8a4431ef-2ffa-4bbd-af8a-15fde138a0cc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/8a4431ef-2ffa-4bbd-af8a-15fde138a0cc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230912171638_Testing.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230912171638_Testing.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230913231052_RefacModels.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230913231052_RefacModels.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230914004804_RefacController.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230914004804_RefacController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230914152004_GaranteeMigration.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230914152004_GaranteeMigration.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230914152318_Garantee_Migration_2.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230914152318_Garantee_Migration_2.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/MoviesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/MoviesController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/SessionsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/SessionsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/TicketsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/TicketsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/UsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/UsersController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/MovieTicketApiContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/MovieTicketApiContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20230914223303_Connection.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20230914223303_Connection.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20230914225248_postgresql.container_migration_849.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20230914225248_postgresql.container_migration_849.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/MovieTicketApiContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Migrations/MovieTicketApiContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/DTOs/MovieDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/DTOs/MovieDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/DTOs/SessionDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/DTOs/SessionDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/DTOs/TicketDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/DTOs/TicketDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/DTOs/UserDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/DTOs/UserDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Entity/Session.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Entity/Session.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Entity/Ticket.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Entity/Ticket.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Entity/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Entity/User.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Enums/TicketStatus.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Mapping/UserConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Mapping/UserConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MovieTicketApi.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/MovieTicketApi.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Properties/ServiceDependencies/local/secrets1.arm.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Properties/ServiceDependencies/movieticketapi - Zip Deploy/profile.arm.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Properties/ServiceDependencies/movieticketapi - Zip Deploy/secrets1.arm.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Properties/launchSettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Properties/serviceDependencies.json" beforeDir="false" afterPath="$PROJECT_DIR$/Properties/serviceDependencies.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Properties/serviceDependencies.local.json" beforeDir="false" afterPath="$PROJECT_DIR$/Properties/serviceDependencies.local.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Properties/serviceDependencies.movieticketapi - Zip Deploy.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/PasswordHashService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/PasswordHashService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/TokenService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/TokenService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

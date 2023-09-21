@@ -12,10 +12,9 @@ public class Ticket
     {
     }
 
-    public Ticket( int userId, int movieId, int sessionId )
+    public Ticket( int userId, int sessionId )
     {
         this.UserId = userId;
-        this.MovieId = movieId;
         this.SessionId = sessionId;
     }
 
@@ -23,13 +22,9 @@ public class Ticket
 
     public int SessionId { get; set; }
 
-    public Session Session { get; set; }
+    public Session Session { get; set; } = null!;
 
     public int UserId { get; set; }
 
-    public int MovieId { get; set; }
-
-    public Movie Movie { get; set; }
-
-    public User User { get; set; }
+    public User User { get; set; } = null!;
 }
