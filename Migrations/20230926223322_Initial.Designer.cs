@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MovieTicketApi.Migrations
 {
     [DbContext(typeof(MovieTicketApiContext))]
-    [Migration("20230921225139_uehhiwuf22222554")]
-    partial class uehhiwuf22222554
+    [Migration("20230926223322_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -143,7 +143,7 @@ namespace MovieTicketApi.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
-                        .HasColumnName("password_hash");
+                        .HasColumnName("hashed_password");
 
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("boolean")

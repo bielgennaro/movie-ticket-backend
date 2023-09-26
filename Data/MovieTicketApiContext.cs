@@ -15,8 +15,6 @@ public class MovieTicketApiContext : DbContext
         : base( options )
     {
         this.Database.Migrate();
-
-        this.Database.EnsureCreated();
     }
 
     public DbSet<User> Users { get; set; }

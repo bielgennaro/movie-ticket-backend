@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MovieTicketApi.Migrations
 {
     /// <inheritdoc />
-    public partial class uehhiwuf22222554 : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -42,7 +42,7 @@ namespace MovieTicketApi.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     email = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     is_admin = table.Column<bool>(type: "boolean", nullable: false),
-                    password_hash = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                    hashed_password = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
