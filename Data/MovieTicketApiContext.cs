@@ -22,6 +22,7 @@ public class MovieTicketApiContext : DbContext
     public DbSet<Ticket> Tickets { get; set; }
     public DbSet<Movie> Movies { get; set; }
 
+
     protected override void OnModelCreating( ModelBuilder modelBuilder )
     {
         modelBuilder.HasDefaultSchema( "develop" );

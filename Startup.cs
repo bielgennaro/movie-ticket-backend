@@ -25,7 +25,7 @@ namespace MovieTicketApi
             services.AddDbContext<MovieTicketApiContext>( options =>
                 options.UseNpgsql( this.Configuration.GetConnectionString( "LOCAL_CONNECTIONSTRING" ) ) );
 
-            services.AddTransient<TokenService>();
+            services.AddScoped<TokenService>();
 
             services.AddScoped<PasswordHashService>();
 

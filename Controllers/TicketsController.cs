@@ -87,7 +87,7 @@ namespace MovieTicketApi.Controllers
                     return this.NotFound( "O ticket não foi encontrado." );
                 }
 
-                var ticket = new Ticket( request.SessionId, request.UserId );
+                Ticket ticket = new Ticket( request.SessionId, request.UserId );
 
                 if( id != ticket.Id )
                 {
@@ -112,7 +112,7 @@ namespace MovieTicketApi.Controllers
         {
             try
             {
-                var ticket = new Ticket( request.UserId, request.SessionId );
+                Ticket ticket = new Ticket( request.UserId, request.SessionId );
                 var user = await this._context.Users.FindAsync( request.UserId );
                 var session = await this._context.Sessions.FindAsync( request.SessionId );
 

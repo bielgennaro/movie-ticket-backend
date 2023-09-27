@@ -13,7 +13,7 @@ namespace MovieTicketApi.Models.DTOs
         [JsonProperty( "isAdmin" )]
         public bool IsAdmin { get; set; }
 
-        [JsonProperty( "passwordHash" )]
-        public string PasswordHash { get; set; }
+        [JsonProperty( "hashedPassword" )]
+        public string HashedPassword { get; set; }
     }
 }

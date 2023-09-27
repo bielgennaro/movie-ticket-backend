@@ -1,5 +1,3 @@
-using MovieTicketApi.Models.Entity;
-
 using Newtonsoft.Json;
 
 namespace MovieTicketApi.Models.DTOs;
