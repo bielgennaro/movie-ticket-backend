@@ -36,7 +36,7 @@ namespace MovieTicketApi.Controllers
                         Id = u.Id,
                         Email = u.Email,
                         IsAdmin = u.IsAdmin,
-                        PasswordHash = u.HashedPassword
+                        HashedPassword = u.HashedPassword
                     } )
                     .ToListAsync();
 
@@ -56,7 +56,7 @@ namespace MovieTicketApi.Controllers
         {
             try
             {
-                User? user = await this._context.Users.FindAsync( id );
+                var user = await this._context.Users.FindAsync( id );
 
                 if( user == null )
                 {
@@ -79,7 +79,7 @@ namespace MovieTicketApi.Controllers
         {
             try
             {
-                User? existingUser = await this._context.Users.FindAsync( id );
+                var existingUser = await this._context.Users.FindAsync( id );
 
                 if( existingUser == null )
                 {
@@ -122,12 +122,12 @@ namespace MovieTicketApi.Controllers
 
                 string hashedPassword = this._passwordHashService.HashPassword( request.Password );
 
-                User user = new User( request.Email, request.IsAdmin,request.Password, hashedPassword );
-
-                string jwtToken = this._tokenService.Generate( user );
+                var user = new User( request.Email, request.IsAdmin, request.Password, hashedPassword );
 
                 this._context.Users.Add( user );
                 await this._context.SaveChangesAsync();
+
+                string jwtToken = this._tokenService.GenerateToken( user );
 
                 return this.CreatedAtAction( nameof( GetUser ), new { id = user.Id }, new { auth = jwtToken } );
             }
@@ -139,6 +139,7 @@ namespace MovieTicketApi.Controllers
 
 
 
+
         [HttpDelete( "delete/{id:int}" )]
         [ProducesResponseType( StatusCodes.Status204NoContent )]
         [ProducesResponseType( StatusCodes.Status404NotFound )]
@@ -147,7 +148,7 @@ namespace MovieTicketApi.Controllers
         {
             try
             {
-                User? user = await this._context.Users.FindAsync( id );
+                var user = await this._context.Users.FindAsync( id );
 
                 if( user == null )
                 {

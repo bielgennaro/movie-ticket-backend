@@ -10,39 +10,114 @@ namespace MovieTicketApi.Services
 {
     public class TokenService
     {
-        public TokenService()
+        private readonly IConfiguration _configuration;
+
+        public TokenService( IConfiguration configuration )
         {
+            this._configuration = configuration ?? throw new ArgumentNullException( nameof( configuration ) );
         }
 
-        public string Generate( User user )
+        public string GenerateToken( User user )
         {
-            var handler = new JwtSecurityTokenHandler();
+            byte[] key = Encoding.ASCII.GetBytes( this._configuration["Jwt:SecretKey"] );
+            string? issuer = this._configuration["Jwt:Issuer"];
+            string? audience = this._configuration["Jwt:Audience"];
+            int expiryInMinutes = Convert.ToInt32( this._configuration["Jwt:ExpiryInMinutes"] );
 
-            var key = Encoding.ASCII.GetBytes( "1F2A3B4C5D6E7F8A9B0C1D2E3F4A5B6C7D8E9F0A1B2C3D4E5F6" );
+            ClaimsIdentity claims = GenerateClaims( user );
 
-            var credentials = new SigningCredentials( new SymmetricSecurityKey( key ), SecurityAlgorithms.HmacSha256Signature );
-
-            var tokenDescriptor = new SecurityTokenDescriptor
+            SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = GenerateClaims( user ),
-                SigningCredentials = credentials,
-                Expires = DateTime.UtcNow.AddHours( 3 ),
+                Subject = new ClaimsIdentity( claims ),
+                Expires = DateTime.UtcNow.AddMinutes( expiryInMinutes ),
+                SigningCredentials = new SigningCredentials( new SymmetricSecurityKey( key ), SecurityAlgorithms.HmacSha256Signature ),
+                Issuer = issuer,
+                Audience = audience
             };
 
-            var token = handler.CreateToken( tokenDescriptor );
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            SecurityToken token = tokenHandler.CreateToken( tokenDescriptor );
 
-            return handler.WriteToken( token );
+            return tokenHandler.WriteToken( token );
         }
+
+        public ClaimsPrincipal? GetPrincipalFromToken( string token )
+        {
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            byte[] key = Encoding.ASCII.GetBytes( this._configuration["Jwt:SecretKey"] );
+
+            TokenValidationParameters tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey( key ),
+                ValidateIssuer = true,
+                ValidIssuer = this._configuration["Jwt:Issuer"],
+                ValidateAudience = true,
+                ValidAudience = this._configuration["Jwt:Audience"],
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero
+            };
+
+            try
+            {
+                ClaimsPrincipal principal = tokenHandler.ValidateToken( token, tokenValidationParameters, out SecurityToken? validatedToken );
+                if( IsJwtWithValidSecurityAlgorithm( validatedToken ) )
+                {
+                    return principal;
+                }
+            }
+            catch( Exception e )
+            {
+                throw new Exception( e.Message );
+            }
+
+            return null;
+
+        }
+
+        public bool VerifyToken( string token, int id )
+        {
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            byte[] key = Encoding.ASCII.GetBytes( this._configuration["Jwt:SecretKey"] );
+
+            TokenValidationParameters tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey( key ),
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero
+            };
+
+            try
+            {
+                tokenHandler.ValidateToken( token, tokenValidationParameters, out _ );
+                return true;
+            }
+            catch( Exception )
+            {
+                return false;
+            }
+        }
+
 
         private static ClaimsIdentity GenerateClaims( User user )
         {
-            var ci = new ClaimsIdentity();
+            Claim[] claims = new[]
+            {
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Name, user.Password),
+                new Claim(ClaimTypes.Role, user.IsAdmin ? "Admin" : "Client")
+            };
 
-            ci.AddClaim( new Claim( ClaimTypes.Email, user.Email ) );
-            ci.AddClaim( new Claim( ClaimTypes.Name, user.Password ) );
-            ci.AddClaim( new Claim( ClaimTypes.Role, user.IsAdmin ? "Admin" : "Client" ) );
+            return new ClaimsIdentity( claims );
+        }
 
-            return ci;
+        private static bool IsJwtWithValidSecurityAlgorithm( SecurityToken validatedToken )
+        {
+            return ( validatedToken is JwtSecurityToken jwtSecurityToken ) &&
+                jwtSecurityToken.Header.Alg.Equals( SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase );
         }
     }
 }

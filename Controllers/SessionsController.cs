@@ -26,7 +26,7 @@ namespace MovieTicketApi.Controllers
         {
             try
             {
-                var sessions = await this._context.Sessions.Include( s => s.Movie ).ToListAsync();
+                List<Session> sessions = await this._context.Sessions.Include( s => s.Movie ).ToListAsync();
 
                 return this.Ok( sessions );
             }
@@ -112,7 +112,7 @@ namespace MovieTicketApi.Controllers
                     return this.NotFound( new { error = $"Filme com ID {sessionRequest.MovieId} não encontrado." } );
                 }
 
-                var session = new Session( sessionRequest.DateTime, sessionRequest.Room, sessionRequest.MovieId );
+                Session session = new Session( sessionRequest.DateTime, sessionRequest.Room, sessionRequest.MovieId );
 
                 this._context.Sessions.Add( session );
                 await this._context.SaveChangesAsync();

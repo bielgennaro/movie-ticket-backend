@@ -25,7 +25,7 @@ namespace MovieTicketApi.Controllers
         {
             try
             {
-                var movies = await this._context.Movies.ToListAsync();
+                List<Movie> movies = await this._context.Movies.ToListAsync();
                 return this.Ok( movies );
             }
             catch( Exception ex )

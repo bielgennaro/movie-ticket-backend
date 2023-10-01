@@ -140,7 +140,7 @@ namespace MovieTicketApi.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
-                        .HasColumnName("password_hash");
+                        .HasColumnName("hashed_password");
 
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("boolean")
