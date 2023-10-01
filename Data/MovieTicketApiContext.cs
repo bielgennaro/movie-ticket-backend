@@ -2,8 +2,11 @@
 
 using Microsoft.EntityFrameworkCore;
 
-using MovieTicketApi.Models.Entity;
-using MovieTicketApi.Models.Mapping;
+using MovieTicketApi.Mapping;
+using MovieTicketApi.Resources.Movies.Models;
+using MovieTicketApi.Resources.Sessions.Models;
+using MovieTicketApi.Resources.Tickets.Models;
+using MovieTicketApi.Resources.Users.Models;
 
 #endregion
 

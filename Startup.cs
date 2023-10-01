@@ -22,12 +22,12 @@ namespace MovieTicketApi
         public void ConfigureServices( IServiceCollection services )
         {
 
-            services.AddDbContext<MovieTicketApiContext>( options =>
+            services.AddDbContextPool<MovieTicketApiContext>( options =>
                 options.UseNpgsql( this.Configuration.GetConnectionString( "LOCAL_CONNECTIONSTRING" ) ) );
 
             services.AddScoped<TokenService>();
+            services.AddScoped<PasswordHash>();
 
-            services.AddScoped<PasswordHashService>();
 
 
             services.AddAuthentication( JwtBearerDefaults.AuthenticationScheme )
@@ -50,7 +50,7 @@ namespace MovieTicketApi
 
             services.AddSwaggerGen( c =>
             {
-                c.SwaggerDoc( "v1",
+                c.SwaggerDoc( "v2",
                     new OpenApiInfo
                     {
                         Title = "Movie Ticket",
@@ -74,6 +74,7 @@ namespace MovieTicketApi
             app.UseRouting();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
 
             app.UseEndpoints( endpoints =>
             {

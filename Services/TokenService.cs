@@ -4,7 +4,7 @@ using System.Text;
 
 using Microsoft.IdentityModel.Tokens;
 
-using MovieTicketApi.Models.Entity;
+using MovieTicketApi.Resources.Users.Models;
 
 namespace MovieTicketApi.Services
 {
@@ -116,7 +116,7 @@ namespace MovieTicketApi.Services
 
         private static bool IsJwtWithValidSecurityAlgorithm( SecurityToken validatedToken )
         {
-            return ( validatedToken is JwtSecurityToken jwtSecurityToken ) &&
+            return validatedToken is JwtSecurityToken jwtSecurityToken &&
                 jwtSecurityToken.Header.Alg.Equals( SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase );
         }
     }
