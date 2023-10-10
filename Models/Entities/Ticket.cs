@@ -4,10 +4,7 @@
 #endregion
 
 
-using MovieTicketApi.Resources.Sessions.Models;
-using MovieTicketApi.Resources.Users.Models;
-
-namespace MovieTicketApi.Resources.Tickets.Models;
+namespace MovieTicketApi.Models.Entities;
 
 public sealed class Ticket
 {

@@ -2,11 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 using MovieTicketApi.Data;
+using MovieTicketApi.Models.Dtos;
+using MovieTicketApi.Models.Entities;
 using MovieTicketApi.Request;
-using MovieTicketApi.Resources.Users.Models;
 using MovieTicketApi.Services;
 
-namespace MovieTicketApi.Resources.Users.Controllers
+namespace MovieTicketApi.Controllers
 {
     [Route( "api/users" )]
     [ApiController]
@@ -24,7 +25,6 @@ namespace MovieTicketApi.Resources.Users.Controllers
         }
 
         [HttpGet( "list" )]
-        [ProducesResponseType( StatusCodes.Status200OK )]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetUserList()
         {
             try
@@ -49,8 +49,6 @@ namespace MovieTicketApi.Resources.Users.Controllers
 
 
         [HttpGet( "list/{id:int}" )]
-        [ProducesResponseType( StatusCodes.Status200OK )]
-        [ProducesResponseType( StatusCodes.Status404NotFound )]
         public async Task<ActionResult<UserDto>> GetUser( int id )
         {
             try
@@ -71,9 +69,6 @@ namespace MovieTicketApi.Resources.Users.Controllers
         }
 
         [HttpPut( "edit/{id:int}" )]
-        [ProducesResponseType( StatusCodes.Status200OK )]
-        [ProducesResponseType( StatusCodes.Status404NotFound )]
-        [ProducesResponseType( StatusCodes.Status500InternalServerError )]
         public async Task<IActionResult> PutUser( int id, [FromBody] CreateUserRequest userRequest )
         {
             try
@@ -102,9 +97,6 @@ namespace MovieTicketApi.Resources.Users.Controllers
         }
 
         [HttpPost( "register" )]
-        [ProducesResponseType( StatusCodes.Status201Created )]
-        [ProducesResponseType( StatusCodes.Status400BadRequest )]
-        [ProducesResponseType( StatusCodes.Status500InternalServerError )]
         public async Task<ActionResult<UserDto>> PostUser( CreateUserRequest request )
         {
             try
@@ -136,13 +128,7 @@ namespace MovieTicketApi.Resources.Users.Controllers
             }
         }
 
-
-
-
         [HttpDelete( "delete/{id:int}" )]
-        [ProducesResponseType( StatusCodes.Status204NoContent )]
-        [ProducesResponseType( StatusCodes.Status404NotFound )]
-        [ProducesResponseType( StatusCodes.Status500InternalServerError )]
         public async Task<IActionResult> DeleteUser( int id )
         {
             try

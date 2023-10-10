@@ -50,18 +50,15 @@ namespace MovieTicketApi
 
             services.AddSwaggerGen( c =>
             {
-                c.SwaggerDoc( "v2",
+                c.SwaggerDoc( "v1",
                     new OpenApiInfo
                     {
                         Title = "Movie Ticket",
                         Description = "Projeto integrado do 3/4° semestre",
                         Version = "v1"
                     } );
+                c.ResolveConflictingActions( apiDescriptions => apiDescriptions.First() );
             } );
-
-            services.AddCors( options => options.AddPolicy( "AllowAll", p => p.AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader() ) );
 
             services.AddDataProtection();
         }

@@ -7,7 +7,9 @@
         public static void When( bool hasError, string error )
         {
             if( hasError )
+            {
                 throw new EntityValidationException( error );
+            }
         }
     }
 }

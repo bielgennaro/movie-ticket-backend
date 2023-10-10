@@ -1,8 +1,6 @@
-using MovieTicketApi.Resources.Movies.Models;
-
 using Newtonsoft.Json;
 
-namespace MovieTicketApi.Resources.Sessions.Models;
+namespace MovieTicketApi.Models.Dtos;
 
 public sealed class SessionDto
 {

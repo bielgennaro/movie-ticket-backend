@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using MovieTicketApi.Resources.Users.Models;
+using MovieTicketApi.Models.Entities;
 
 namespace MovieTicketApi.Mapping
 {

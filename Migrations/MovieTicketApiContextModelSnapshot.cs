@@ -23,7 +23,7 @@ namespace MovieTicketApi.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("MovieTicketApi.Resources.Movies.Models.Movie", b =>
+            modelBuilder.Entity("MovieTicketApi.Models.Entities.Movie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -65,7 +65,7 @@ namespace MovieTicketApi.Migrations
                     b.ToTable("Movies", "develop");
                 });
 
-            modelBuilder.Entity("MovieTicketApi.Resources.Sessions.Models.Session", b =>
+            modelBuilder.Entity("MovieTicketApi.Models.Entities.Session", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -102,7 +102,7 @@ namespace MovieTicketApi.Migrations
                     b.ToTable("Sessions", "develop");
                 });
 
-            modelBuilder.Entity("MovieTicketApi.Resources.Tickets.Models.Ticket", b =>
+            modelBuilder.Entity("MovieTicketApi.Models.Entities.Ticket", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -126,7 +126,7 @@ namespace MovieTicketApi.Migrations
                     b.ToTable("Tickets", "develop");
                 });
 
-            modelBuilder.Entity("MovieTicketApi.Resources.Users.Models.User", b =>
+            modelBuilder.Entity("MovieTicketApi.Models.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -155,9 +155,9 @@ namespace MovieTicketApi.Migrations
                     b.ToTable("Users", "develop");
                 });
 
-            modelBuilder.Entity("MovieTicketApi.Resources.Sessions.Models.Session", b =>
+            modelBuilder.Entity("MovieTicketApi.Models.Entities.Session", b =>
                 {
-                    b.HasOne("MovieTicketApi.Resources.Movies.Models.Movie", "Movie")
+                    b.HasOne("MovieTicketApi.Models.Entities.Movie", "Movie")
                         .WithMany()
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -167,16 +167,16 @@ namespace MovieTicketApi.Migrations
                     b.Navigation("Movie");
                 });
 
-            modelBuilder.Entity("MovieTicketApi.Resources.Tickets.Models.Ticket", b =>
+            modelBuilder.Entity("MovieTicketApi.Models.Entities.Ticket", b =>
                 {
-                    b.HasOne("MovieTicketApi.Resources.Sessions.Models.Session", "Session")
+                    b.HasOne("MovieTicketApi.Models.Entities.Session", "Session")
                         .WithMany()
                         .HasForeignKey("SessionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("session_id");
 
-                    b.HasOne("MovieTicketApi.Resources.Users.Models.User", "User")
+                    b.HasOne("MovieTicketApi.Models.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

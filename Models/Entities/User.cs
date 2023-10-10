@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 using MovieTicketApi.Validation;
 
-namespace MovieTicketApi.Resources.Users.Models;
+namespace MovieTicketApi.Models.Entities;
 
 public sealed class User
 {

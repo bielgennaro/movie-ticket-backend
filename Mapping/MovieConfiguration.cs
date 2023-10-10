@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using MovieTicketApi.Resources.Movies.Models;
+using MovieTicketApi.Models.Entities;
 
 namespace MovieTicketApi.Mapping
 {
@@ -21,7 +21,7 @@ namespace MovieTicketApi.Mapping
 
             builder.Property( m => m.BannerUrl ).HasColumnName( "banner_url" ).HasMaxLength( 200 );
 
-            builder.Property(m => m.Title).HasColumnName("title").HasMaxLength(255);
+            builder.Property( m => m.Title ).HasColumnName( "title" ).HasMaxLength( 255 );
         }
     }
 }

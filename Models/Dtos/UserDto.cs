@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace MovieTicketApi.Resources.Users.Models
+namespace MovieTicketApi.Models.Dtos
 {
     public sealed class UserDto
     {

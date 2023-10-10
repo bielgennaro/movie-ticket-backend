@@ -2,10 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 using MovieTicketApi.Data;
+using MovieTicketApi.Models.Dtos;
+using MovieTicketApi.Models.Entities;
 using MovieTicketApi.Request;
-using MovieTicketApi.Resources.Tickets.Models;
 
-namespace MovieTicketApi.Resources.Tickets.Controllers
+namespace MovieTicketApi.Controllers
 {
     [Route( "api/tickets" )]
     [ApiController]
@@ -19,7 +20,6 @@ namespace MovieTicketApi.Resources.Tickets.Controllers
         }
 
         [HttpGet( "list" )]
-        [ProducesResponseType( StatusCodes.Status200OK )]
         public async Task<ActionResult<IEnumerable<object>>> GetTickets()
         {
             try
@@ -43,8 +43,6 @@ namespace MovieTicketApi.Resources.Tickets.Controllers
 
 
         [HttpGet( "list/{id:int}" )]
-        [ProducesResponseType( StatusCodes.Status200OK )]
-        [ProducesResponseType( StatusCodes.Status404NotFound )]
         public async Task<ActionResult<Ticket>> GetTicket( int id )
         {
             try
@@ -74,9 +72,6 @@ namespace MovieTicketApi.Resources.Tickets.Controllers
 
 
         [HttpPut( "edit/{id:int}" )]
-        [ProducesResponseType( StatusCodes.Status204NoContent )]
-        [ProducesResponseType( StatusCodes.Status404NotFound )]
-        [ProducesResponseType( StatusCodes.Status400BadRequest )]
         public async Task<IActionResult> PutTicket( int id, CreateTicketRequest request )
         {
             try
@@ -105,8 +100,6 @@ namespace MovieTicketApi.Resources.Tickets.Controllers
         }
 
         [HttpPost( "generate" )]
-        [ProducesResponseType( StatusCodes.Status201Created )]
-        [ProducesResponseType( StatusCodes.Status400BadRequest )]
         public async Task<ActionResult<TicketDto>> PostTicket( CreateTicketRequest request )
         {
             try
@@ -132,8 +125,6 @@ namespace MovieTicketApi.Resources.Tickets.Controllers
         }
 
         [HttpDelete( "delete/{id:int}" )]
-        [ProducesResponseType( StatusCodes.Status204NoContent )]
-        [ProducesResponseType( StatusCodes.Status404NotFound )]
         public async Task<IActionResult> DeleteTicket( int id )
         {
             try

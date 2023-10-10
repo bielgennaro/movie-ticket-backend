@@ -1,7 +1,6 @@
-﻿using MovieTicketApi.Resources.Movies.Models;
-using MovieTicketApi.Validation;
+﻿using MovieTicketApi.Validation;
 
-namespace MovieTicketApi.Resources.Sessions.Models;
+namespace MovieTicketApi.Models.Entities;
 
 public sealed class Session
 {
@@ -9,10 +8,18 @@ public sealed class Session
     {
     }
 
+    public Session( string room, double price, int movieId, int availableTickets )
+    {
+        this.Room = room;
+        this.Price = price;
+        this.MovieId = movieId;
+        this.AvailableTickets = availableTickets;
+    }
+
     public Session( DateTime dateTime, string room, double price, int availableTickets, int movieId )
     {
         this.DateTime = dateTime;
-        this.ValidateDomain( room, availableTickets, price, movieId);
+        this.ValidateDomain( room, availableTickets, price, movieId );
     }
 
     public int Id { get; private set; }
@@ -29,7 +36,7 @@ public sealed class Session
 
     public Movie Movie { get; private set; }
 
-    private void ValidateDomain( string room, int availableTickets, double price, int movieId)
+    private void ValidateDomain( string room, int availableTickets, double price, int movieId )
     {
         EntityValidationException.When( string.IsNullOrEmpty( room ), "Invalid room. Room is required" );
 

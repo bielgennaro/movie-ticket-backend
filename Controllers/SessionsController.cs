@@ -2,10 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 using MovieTicketApi.Data;
+using MovieTicketApi.Models.Dtos;
+using MovieTicketApi.Models.Entities;
 using MovieTicketApi.Request;
-using MovieTicketApi.Resources.Sessions.Models;
 
-namespace MovieTicketApi.Resources.Sessions.Controllers
+namespace MovieTicketApi.Controllers
 {
     [Route( "api/sessions" )]
     [ApiController]
@@ -19,8 +20,6 @@ namespace MovieTicketApi.Resources.Sessions.Controllers
         }
 
         [HttpGet( "list" )]
-        [ProducesResponseType( StatusCodes.Status200OK )]
-        [ProducesResponseType( StatusCodes.Status500InternalServerError )]
         public async Task<ActionResult<IEnumerable<Session>>> GetSessions()
         {
             try
@@ -36,9 +35,6 @@ namespace MovieTicketApi.Resources.Sessions.Controllers
         }
 
         [HttpGet( "list/{id}" )]
-        [ProducesResponseType( StatusCodes.Status200OK )]
-        [ProducesResponseType( StatusCodes.Status404NotFound )]
-        [ProducesResponseType( StatusCodes.Status500InternalServerError )]
         public async Task<ActionResult<Session>> GetSession( int id )
         {
             try
@@ -59,9 +55,6 @@ namespace MovieTicketApi.Resources.Sessions.Controllers
         }
 
         [HttpPut( "edit/{id}" )]
-        [ProducesResponseType( StatusCodes.Status200OK )]
-        [ProducesResponseType( StatusCodes.Status404NotFound )]
-        [ProducesResponseType( StatusCodes.Status500InternalServerError )]
         public async Task<IActionResult> PutSession( int id, CreateSessionRequest sessionRequest )
         {
             try
@@ -98,20 +91,18 @@ namespace MovieTicketApi.Resources.Sessions.Controllers
         }
 
         [HttpPost( "create" )]
-        [ProducesResponseType( StatusCodes.Status201Created )]
-        [ProducesResponseType( StatusCodes.Status500InternalServerError )]
-        public async Task<ActionResult<SessionDto>> PostSession( CreateSessionRequest sessionRequest )
+        public async Task<ActionResult<SessionDto>> PostSession( CreateSessionRequest request )
         {
             try
             {
-                var movie = await this._context.Movies.FindAsync( sessionRequest.MovieId );
+                var movie = await this._context.Movies.FindAsync( request.MovieId );
 
                 if( movie == null )
                 {
-                    return this.NotFound( new { error = $"Filme com ID {sessionRequest.MovieId} não encontrado." } );
+                    return this.NotFound( new { error = $"Filme com ID {request.MovieId} não encontrado." } );
                 }
 
-                Session session = new Session( sessionRequest.DateTime, sessionRequest.Room, sessionRequest.MovieId, sessionRequest.Price, sessionRequest.AvailableTickets);
+                Session session = new Session( request.Room, request.Price, request.MovieId, request.AvailableTickets );
 
                 this._context.Sessions.Add( session );
                 await this._context.SaveChangesAsync();
@@ -125,9 +116,6 @@ namespace MovieTicketApi.Resources.Sessions.Controllers
         }
 
         [HttpDelete( "delete/{id}" )]
-        [ProducesResponseType( StatusCodes.Status204NoContent )]
-        [ProducesResponseType( StatusCodes.Status404NotFound )]
-        [ProducesResponseType( StatusCodes.Status500InternalServerError )]
         public async Task<IActionResult> DeleteSession( int id )
         {
             try

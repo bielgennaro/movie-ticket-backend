@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 using Newtonsoft.Json;
 
-namespace MovieTicketApi.Resources.Movies.Models;
+namespace MovieTicketApi.Models.Dtos;
 
 public sealed class MovieDto
 {

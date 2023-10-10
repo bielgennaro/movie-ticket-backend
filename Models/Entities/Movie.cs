@@ -2,7 +2,7 @@
 
 using MovieTicketApi.Validation;
 
-namespace MovieTicketApi.Resources.Movies.Models;
+namespace MovieTicketApi.Models.Entities;
 
 public sealed class Movie
 {
@@ -28,7 +28,7 @@ public sealed class Movie
     [Url]
     public string BannerUrl { get; set; }
 
-    private void ValidateDomain( string title, string gender, string synopsis, string  director, string bannerUrl )
+    private void ValidateDomain( string title, string gender, string synopsis, string director, string bannerUrl )
     {
         EntityValidationException.When( string.IsNullOrEmpty( title ), "Invalid title. Title is required" );
 
@@ -42,7 +42,7 @@ public sealed class Movie
 
         EntityValidationException.When( gender.Length > 255, "Invalid gender, too long, maximum 255 characters" );
 
-        EntityValidationException.When(string.IsNullOrEmpty( synopsis ), "Invalid movie synopsis. Movie synopsis is required" );
+        EntityValidationException.When( string.IsNullOrEmpty( synopsis ), "Invalid movie synopsis. Movie synopsis is required" );
 
         EntityValidationException.When( synopsis.Length < 3, "Invalid synopsis, too short, minimum 3 characters" );
 

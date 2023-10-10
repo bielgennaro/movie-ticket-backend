@@ -6,7 +6,7 @@ using MovieTicketApi.Data;
 using MovieTicketApi.Request;
 using MovieTicketApi.Services;
 
-namespace MovieTicketApi.Resources.Users.Controllers
+namespace MovieTicketApi.Controllers
 {
     [Route( "api/[controller]" )]
     [ApiController]
@@ -14,7 +14,6 @@ namespace MovieTicketApi.Resources.Users.Controllers
     {
         private readonly MovieTicketApiContext _context;
         private readonly PasswordHash _passwordHashService;
-        private readonly ILogger<AuthController> _logger;
 
         public AuthController( MovieTicketApiContext context, TokenService tokenService, PasswordHash passwordHashService, ILogger<AuthController> logger )
         {
@@ -23,9 +22,6 @@ namespace MovieTicketApi.Resources.Users.Controllers
         }
 
         [HttpPost( "login" )]
-        [ProducesResponseType( StatusCodes.Status200OK )]
-        [ProducesResponseType( StatusCodes.Status400BadRequest )]
-        [ProducesResponseType( StatusCodes.Status500InternalServerError )]
         public IActionResult LoginUser( [FromBody] LoginRequest loginRequest )
         {
             try
@@ -49,11 +45,11 @@ namespace MovieTicketApi.Resources.Users.Controllers
 
                 return this.Ok( new { UserId = existingUser.Id } );
             }
-            catch( DbException ex )
+            catch( DbException )
             {
                 return this.StatusCode( 500, "Erro interno do servidor." );
             }
-            catch( Exception ex )
+            catch( Exception )
             {
                 return this.StatusCode( 500, "Erro interno do servidor." );
             }
