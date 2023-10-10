@@ -6,9 +6,11 @@
 
 using System.ComponentModel.DataAnnotations.Schema;
 
+using MovieTicketApi.Validation;
+
 namespace MovieTicketApi.Resources.Users.Models;
 
-public class User
+public sealed class User
 {
     public User()
     {
@@ -16,13 +18,12 @@ public class User
 
     public User( string email, bool isAdmin, string password, string hashedPassword )
     {
-        this.Email = email;
+        this.ValidateDomain( email, password );
         this.IsAdmin = isAdmin;
-        this.Password = password;
         this.HashedPassword = hashedPassword;
     }
 
-    public int Id { get; set; }
+    public int Id { get; private set; }
 
     public string Email { get; set; }
 
@@ -32,5 +33,18 @@ public class User
     public bool IsAdmin { get; set; }
 
     [NotMapped]
-    public string HashedPassword { get; }
+    public string HashedPassword { get; private set; }
+
+
+    private void ValidateDomain( string email, string password )
+    {
+        EntityValidationException.When( string.IsNullOrEmpty( email ), "Invalid email. Password is required" );
+
+        EntityValidationException.When( email.Length < 3, "Invalid email, too short, minimum 3 characters" );
+
+        EntityValidationException.When( string.IsNullOrEmpty( password ), "Invalid password. Password is required" );
+
+        this.Email = email;
+        this.Password = password;
+    }
 }

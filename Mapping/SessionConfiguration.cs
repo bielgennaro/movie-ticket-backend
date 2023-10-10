@@ -19,6 +19,10 @@ namespace MovieTicketApi.Mapping
 
             builder.Property( s => s.DateTime ).HasColumnName( "date_time" );
 
+            builder.Property( s => s.Price ).HasColumnName( "price" );
+
+            builder.Property( s => s.AvailableTickets ).HasColumnName( "available_tickets" );
+
             builder.HasOne( s => s.Movie )
                     .WithMany()
                    .HasForeignKey( s => s.MovieId )

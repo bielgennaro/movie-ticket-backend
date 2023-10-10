@@ -11,40 +11,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2c4262d2-1453-4d05-bef6-5a24e9578d18" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MovieTicketApi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MovieTicketApi/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/13f23579-5572-40af-a510-5f460436c238.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/13f23579-5572-40af-a510-5f460436c238.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Configuration.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/Auth/AuthController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/MoviesController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/SessionsController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/TicketsController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/UsersController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/MovieTicketApiContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/MovieTicketApiContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/DTOs/MovieDto.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/DTOs/SessionDto.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/DTOs/TicketDto.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/DTOs/UserDto.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Entity/Movie.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Entity/Session.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Entity/Ticket.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Entity/User.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Interfaces/IPasswordHashService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Mapping/MovieConfiguration.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Mapping/SessionConfiguration.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Mapping/TicketConfiguration.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Mapping/UserConfiguration.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Request/CreateMovieRequest.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Request/CreateSessionRequest.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Request/CreateTicketRequest.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Request/CreateUserRequest.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Request/LoginRequest.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieTicketApi.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/MovieTicketApi.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/PasswordHashService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/TokenService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/TokenService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Startup.cs" afterDir="false" />
-    </list>
+    <list default="true" id="2c4262d2-1453-4d05-bef6-5a24e9578d18" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -236,6 +203,7 @@
       <workItem from="1692662183825" duration="1483000" />
       <workItem from="1696180103094" duration="128000" />
       <workItem from="1696180256574" duration="104000" />
+      <workItem from="1696181856484" duration="21000" />
     </task>
     <task id="LOCAL-00001" summary="clean:ajustes na identação">
       <option name="closed" value="true" />

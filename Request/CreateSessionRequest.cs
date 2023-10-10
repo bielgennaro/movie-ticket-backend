@@ -7,4 +7,8 @@ public class CreateSessionRequest
     public DateTime DateTime { get; set; }
 
     public int MovieId { get; set; }
+
+    public double Price { get; set; }
+
+    public int AvailableTickets { get; set; }
 }

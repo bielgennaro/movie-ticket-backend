@@ -23,7 +23,7 @@ namespace MovieTicketApi
         {
 
             services.AddDbContextPool<MovieTicketApiContext>( options =>
-                options.UseNpgsql( this.Configuration.GetConnectionString( "LOCAL_CONNECTIONSTRING" ) ) );
+                options.UseNpgsql( this.Configuration.GetConnectionString( "LOCAL_CONNECTION_STRING" ) ) );
 
             services.AddScoped<TokenService>();
             services.AddScoped<PasswordHash>();

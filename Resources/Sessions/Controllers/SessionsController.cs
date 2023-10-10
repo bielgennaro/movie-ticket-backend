@@ -111,7 +111,7 @@ namespace MovieTicketApi.Resources.Sessions.Controllers
                     return this.NotFound( new { error = $"Filme com ID {sessionRequest.MovieId} não encontrado." } );
                 }
 
-                Session session = new Session( sessionRequest.DateTime, sessionRequest.Room, sessionRequest.MovieId );
+                Session session = new Session( sessionRequest.DateTime, sessionRequest.Room, sessionRequest.MovieId, sessionRequest.Price, sessionRequest.AvailableTickets);
 
                 this._context.Sessions.Add( session );
                 await this._context.SaveChangesAsync();

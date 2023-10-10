@@ -5,21 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc96a72e-2a25-4003-9988-992a76aab0f6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.MovieTicketApi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MovieTicketApi/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/13f23579-5572-40af-a510-5f460436c238.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/13f23579-5572-40af-a510-5f460436c238.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/Auth/AuthController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/Auth/AuthController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/MoviesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/MoviesController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/SessionsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/SessionsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/TicketsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/TicketsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/UsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/UsersController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/MovieTicketApiContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/MovieTicketApiContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20230926223322_Initial.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Migrations/20230926223322_Initial.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/DTOs/SessionDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/DTOs/SessionDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/DTOs/UserDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/DTOs/UserDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Mapping/UserConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Mapping/UserConfiguration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/TokenService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/TokenService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mapping/MovieConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mapping/MovieConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mapping/SessionConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mapping/SessionConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/MovieTicketApiContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Migrations/MovieTicketApiContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Resources/Movies/Models/Movie.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Movies/Models/Movie.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Resources/Sessions/Models/Session.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Sessions/Models/Session.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Resources/Tickets/Models/Ticket.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Tickets/Models/Ticket.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Resources/Users/Models/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Users/Models/User.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

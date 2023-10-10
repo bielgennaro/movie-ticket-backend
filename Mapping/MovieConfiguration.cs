@@ -20,6 +20,8 @@ namespace MovieTicketApi.Mapping
             builder.Property( m => m.Director ).HasColumnName( "director" ).HasMaxLength( 255 );
 
             builder.Property( m => m.BannerUrl ).HasColumnName( "banner_url" ).HasMaxLength( 200 );
+
+            builder.Property(m => m.Title).HasColumnName("title").HasMaxLength(255);
         }
     }
 }
