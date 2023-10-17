@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 using MovieTicketApi.Data;
-using MovieTicketApi.Models.DTOs;
-using MovieTicketApi.Models.Entity;
-using MovieTicketApi.Models.Request;
+using MovieTicketApi.Models.Dtos;
+using MovieTicketApi.Models.Entities;
+using MovieTicketApi.Request;
 using MovieTicketApi.Services;
 
 namespace MovieTicketApi.Controllers
@@ -15,9 +15,9 @@ namespace MovieTicketApi.Controllers
     {
         private readonly MovieTicketApiContext _context;
         private readonly TokenService _tokenService;
-        private readonly PasswordHashService _passwordHashService;
+        private readonly PasswordHash _passwordHashService;
 
-        public UsersController( MovieTicketApiContext context, TokenService tokenService, PasswordHashService passwordHashService )
+        public UsersController( MovieTicketApiContext context, TokenService tokenService, PasswordHash passwordHashService )
         {
             this._context = context ?? throw new ArgumentNullException( nameof( context ) );
             this._tokenService = tokenService ?? throw new ArgumentNullException( nameof( tokenService ) );
@@ -25,7 +25,6 @@ namespace MovieTicketApi.Controllers
         }
 
         [HttpGet( "list" )]
-        [ProducesResponseType( StatusCodes.Status200OK )]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetUserList()
         {
             try
@@ -50,8 +49,6 @@ namespace MovieTicketApi.Controllers
 
 
         [HttpGet( "list/{id:int}" )]
-        [ProducesResponseType( StatusCodes.Status200OK )]
-        [ProducesResponseType( StatusCodes.Status404NotFound )]
         public async Task<ActionResult<UserDto>> GetUser( int id )
         {
             try
@@ -72,9 +69,6 @@ namespace MovieTicketApi.Controllers
         }
 
         [HttpPut( "edit/{id:int}" )]
-        [ProducesResponseType( StatusCodes.Status200OK )]
-        [ProducesResponseType( StatusCodes.Status404NotFound )]
-        [ProducesResponseType( StatusCodes.Status500InternalServerError )]
         public async Task<IActionResult> PutUser( int id, [FromBody] CreateUserRequest userRequest )
         {
             try
@@ -103,9 +97,6 @@ namespace MovieTicketApi.Controllers
         }
 
         [HttpPost( "register" )]
-        [ProducesResponseType( StatusCodes.Status201Created )]
-        [ProducesResponseType( StatusCodes.Status400BadRequest )]
-        [ProducesResponseType( StatusCodes.Status500InternalServerError )]
         public async Task<ActionResult<UserDto>> PostUser( CreateUserRequest request )
         {
             try
@@ -137,13 +128,7 @@ namespace MovieTicketApi.Controllers
             }
         }
 
-
-
-
         [HttpDelete( "delete/{id:int}" )]
-        [ProducesResponseType( StatusCodes.Status204NoContent )]
-        [ProducesResponseType( StatusCodes.Status404NotFound )]
-        [ProducesResponseType( StatusCodes.Status500InternalServerError )]
         public async Task<IActionResult> DeleteUser( int id )
         {
             try

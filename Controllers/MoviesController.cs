@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 using MovieTicketApi.Data;
-using MovieTicketApi.Models.DTOs;
-using MovieTicketApi.Models.Entity;
-using MovieTicketApi.Models.Request;
+using MovieTicketApi.Models.Dtos;
+using MovieTicketApi.Models.Entities;
+using MovieTicketApi.Request;
 
 namespace MovieTicketApi.Controllers
 {
@@ -20,7 +20,6 @@ namespace MovieTicketApi.Controllers
         }
 
         [HttpGet( "list" )]
-        [ProducesResponseType( StatusCodes.Status200OK )]
         public async Task<ActionResult<IEnumerable<Movie>>> GetMovies()
         {
             try
@@ -35,8 +34,6 @@ namespace MovieTicketApi.Controllers
         }
 
         [HttpGet( "list/{id:int}" )]
-        [ProducesResponseType( StatusCodes.Status200OK )]
-        [ProducesResponseType( StatusCodes.Status404NotFound )]
         public async Task<ActionResult<Movie>> GetMovie( int id )
         {
             try
@@ -57,9 +54,6 @@ namespace MovieTicketApi.Controllers
         }
 
         [HttpPut( "edit/{id:int}" )]
-        [ProducesResponseType( StatusCodes.Status200OK )]
-        [ProducesResponseType( StatusCodes.Status400BadRequest )]
-        [ProducesResponseType( StatusCodes.Status404NotFound )]
         public async Task<IActionResult> PutMovie( int id, CreateMovieRequest movieRequest )
         {
             try
@@ -102,8 +96,6 @@ namespace MovieTicketApi.Controllers
         }
 
         [HttpPost( "add" )]
-        [ProducesResponseType( StatusCodes.Status201Created )]
-        [ProducesResponseType( StatusCodes.Status400BadRequest )]
         public async Task<ActionResult<MovieDto>> PostMovie( CreateMovieRequest movieRequest )
         {
             try
@@ -134,8 +126,6 @@ namespace MovieTicketApi.Controllers
         }
 
         [HttpDelete( "delete/{id:int}" )]
-        [ProducesResponseType( StatusCodes.Status204NoContent )]
-        [ProducesResponseType( StatusCodes.Status404NotFound )]
         public async Task<IActionResult> DeleteMovie( int id )
         {
             try

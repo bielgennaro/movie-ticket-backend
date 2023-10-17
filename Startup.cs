@@ -22,12 +22,12 @@ namespace MovieTicketApi
         public void ConfigureServices( IServiceCollection services )
         {
 
-            services.AddDbContext<MovieTicketApiContext>( options =>
-                options.UseNpgsql( this.Configuration.GetConnectionString( "LOCAL_CONNECTIONSTRING" ) ) );
+            services.AddDbContextPool<MovieTicketApiContext>( options =>
+                options.UseNpgsql( this.Configuration.GetConnectionString( "LOCAL_CONNECTION_STRING" ) ) );
 
             services.AddScoped<TokenService>();
+            services.AddScoped<PasswordHash>();
 
-            services.AddScoped<PasswordHashService>();
 
 
             services.AddAuthentication( JwtBearerDefaults.AuthenticationScheme )
@@ -57,11 +57,8 @@ namespace MovieTicketApi
                         Description = "Projeto integrado do 3/4° semestre",
                         Version = "v1"
                     } );
+                c.ResolveConflictingActions( apiDescriptions => apiDescriptions.First() );
             } );
-
-            services.AddCors( options => options.AddPolicy( "AllowAll", p => p.AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader() ) );
 
             services.AddDataProtection();
         }
@@ -74,6 +71,7 @@ namespace MovieTicketApi
             app.UseRouting();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
 
             app.UseEndpoints( endpoints =>
             {
